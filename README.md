@@ -9,10 +9,10 @@ There are a couple of options to install the software:
 1. Clone the [ASD repository from GitHub][1]:
    
 *Use this option if you are familiar with Git*
-   
-    - From the command line:
+      
+   - From the command line:
         - `git clone https://github.com/JosepFanals/ASD`
-    - Or from the [ASD GitHub repository page][1]:
+   - Or from the [ASD GitHub repository page][1]:
         - Click the green **Clone or download** button, then **Open in Desktop**.
 
 2. Download the repository as a .zip file from the GitHub page:
