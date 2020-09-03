@@ -11,7 +11,7 @@ There are a couple of options to install the software:
 *Use this option if you are familiar with Git*
    
     - From the command line:
-        - `git clone https://github.com/JosepFanals/HELM`
+        - `git clone https://github.com/JosepFanals/ASD`
     - Or from the [ASD GitHub repository page][1]:
         - Click the green **Clone or download** button, then **Open in Desktop**.
 
