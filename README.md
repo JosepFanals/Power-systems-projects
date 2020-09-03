@@ -1,5 +1,5 @@
 # ASD
- The Alternating Search Directions method (ASD) is an iterative technique to solve the power flow problem of traditional electric power systems. The main reference can be found in https://www.sciencedirect.com/science/article/abs/pii/S0378779616302292.
+ The Alternating Search Directions method (ASD) is an iterative technique to solve the power flow problem of traditional electric power systems. The main reference can be found in [this paper](https://www.sciencedirect.com/science/article/abs/pii/S0378779616302292).
 
 ### Relevant files:
 
