@@ -30,7 +30,7 @@ Remember to tune the parameters as explained in the [paper](https://github.com/J
 ### Learning about ASD
 
 I suggest reading the following papers to gain knowledge and ituition about ASD:
-* **[D. Borzacchiello, M. H. Malik, F. Chinesta, R. García-Blanco, Pedro Díez, "Unified formulation of a family of iterative solvers for power systems analysis", in Electric Power Systems Research, vol. 140, pp. 201–208, 2016](https://www.sciencedirect.com/science/article/abs/pii/S0378779616302292)**: the main reference, enough to understand properly the ASD method.
+* **[D. Borzacchiello, M. H. Malik, F. Chinesta, R. García-Blanco and Pedro Díez, "Unified formulation of a family of iterative solvers for power systems analysis", in Electric Power Systems Research, vol. 140, pp. 201–208, 2016](https://www.sciencedirect.com/science/article/abs/pii/S0378779616302292)**: the main reference, enough to understand properly the ASD method.
 * **[My paper](https://github.com/JosepFanals/ASD/blob/master/Escrit/bare_jrnl.pdf)**: details the modification of search directions and the modeling of PV buses. This causes the algorithm to be faster.
 
 ------------
