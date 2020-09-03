@@ -8,7 +8,7 @@ There are a couple of options to install the software:
 
 1. Clone the [ASD repository from GitHub][1]:
    
-*Use this option if you are familiar with Git*
+   *Use this option if you are familiar with Git*
       
    - From the command line:
         - `git clone https://github.com/JosepFanals/ASD`
