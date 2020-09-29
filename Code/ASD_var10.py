@@ -2,6 +2,8 @@
 # main reference: D. Borzacchiello, F. Chinesta, H. Malik, R. García-Blanco and P. Díez, "Unified formulation of a family of iterative solvers for power systems analysis," in Electric Power Systems Research, vol. 140, pp. 201–208, 2016.
 # change gamma, psi and prof (number of iterations) accordingly
 
+# 1.0, no funciona
+
 import time
 import pandas as pd
 import numpy as np
@@ -139,16 +141,19 @@ beta = np.zeros((n_b, n_b), dtype=complex)
 
 psi = 2.01
 for i in range(n_pq):  # make sure the indexation is correct
-    alpha_pq[i] = psi * ((P_pq[i] - 1j * Q_pq[i]) / Vb ** 2)
+    # alpha_pq[i] = psi * ((P_pq[i] - 1j * Q_pq[i]) / Vb ** 2)
+    alpha_pq[i] = (P_pq[i] - 1j * Q_pq[i]) / Vb ** 2
 
 for i in range(n_pv):
-    alpha_pv[i] = psi * ((P_pv[i]) / Vb ** 2)
+    # alpha_pv[i] = psi * ((P_pv[i]) / Vb ** 2)
+    alpha_pv[i] = (P_pv[i]) / Vb ** 2
 
 alpha_vec = np.block([alpha_pq, alpha_pv])
 alpha = np.diag(alpha_vec)
 
 for i in range(n_b):
-    beta[i, i] = psi * (Y[i, i] + alpha[i, i])
+    # beta[i, i] = psi * (Y[i, i] + alpha[i, i])
+    beta[i, i] = Y[i, i] - alpha[i, i]
 
 beta_pq = np.zeros(n_pq, dtype=complex)
 beta_pv = np.zeros(n_pv, dtype=complex)
@@ -173,7 +178,7 @@ V2_pq = np.zeros(n_pq, dtype=complex)
 V2_pv = np.zeros(n_pv, dtype=complex)
 Q1 = np.zeros(n_pv, dtype=float)
 Q2 = np.zeros(n_pv, dtype=float)
-gamma = 0.55  # try different values
+gamma = 0.25  # try different values
 
 rhs_pq = np.zeros(n_pq, dtype=complex)
 rhs_pv = np.zeros(n_pv, dtype=complex)
@@ -201,6 +206,7 @@ for c in range(prof):
     V2[:] = lhs[:]
     V2_pq = V2[:n_pq]
     V2_pv = V2[n_pq:n_b]
+    I2 = np.dot(Y, V2) - I0
 
 
     # PV BUS MODELLING ACORDING TO THE MAIN REFERENCE

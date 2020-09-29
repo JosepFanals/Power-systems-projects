@@ -2,6 +2,8 @@
 # main reference: D. Borzacchiello, F. Chinesta, H. Malik, R. García-Blanco and P. Díez, "Unified formulation of a family of iterative solvers for power systems analysis," in Electric Power Systems Research, vol. 140, pp. 201–208, 2016.
 # change gamma, psi and prof (number of iterations) accordingly
 
+# 1.1, no funciona
+
 import time
 import pandas as pd
 import numpy as np
@@ -139,16 +141,19 @@ beta = np.zeros((n_b, n_b), dtype=complex)
 
 psi = 2.01
 for i in range(n_pq):  # make sure the indexation is correct
-    alpha_pq[i] = psi * ((P_pq[i] - 1j * Q_pq[i]) / Vb ** 2)
+    # alpha_pq[i] = psi * ((P_pq[i] - 1j * Q_pq[i]) / Vb ** 2)
+    alpha_pq[i] = (P_pq[i] - 1j * Q_pq[i]) / Vb ** 2
 
 for i in range(n_pv):
-    alpha_pv[i] = psi * ((P_pv[i]) / Vb ** 2)
+    # alpha_pv[i] = psi * ((P_pv[i]) / Vb ** 2)
+    alpha_pv[i] = (P_pv[i]) / Vb ** 2
 
 alpha_vec = np.block([alpha_pq, alpha_pv])
 alpha = np.diag(alpha_vec)
 
 for i in range(n_b):
-    beta[i, i] = psi * (Y[i, i] + alpha[i, i])
+    # beta[i, i] = psi * (Y[i, i] + alpha[i, i])
+    beta[i, i] = Y[i, i] - alpha[i, i]
 
 beta_pq = np.zeros(n_pq, dtype=complex)
 beta_pv = np.zeros(n_pv, dtype=complex)
@@ -173,7 +178,7 @@ V2_pq = np.zeros(n_pq, dtype=complex)
 V2_pv = np.zeros(n_pv, dtype=complex)
 Q1 = np.zeros(n_pv, dtype=float)
 Q2 = np.zeros(n_pv, dtype=float)
-gamma = 0.55  # try different values
+gamma = 0.25  # try different values
 
 rhs_pq = np.zeros(n_pq, dtype=complex)
 rhs_pv = np.zeros(n_pv, dtype=complex)
@@ -192,15 +197,22 @@ for c in range(prof):
 
     # GLOBAL STEP
     for i in range(n_pq):
-        rhs_pq[i] = (P_pq[i] - 1j * Q_pq[i]) / np.conj(V1_pq[i]) - alpha_pq[i] * V1_pq[i] + I0_pq[i]
+        if c == 0:
+            rhs_pq[i] = (P_pq[i] - 1j * Q_pq[i]) / np.conj(V1_pq[i]) - alpha_pq[i] * V1_pq[i] + I0_pq[i]
+        else:
+            rhs_pq[i] = I1[i] - alpha_pq[i] * V1_pq[i] + I0_pq[i]
 
     for i in range(n_pv):
-        rhs_pv[i] = (P_pv[i] - 1j * Q1[i]) / np.conj(V1_pv[i]) - alpha_pv[i] * V1_pv[i] + I0_pv[i]
+        if c == 0:
+            rhs_pv[i] = (P_pv[i] - 1j * Q1[i]) / np.conj(V1_pv[i]) - alpha_pv[i] * V1_pv[i] + I0_pv[i]
+        else:
+            rhs_pv[i] = I1[i + n_pq] - alpha_pv[i] * V1_pv[i] + I0_pv[i]
 
     lhs = np.dot(Yalpha_inv, np.block([rhs_pq, rhs_pv]))
     V2[:] = lhs[:]
     V2_pq = V2[:n_pq]
     V2_pv = V2[n_pq:n_b]
+    I2 = np.dot(Y, V2) - I0
 
 
     # PV BUS MODELLING ACORDING TO THE MAIN REFERENCE
@@ -237,12 +249,15 @@ for c in range(prof):
         S_c[i] = P_pv[i - n_pq] - 1j * Q1[i - n_pq]
 
     YbetaV2 = np.dot(Ybeta, V2)
+    I1 = np.zeros(n_b, dtype=complex)
     
     for i in range(n_b):
-        A[i] = (YbetaV2[i] - I0[i]) / beta[i, i]
-        sigma[i] = - S_c[i] / (A[i] * np.conj(A[i]) * beta[i, i])
-        U[i] = (- 1 - np.sqrt(1 - 4 * (np.imag(sigma[i]) * np.imag(sigma[i]) + np.real(sigma[i])))) / 2 + 1j * np.imag(sigma[i])  # negative root!!
-        V1[i] = U[i] * A[i]
+        V1[i] = S_c[i] / np.conj(I2[i])
+        I1[i] = beta[i, i] * (V1[i] - V2[i]) + I2[i]
+        # A[i] = (YbetaV2[i] - I0[i]) / beta[i, i]
+        # sigma[i] = - S_c[i] / (A[i] * np.conj(A[i]) * beta[i, i])
+        # U[i] = (- 1 - np.sqrt(1 - 4 * (np.imag(sigma[i]) * np.imag(sigma[i]) + np.real(sigma[i])))) / 2 + 1j * np.imag(sigma[i])  # negative root!!
+        # V1[i] = U[i] * A[i]
 
     V1_pq = V1[:n_pq]
     V1_pv = V1[n_pq:n_b]
@@ -253,6 +268,7 @@ for c in range(prof):
         #print(V1[i])
         aa = vec_YV[i] - I0[i]
         bb = S_c[i] / np.conj(V1[i])
+        print(abs(V1[i]))
         errors.append(abs(aa - bb))
 
     # print(c, np.max(errors))
