@@ -1,0 +1,106 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{chinesta2010recent}{article}{}
+      \name{author}{3}{}{%
+        {{hash=387729112d9b3ef8ab4a11507c0b4ec5}{%
+           family={Chinesta},
+           familyi={C\bibinitperiod},
+           given={Francisco},
+           giveni={F\bibinitperiod}}}%
+        {{hash=617e49690b1737e0dc3630ee39061db0}{%
+           family={Ammar},
+           familyi={A\bibinitperiod},
+           given={Amine},
+           giveni={A\bibinitperiod}}}%
+        {{hash=275bcffc0e84d27b44671bce3edeeaee}{%
+           family={Cueto},
+           familyi={C\bibinitperiod},
+           given={Elı́as},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{5fde81660ccc745982c6549324a493cf}
+      \strng{fullhash}{5fde81660ccc745982c6549324a493cf}
+      \strng{bibnamehash}{5fde81660ccc745982c6549324a493cf}
+      \strng{authorbibnamehash}{5fde81660ccc745982c6549324a493cf}
+      \strng{authornamehash}{5fde81660ccc745982c6549324a493cf}
+      \strng{authorfullhash}{5fde81660ccc745982c6549324a493cf}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Archives of Computational methods in Engineering}
+      \field{number}{4}
+      \field{title}{Recent advances and new challenges in the use of the proper generalized decomposition for solving multidimensional models}
+      \field{volume}{17}
+      \field{year}{2010}
+      \field{pages}{327\bibrangedash 350}
+      \range{pages}{24}
+    \endentry
+    \entry{garcia2016reduced}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=908b629828c291798fa2fcb5040ccaf3}{%
+           family={Garcı́a-Blanco},
+           familyi={G\bibinithyphendelim B\bibinitperiod},
+           given={Raquel},
+           giveni={R\bibinitperiod}}}%
+        {{hash=b88d103ae386e36a517b33481b2cbf71}{%
+           family={Dı́ez},
+           familyi={D\bibinitperiod},
+           given={Pedro},
+           giveni={P\bibinitperiod}}}%
+        {{hash=092a761226b5e97f65ec48824c4c6145}{%
+           family={Borzacchiello},
+           familyi={B\bibinitperiod},
+           given={Domenico},
+           giveni={D\bibinitperiod}}}%
+        {{hash=387729112d9b3ef8ab4a11507c0b4ec5}{%
+           family={Chinesta},
+           familyi={C\bibinitperiod},
+           given={Francisco},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{3e0f49bfdd799a007db13b99bb92a5cb}
+      \strng{fullhash}{1229012b3223125fa2319d584b19fa37}
+      \strng{bibnamehash}{3e0f49bfdd799a007db13b99bb92a5cb}
+      \strng{authorbibnamehash}{3e0f49bfdd799a007db13b99bb92a5cb}
+      \strng{authornamehash}{3e0f49bfdd799a007db13b99bb92a5cb}
+      \strng{authorfullhash}{1229012b3223125fa2319d584b19fa37}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2016 IEEE International Energy Conference (ENERGYCON)}
+      \field{title}{A reduced order modeling approach for optimal allocation of distributed generation in power distribution systems}
+      \field{year}{2016}
+      \field{pages}{1\bibrangedash 6}
+      \range{pages}{6}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

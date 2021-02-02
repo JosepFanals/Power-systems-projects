@@ -1,0 +1,42 @@
+\documentclass{article}
+
+
+\usepackage[backend=biber]{biblatex} % per la bibliografia
+\setlength\bibitemsep{\baselineskip} % per tenir més espai entre bibliografia
+\addbibresource{bib.bib} % carregar el fitxer de bibliografia
+
+\begin{document}
+\section{Proper Generalized Decomposition}
+The Proper Generalized Decomposition (PGD) is a technique to efficiently solve  a multidimensional problem. It relies on progressive enrichments performed not on each individual case of the problem, but on the structure of the problem as a whole \cite{chinesta2010recent}. The outcome of the PAD becomes a potentially well-refined solution for various scenarios that have not been computed directly. Indeed, this comes with an associated saving of time. 
+\subsection{Definitions}
+As defined in \cite{garcia2016reduced}, in the power flow problem we are mainly concerned with three magnitudes: voltages denoted by $V$, currents represented by $I$ and the apparent powers given by $S$. 
+
+The first important idea here has to do with their tonsorial representation. This arises from the crossing of multiple vectors, each describing a dimension of the form \[
+	Y(x,t,P_1,P_2,...,P_n) = \sum_{m=1}^{M}X(x)\otimes T(t) \otimes P_1(p_1)\otimesP_2(p_2)\otimes...\otimes P_n(p_n)
+,\] 
+where $Y$ represents either $V$, $I$ or $S$. Note the dependence on position ($x$), time ($t$) and the parameters meant to change ($P_1$ to $P_n$). In the power flow problem, $x$ stands for the number of bus while the parameters can be for instance variations in power in several buses. Changes in impedance could also be parametrized, although it is not clear how the PGD should be adapted to it. Notice also that the final tensor is the result of the sum of multiple tensors with the same dimensions. One tensor could represent the stationary power we predict, while another one could be the variations we introduce, for instance.
+
+Recall that by definition solving the power flow means solving \[
+YV=\frac{S^*}{V^*}
+,\] 
+for $V$. Considering the presence of a slack bus, where the voltage is already known \[
+YV = I_0 + \frac{S^*}{V^*}
+.\] 
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\printbibliography
+
+
+\end{document}
