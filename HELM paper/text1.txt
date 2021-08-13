@@ -1,0 +1,5 @@
+Bona tarda Sergio,
+Moltes gràcies per la informació, no tenia aquest últim article en ment! Pel que he vist, l'enfocament que utilitzem és similar al del model 3, encara que jo diria que més simple perquè eleven al quadrat l'equació dels mòduls de tensió. He aprofitat per mirar altres articles, alguns dels quals havia consultat fa un temps, i m'hi he referit a la introducció. En general he modificat l'estructura tal com m'has comentat, procurant que les equacions quedin delimitades respecte als resultats. 
+Falta veure si l'abstract està prou bé (l'he modificat lleugerament però no sé si és apropiat). També, no acabo d'entendre el comentari de sota de tot de la primera pàgina. La resta els he tingut en compte. A hores d'ara hi ha afegides força més referències, tot i que algunes no les cito i estaria bé fer-ho. Em pregunto, quin estil hauria de seguir a l'hora d'anotar-les a l'apartat de referències? Veig que en funció de la pàgina posen cursives, altres no, o els noms dels autors s'escriuen d'una forma o altra...
+Salut i moltes gràcies per l'ajuda,
+Josep Fanals 

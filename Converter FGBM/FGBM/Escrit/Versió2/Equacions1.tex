@@ -1,0 +1,149 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ left=25mm,
+ top=20mm,
+ bottom=20mm,
+ right=15mm
+ }
+ \usepackage{amsmath}
+
+
+\begin{document}
+
+Escric les equacions del convertidor. Bé, concretament la de la intensitat $I_f$ que abandona un bus DC (bus $f$) i va en direcció al bus AC de l'altra banda del convertidor, anomenat $t$. En aquest cas, $f=3$, $t=4$ i un bus DC que connecta amb el bus 3 és el 2. Si n'hi haguessin més, no costar-hi gaire replicar-ho. Al final només es tracta d'afegir un parell de termes a la part real i a la imaginària per arreglar-ho.
+
+Aquesta expressió sempre es donarà d'aquesta manera. Les variables del convertidor són $M_2(s)$, $B_2(s)$ i $E_2(s)$. El subíndex 2 simplement indica que pertanyen al segon convertidor. Nota: $M_2(s)$ sempre s'haurà de trobar, però quan s'hagi de trobar $B_2(s)$, $E_2(s)=0$. Quan s'hagi de trobar $E_2(s)$, $B_2(s)=0$. Cal deixar clar que $B_2$ representa $B_{eq}$ d'aquell convertidor, $E_2=\frac{1}{e^{j\theta_{sh}}}$ i $M_2=\frac{1}{m'_a}$. També dir que $E^*_2(s^*)=\frac{1}{e^{-j\theta_{sh}}}$. Però al final divideixo tot complex en real i imaginari, així que la distinció $E_2$ o $E^*_2$ no cal fer-la, ja ho he tingut en compte a les equacions més expandides.
+
+Esquemàticament:
+
+\begin{equation}
+    I_{f3,total} = link amb AC + link amb DC = 0,
+    \label{eq:0}
+\end{equation}
+on començant pel link amb AC la part real és:
+\begin{equation}
+    \begin{split}
+    &\Re[link amb AC] = I^{re}_{f3}(s) = sG_3\left[I^{re}_{f3}(s)I^{re}_{f3}(s)V^{re}_{3}(s) - I^{im}_{f3}(s)I^{im}_{f3}(s)V^{re}_{3}(s) - 2I^{re}_{f3}(s)I^{im}_{f3}(s)V^{im}_{3}(s)\right]\\
+     &+ g_{34}M_2(s)M_2(s)V^{re}_3(s) - b_{34}M_2(s)M_2(s)V^{im}_3(s) -s\frac{b_{c34}}{2}M_2(s)M_2(s)V^{im}_3(s)\\
+     & - sM_2(s)M_2(s)B_2(s)V^{im}_3(s)\\
+     &-M_2(s)\left[g_{34}E^{re}_2(s)V^{re}_4(s) + g_{34}E^{im}_2(s)V^{im}_4(s) - b_{34}E^{re}_2(s)V^{im}_4(s) + b_{34}E^{im}_2(s)V^{re}_4(s)  \right],
+    \end{split}
+\end{equation}
+mentre que la part imaginària resulta:
+\begin{equation}
+    \begin{split}
+        &\Im[link amb AC] = I^{im}_{f3}(s) = sG_3\left[I^{re}_{f3}(s)I^{re}_{f3}(s)V^{im}_{3}(s) - I^{im}_{f3}(s)I^{im}_{f3}(s)V^{im}_{3}(s) - 2I^{re}_{f3}(s)I^{im}_{f3}(s)V^{re}_{3}(s)\right]\\
+        &+ b_{34}M_2(s)M_2(s)V^{re}_3(s) + g_{34}M_2(s)M_2(s)V^{im}_3(s) +s\frac{b_{c34}}{2}M_2(s)M_2(s)V^{re}_3(s)\\
+        & + sM_2(s)M_2(s)B_2(s)V^{re}_3(s)\\
+        &-M_2(s)\left[g_{34}E^{re}_2(s)V^{im}_4(s) + g_{34}E^{im}_2(s)V^{re}_4(s) + b_{34}E^{re}_2(s)V^{re}_4(s) + b_{34}E^{im}_2(s)V^{im}_4(s)  \right].
+    \end{split}
+\end{equation}
+Pel que fa a l'enllaç amb la banda de DC, assumint que només connecta amb un bus la part real és:
+\begin{equation}
+    \Re[link amb DC] = g_{23}V^{re}_3(s)-g_{23}V^{re}_2(s),
+\end{equation}
+i per últim la part imaginària obeeix:
+\begin{equation}
+    \Im[link amb DC] = g_{23}V^{im}_3(s)-g_{23}V^{im}_2(s).
+\end{equation}
+Es tracta d'expressar-ho en forma de coeficients i fer servir l'equació \ref{eq:0}, que acaba sent 0. Per la $P_f$ especificada dels convertidors amb operació tipus I, ignorem la component $linkambDC$ i només mirem la $linkambAC$. Llavors la part real d'aquesta intensitat multiplicant per la tensió conjugada (es podria conjugar la intensitat però per la potència activa és indiferent) és igual a $P_f$. Es desenvolupa i tot segueix igual.
+
+
+Pels busos AC que connecten amb el convertidor, les dues equacions del sumatori d'intensitat són les següents. El bus AC en qüestió és el 4, mentre que el DC és el 3. Els elements del tipus $g_{44}$ són elements de la matriu d'admitàncies però només mirant la banda d'AC. O sigui, no inclou la connexió amb DC. Aquesta es representa per $g_{34}$ i $b_{34}$. El subíndex $x$ representa l'índex del convertidor. O sigui, si és el primer convertidor, $x=1$. O si volgués, també podria fer que $x=0$. 
+\begin{equation}
+    \begin{split}
+    &(g_{34}+g_{44})V^{re}_4(s) - (b_{34}+b_{44})V^{im}_4(s)
+    + \sum_{j\neq 4}[g_{4j}V^{re}_j(s) - b_{4j}V^{im}_j(s)] \\
+    &- M_x(s)[g_{34}V^{re}_3(s)E^{re}_x(s)-b_{34}V^{im}_3(s)E^{re}_x(s)
+    -b_{34}V^{re}_3(s)E^{im}_x(s)-g_{34}V^{im}_3(s)E^{im}_x(s)] \\
+    &= \Re\biggl[s\frac{P_4-jQ_4}{V^*_4(s^*)} - sj\frac{b_{c34}}{2}V_4(s) - sY_{sh,4}V_4(s)\biggr].
+    \end{split}
+\end{equation}
+I per la part imaginària:
+\begin{equation}
+    \begin{split}
+    &(b_{34}+b_{44})V^{re}_4(s) + (g_{34}+g_{44})V^{im}_4(s)
+    + \sum_{j\neq 4}[b_{4j}V^{re}_j(s) + g_{4j}V^{im}_j(s)] \\
+    &- M_x(s)[b_{34}V^{re}_3(s)E^{re}_x(s)+g_{34}V^{im}_3(s)E^{re}_x(s)
+    +g_{34}V^{re}_3(s)E^{im}_x(s)-b_{34}V^{im}_3(s)E^{im}_x(s)] \\
+    &= \Im\biggl[s\frac{P_4-jQ_4}{V^*_4(s^*)} - sj\frac{b_{c34}}{2}V_4(s) - sY_{sh,4}V_4(s)\biggr].
+    \end{split}
+\end{equation}
+
+Aquestes ja les tinc expressades en forma de coeficients. Considerar que el bus 4 es connecta amb més busos AC només influeix en què les tensions d'aquests busos també surten a les matrius, però al $rhs$ no varia res. 
+
+Pels busos AC que no connecten directament amb els convertidors, les equacions pels busos PQ (suposant que ens fixem en el bus número 5):
+\begin{equation}
+    \begin{split}
+    &g_{55}V^{re}_5(s)-b_{55}V^{im}_5(s) + \sum_{j\neq 5}[g_{5j}V^{re}_j(s)-b_{5j}V^{im}_j(s)] = \Re[(P_5-jQ_5)X_5[c-1] - Y_{sh,5}V_5[c-1]],\\
+    &b_{55}V^{re}_5(s)+g_{55}V^{im}_5(s) + \sum_{j\neq 5}[b_{5j}V^{re}_j(s)+g_{5j}V^{im}_j(s)] = \Im[(P_5-jQ_5)X_5[c-1] - Y_{sh,5}V_5[c-1]].
+    \end{split}
+\end{equation}
+Si el bus és PV:
+\begin{equation}
+    \begin{split}
+    g_{55}V^{re}_5(s)-b_{55}V^{im}_5(s) + \sum_{j\neq 5}[g_{5j}V^{re}_j(s)-b_{5j}V^{im}_j(s)] = & \Re[P_5X_5[c-1] - j\sum_{k=1}^{c-1}X_5[k]Q_5[c-k]\\
+    & - Y_{sh,5}V_5[c-1]],\\
+    b_{55}V^{re}_5(s)+g_{55}V^{im}_5(s) + \sum_{j\neq 5}[b_{5j}V^{re}_j(s)+g_{5j}V^{im}_j(s)] + Q_5[c] = &\Im[P_5X_5[c-1] - j\sum_{k=1}^{c-1}X_5[k]Q_5[c-k]\\
+    & - Y_{sh,5}V_5[c-1]].
+    \end{split}
+\end{equation}
+Com que també s'ha d'afegir la connexió amb el bus slack, que no és una incògnita, les dues equacions anteriors queden:
+\begin{equation}
+    \begin{split}
+    g_{55}V^{re}_5(s)-b_{55}V^{im}_5(s) + \sum_{j\neq 5}[g_{5j}V^{re}_j(s)-b_{5j}V^{im}_j(s)] = &\Re[(P_5-jQ_5)X_5[c-1] - Y_{sh,5}V_5[c-1]\\
+    & - Y_{sl,5}V_1[c]],\\
+    b_{55}V^{re}_5(s)+g_{55}V^{im}_5(s) + \sum_{j\neq 5}[b_{5j}V^{re}_j(s)+g_{5j}V^{im}_j(s)] = & \Im[(P_5-jQ_5)X_5[c-1] - Y_{sh,5}V_5[c-1]\\
+    & - Y_{sl,5}V_1[c]],
+    \end{split}
+\end{equation}
+\begin{equation}
+    \begin{split}
+    g_{55}V^{re}_5(s)-b_{55}V^{im}_5(s) + \sum_{j\neq 5}[g_{5j}V^{re}_j(s)-b_{5j}V^{im}_j(s)] = & \Re[P_5X_5[c-1] - j\sum_{k=1}^{c-1}X_5[k]Q_5[c-k]\\
+    & - Y_{sh,5}V_5[c-1] - Y_{sl,5}V_1[c]],\\
+    b_{55}V^{re}_5(s)+g_{55}V^{im}_5(s) + \sum_{j\neq 5}[b_{5j}V^{re}_j(s)+g_{5j}V^{im}_j(s)] + Q_5[c] = &\Im[P_5X_5[c-1] - j\sum_{k=1}^{c-1}X_5[k]Q_5[c-k]\\
+    & - Y_{sh,5}V_5[c-1] - Y_{sl,5}V_1[c]].
+    \end{split}
+\end{equation}
+
+De moment no incloc punts de consum a la xarxa de DC però seria tan fàcil com afegir el terme $sP_i/V^*_i(s^*)$ a les equacions del sumatori d'intensitat, dividint en part real i imaginària. Si ho vull incloure, la part real del sumatori d'intensitat en un bus $i$ és:
+\begin{equation}
+    \Re\biggl[s\frac{P_i}{V^*_i(s^*)}\biggr] = I^{re}_{f,i}(s) + g_{ii}V^{re}_i(s) + \sum_{j\neq i}g_{ij}V^{re}_j(s).
+\end{equation}
+Cal dir que aquest bus $i$ s'assumeix que connecta directament amb un convertidor. Si no, $I^{re}_{f,i}(s)=0$, o sigui, no intervé. Per la part imaginària és pràcticament igual:
+\begin{equation}
+    \Im\biggl[s\frac{P_i}{V^*_i(s^*)}\biggr] = I^{im}_{f,i}(s) + g_{ii}V^{im}_i(s) + \sum_{j\neq i}g_{ij}V^{im}_j(s).
+\end{equation}
+En aquest cas els elements tipus $g_{ij}$ són elements de la matriu d'admitàncies de la part DC, no contempla connexions amb AC.
+
+La potència que s'envia des d'un bus DC a un bus AC, ambdós enllaçant a través d'un convertidor, és:
+\begin{equation}
+    sP_{f,i} = V^{re}_i(s)I^{re}_{f,i}(s) + V^{im}_i(s)I^{im}_{f,i}(s).
+\end{equation}
+Quan controlem la potència reactiva del bus slack (que pren l'índex 1, i és clar, connecta directament amb un convertidor, on el bus DC pren l'índex 2):
+\begin{equation}
+    sQ_1 = -V_1(s)V_1(s)\biggl(b_{12} + s \frac{b_{c,12}}{2}\biggr) + V_1(s)M_1(s)b_{12}V^{re}_2(s) + V_1(s)M_1(s)g_{12}V^{im}_2(s).
+\end{equation}
+Quan es controla la potència reactiva però no del bus slack, doncs simplement aquesta serà una dada i plantejarem el sumatori d'intensitats com sempre. 
+
+Falten les equacions dels mòduls de tensió, que són:
+\begin{equation}
+    1+s(W_i-1) = V^{re}_i(s)V^{re}_i(s) + V^{im}_i(s)V^{im}_i(s),
+\end{equation}
+on $W_i=|V_i|^2$. Per últim, quan al convertidor l'angle $\theta_{sh}$ és una incògnita, s'ha d'afegir l'equació següent:
+\begin{equation}
+    1 = E^{re}_i(s)E^{re}_i(s) + E^{im}_i(s)E^{im}_i(s).
+\end{equation}
+
+Ara veure com queda el sistema d'equacions i com organitzar el vector. Crec que el més convenient seria fer: $x=[V^{re}_{AC}, V^{im}_{AC}, Q_{AC}, V^{re}_{DC}, V^{im}_{DC}, I^{re}_f, I^{im}_f, M, B, E^{re}, E^{im}]$. Muntar la matriu. Després puc compactar una mica les convolucions.
+
+Falta l'equació de $Q_z$, que hi serà per tots els convertidors menys per aquell que controla la potència reactiva del bus slack:
+\begin{equation}
+    I^{im}_{f,3}[c] = -\sum_{k=1}^{c-1}V^{re}_3[k]I^{im}_{f,3}[c-k] + \sum_{k=1}^{c-1}V^{im}_3[k]I^{re}_{f,3}[c-k].
+\end{equation}
+
+
+\end{document}

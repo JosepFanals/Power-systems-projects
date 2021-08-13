@@ -1,0 +1,78 @@
+dist: xenial
+
+language: generic
+
+addons:
+  apt:
+    sources:
+    - sourceline: 'ppa:octave/stable'   ## without this, it's octave 4.0.0
+    packages:
+    - coinor-libipopt-dev
+    - liboctave-dev
+    - octave        # octave 4.2.2
+    update: true
+  homebrew:
+    packages:
+    - bash
+    - gcc
+    - octave        # octave 5.1.0
+    - wget
+    update: true
+os:
+- linux
+- osx
+
+install:
+# build and install IPOPT from source on Mac
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then git clone https://www.github.com/coin-or/coinbrew;                                  fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd coinbrew;                                                                        fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./coinbrew fetch Ipopt --no-prompt;                                                 fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./coinbrew build Ipopt --prefix=$TRAVIS_BUILD_DIR/install --test --no-prompt;       fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./coinbrew install Ipopt;                                                           fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd ..;                                                                              fi
+# # https://github.com/travis-ci/travis-ci/issues/9080
+# - sudo systemctl disable apt-daily.timer
+# - sudo killall apt.systemd.daily || true
+# 
+# - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then rm '/usr/local/include/c++'; fi
+# - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update                ; fi
+# - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install ipopt         ; fi
+# - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install octave        ; fi
+# - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-add-repository -y ppa:octave/stable; fi
+# - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq                     ; fi
+# - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -qq coinor-libipopt-dev octave liboctave-dev; fi
+
+env:
+  global:
+  - IPOPT_VER=3.11.9
+
+script:
+# build IPOPT MEX file
+- export PKG_CONFIG_PATH=$TRAVIS_BUILD_DIR/install/lib/pkgconfig
+- mkdir $TRAVIS_BUILD_DIR/build
+- curl -SL https://github.com/coin-or/Ipopt/archive/releases/${IPOPT_VER}.tar.gz | tar -xzC $TRAVIS_BUILD_DIR/build
+- mv $TRAVIS_BUILD_DIR/build/Ipopt-releases-${IPOPT_VER}/Ipopt/contrib/MatlabInterface $TRAVIS_BUILD_DIR/build/ipopt
+- mv $TRAVIS_BUILD_DIR/.travis/Makefile $TRAVIS_BUILD_DIR/build/ipopt/src
+- make -C $TRAVIS_BUILD_DIR/build/ipopt/src
+- mv $TRAVIS_BUILD_DIR/build/ipopt/src/*.mex $TRAVIS_BUILD_DIR/build/ipopt/
+
+# print Octave version number
+- octave-cli --no-gui --eval ver
+
+# install IPOPT MEX file
+- octave-cli --no-gui --eval "addpath('$TRAVIS_BUILD_DIR/build/ipopt'); savepath"
+
+# install MATPOWER
+- octave-cli --no-gui --eval "install_matpower(1,1,1)"
+
+# print version numbers
+- octave-cli --no-gui --eval "qps_glpk( [],[1; 1],[1 1],[2],[2],[1; 1],[1; 1],[1; 1],struct('verbose', 3));"
+- octave-cli --no-gui --eval "qps_ipopt([],[1; 1],[1 1],[2],[2],[1; 1],[1; 1],[1; 1],struct('verbose', 2));"
+- octave-cli --no-gui --eval mpver
+
+# test MP-Test, MIPS, MATPOWER, MOST
+- octave-cli --no-gui --eval "test_mptest(0,1)"
+- octave-cli --no-gui --eval "test_mips(0,1)"
+- octave-cli --no-gui --eval "test_mp_opt_model(0,1)"
+- octave-cli --no-gui --eval "test_matpower(0,1)"
+- octave-cli --no-gui --eval "test_most(0,1)"
