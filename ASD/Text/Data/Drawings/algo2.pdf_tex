@@ -1,0 +1,75 @@
+%% Creator: Inkscape 1.0 (4035a4fb49, 2020-05-01), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'algo2.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{496.55220375bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.23128787)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{algo2.pdf}}%
+    \put(0.16419035,0.16898711){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Node $i$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{algo2.pdf}}%
+    \put(0.30533937,0.18827867){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$[P^i_1, P^i_2,...,P^i_n]$\end{tabular}}}}%
+    \put(0.3034859,0.14799012){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$[C^i_1, C^i_2,...,C^i_n]$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{algo2.pdf}}%
+    \put(0.32500325,0.22459668){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Input data\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{algo2.pdf}}%
+    \put(0.53410703,0.22394505){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Blockchain\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{algo2.pdf}}%
+    \put(0.72913399,0.16631216){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}DSO\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{algo2.pdf}}%
+    \put(0.86450289,0.05778012){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}PGD\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{algo2.pdf}}%
+    \put(0.29799776,0.08313672){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$[P'^i_1, P'^i_2,...,P'^i_n]$\end{tabular}}}}%
+    \put(0.29823569,0.04284817){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$[C'^i_1, C'^i_2,...,C'^i_n]$\end{tabular}}}}%
+    \put(0.31400801,0.00219141){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Output data\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{algo2.pdf}}%
+  \end{picture}%
+\endgroup%

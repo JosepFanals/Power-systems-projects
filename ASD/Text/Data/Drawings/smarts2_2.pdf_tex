@@ -1,0 +1,89 @@
+%% Creator: Inkscape 1.0 (4035a4fb49, 2020-05-01), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'smarts2_2.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{389.42536375bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.6844535)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{smarts2_2.pdf}}%
+    \put(0.01744315,0.37180867){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Address: 0x7B83...0A26 \end{tabular}}}}%
+    \put(0.01681316,0.33352137){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Private key: 91cc...af03\end{tabular}}}}%
+    \put(0.12353449,0.41499986){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}DSO\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{smarts2_2.pdf}}%
+    \put(0.40548964,0.60959251){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Hash: 0xd4d0...322a \end{tabular}}}}%
+    \put(0.40515227,0.5713052){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Block: 14450630\end{tabular}}}}%
+    \put(0.41089973,0.03532755){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Speed: 2.41 s\end{tabular}}}}%
+    \put(0.40515805,0.53289186){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Power: 17.95 MW \end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{smarts2_2.pdf}}%
+    \put(0.41161285,0.00377728){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Tx fee: 0.000448 \euro\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{smarts2_2.pdf}}%
+    \put(0.40549536,0.4645272){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Hash: 0x854e...fe66 \end{tabular}}}}%
+    \put(0.40515827,0.42623989){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Block: 14450633\end{tabular}}}}%
+    \put(0.40516382,0.38782661){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Power: 5.87 MW \end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{smarts2_2.pdf}}%
+    \put(0.40549992,0.31852399){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Hash: 0x96f1...ae4d \end{tabular}}}}%
+    \put(0.40516249,0.28023669){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Block: 14450635\end{tabular}}}}%
+    \put(0.40516843,0.24182332){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Power: 5.30 MW \end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{smarts2_2.pdf}}%
+    \put(0.40517115,0.17311992){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Hash: 0xe89b...45bc\end{tabular}}}}%
+    \put(0.40483372,0.13483262){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Block: 14450638\end{tabular}}}}%
+    \put(0.40483955,0.09641936){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Power: 8.04 MW \end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{smarts2_2.pdf}}%
+    \put(0.43227809,0.66811762){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textsc{Transactions}\end{tabular}}}}%
+    \put(0.79280736,0.42642574){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textsc{Contract}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{smarts2_2.pdf}}%
+    \put(0.74792597,0.37641661){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Hash: 0xD58E...9a98 \end{tabular}}}}%
+    \put(0.74797884,0.33095233){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Block: 14435886\end{tabular}}}}%
+    \put(0.75720716,0.27575337){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Speed: 2.64 s\end{tabular}}}}%
+    \put(0.75792022,0.24420309){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Tx fee: 0.000237 \euro\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{smarts2_2.pdf}}%
+  \end{picture}%
+\endgroup%

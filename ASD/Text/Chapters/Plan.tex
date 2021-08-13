@@ -1,0 +1,62 @@
+Up to this point, the mathematical aspects regarding the PGD, the technicalities about blockchain, and a fundamental business analysis have been covered. Yet, there is a missing piece to bring the ideas to reality: the implementation plan. This chapter enunciates a potential plan. Although this is a partially subjective matter, an organization of the various activities that we envision as requirements are presented along with a schedule. 
+
+First, it is valuable to recall that the project conceives a hierarchical structure as the one depicted in Figure \ref{fig:plan1}. This implies that there has to be a bidirectional flow of information between particular users and the town or \textit{concelho} entity as such. In this sense, towns would act as an aggregator, or in other words, as a centralizer.  Then, a given town establishes communication with the DSO and the rest of the towns in a decentralized manner.
+
+\begin{figure}[!htb]\centering
+    \incfig{plan2}
+    \caption{Hierarchical structure of the communication between participants}
+    \label{fig:plan1}
+\end{figure}
+
+At a high level, the estimated resources needed to achieve this organization are summarized below:
+\begin{itemize}
+	\item Programmers: a team of software engineers to further develop the implementation of smart contracts. In addition to that, the code of the PGD can be written so as to offer more flexibility. 
+	\item Lawyers: with the goal in mind of adapting the tasks in relation to the legislation. That is, it has to be validated if the new market structure that the project unveils is feasible. Not only that, but issues related to data protection are of massive importance as well. 
+	\item Smart meters: they are the gateway that allows interaction between prosumers and the DSO, which would eventually communicate with the town entity. No extra investment would be required here, as these smart meters are already present. 
+	\item App developers: to improve the synergy between prosumers, the town and the DSO. Users would be able to adjust their preferences. They could participate at voting for the price of electricity and activating/deactivating their cooperation for demand-response mechanisms, among others. 
+\end{itemize}
+Communication between the town entity and the prosumers does not necessarily have to be complicated. No blockchain is needed, as there is a large uncertainty on the production and consumption at a certain time of the day. It has already been explained that a peer-to-peer approach is not easily implemented in reality, and apart from that, it probably does not carry substantial advantages. 
+
+
+At a deeper level, Figure \ref{fig:plan_g} shows a Gantt diagram to detail the tasks to be performed and the proposed schedule. Even though the project may take more than a year and a half to be complete, it is thought that these tasks are enough to form a solid basis from where to progress. 
+
+\begin{figure}[!htb]\centering
+\begin{ganttchart}[vgrid={*{2}{draw=none},dotted}, hgrid, expand chart=0.9\textwidth]{1}{18}
+	 \gantttitle{Implementation plan}{18}\\  % title 1
+    \gantttitle[]{2021}{6}                 % title 2
+    \gantttitle[]{2022}{12} \\              
+    \gantttitle{Q3}{3}
+    \gantttitle{Q4}{3}
+    \gantttitle{Q1}{3}
+    \gantttitle{Q2}{3}
+    \gantttitle{Q3}{3} 
+    \gantttitle{Q4}{3}\\
+    % Setting group if any
+    \ganttgroup[inline=false]{PGD development}{1}{9}\\ 
+    \ganttbar[inline=false]{Planning}{1}{2}\\
+    \ganttbar[inline=false]{Add dimensions}{2}{4}\\
+    \ganttbar[inline=false]{Newton-Raphson merging}{5}{6}\\
+    \ganttbar[inline=false]{C translation}{7}{9}\\
+    \ganttmilestone[inline=false]{PGD finished}{9}\\ 
+    \ganttgroup[inline=false]{Smart contracts}{8}{17}\\ 
+    \ganttbar[inline=false]{Planning}{8}{10}\\
+    \ganttbar[inline=false]{Towns-DSO interaction}{10}{11}\\
+    \ganttbar[inline=false]{Optimization algorithm}{12}{14}\\
+    \ganttbar[inline=false]{App development}{14}{17}\\
+    \ganttmilestone[inline=false]{Smart contracts finished}{17}\\ 
+    \ganttgroup[inline=false]{Legislation analysis}{1}{4}
+%     \ganttlink{elem1}{elem2}
+    \ganttlink{elem2}{elem3}
+    \ganttlink{elem3}{elem4}
+    \ganttlink{elem4}{elem5}
+%     \ganttlink{elem7}{elem8}
+    \ganttlink{elem8}{elem9}
+    \ganttlink{elem10}{elem11}
+\end{ganttchart}
+\caption{Implementation plan for 2021 and 2022, with special focus placed on developing the software tools}
+\label{fig:plan_g}
+\end{figure}
+For simplicity, only three dimensions have been considered in this project, but the methodology is scalable for $n$ dimensions. This is a must when trying to perform diverse parametric studies in parallel. The PGD has been combined with the Alternating Search Directions method (ASD) because of its speed and straightforward formulation. However, to study more realistic systems, it would be convenient to merge the PGD with a common iterative approach such as the Newton-Raphson. To have a faster code, the PGD should eventually be programmed in C++, or at least, a non-interpreted programming language like Python.
+
+On the other hand, the code in Solidity related to smart contracts has to be advanced so as to include more data which will permit a better decision making between users and towns, and justify the interaction with the DSO. An optimization algorithm has to be developed to compute the best feasible solution depending on the inclinations of the DSO. The last step has to do with developing a mobile application, mainly to raise awareness on the prosumers' side.
+

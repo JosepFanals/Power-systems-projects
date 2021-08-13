@@ -1,0 +1,243 @@
+%!TEX program = lualatex 
+% \documentclass[11pt, a4paper, ]{article} % report per treballs
+\documentclass[a4paper, ]{article} % report per treballs
+\usepackage[left=3.85cm,top=2.5cm,right=2.5cm,bottom=2.5cm,bindingoffset=0.0cm,headsep=0.6cm]{geometry}  % marges. bindingoffset és el marge per on es posaria l'espiral
+\usepackage{parskip} % per no tenir indentation i gestionar espais de paràgrafs
+\usepackage{setspace} % per l'espai entre línies
+\setstretch{1.2} % espaiat entre línies
+% \setlength\parskip{1.2em plus 0.1em minus 0.1em} % espaiat dels paràgrafs
+\setlength\parskip{1.2em} % espaiat dels paràgrafs
+
+\usepackage{graphicx} % per afegir imatges
+\usepackage[american]{babel} % llengua: anglès
+\usepackage[font=footnotesize, labelfont = sc, labelsep=period]{caption} % captions més petites i separar amb punt
+\usepackage{fancyhdr} % pel heading
+\fancyhf{} % per header i footer
+\lhead{\small \textit{Semi-decentralized blockchain-based optimal framework for distribution power systems}} % dalt a la dreta
+\rhead{\small \thepage} % dalt a l'esquerra
+% \rfoot{\footnotesize \thepage} % baix a la dreta
+\usepackage{tocloft} % per ajustar el table of contents
+% \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}} % per posar punts a tot el TOC
+\addtocontents{toc}{\protect\vskip0.25cm}  % per separar al TOC conclusions d'annex
+\pagestyle{fancy} % heading i footer tipus fancy per defecte
+% \fancypagestyle{plain}{} % per tenir fancy a la 1ra pàgina del TOC i dels capítols
+\usepackage{amsmath} % per matemàtica general
+\makeatletter % per la separació de les equacions, estan ajustats a mà
+\g@addto@macro\normalsize{%
+  \setlength{\abovedisplayskip}{0.5em}% 
+  \setlength{\belowdisplayskip}{0.5em}%
+  \setlength{\abovedisplayshortskip}{0.5em}%
+  \setlength{\belowdisplayshortskip}{0.5em}%
+}
+\makeatother
+\setlength{\intextsep}{1.5em} % separació de la figura o taula amb !h
+\setlength{\textfloatsep}{1.5em} % separació de la figura o taula amb el text sense !h
+\setlength\abovecaptionskip{0.5em} % separació de la caption amb la figura o taula
+\usepackage[hidelinks]{hyperref} % per a tenir TOC clickable
+\hypersetup{ % tots els hiperenllaços de color negre
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{import} % per a les imatges d'Inkscape
+\usepackage{xifthen} % per a les imatges d'Inkscape
+\usepackage{pdfpages} % per a les imatges d'Inkscape
+\usepackage{transparent} % per a les imatges d'Inkscape
+\usepackage{svg} % pel logo en format .svg
+\usepackage[RPvoltages]{circuitikz} % per tal que no salti warning
+\usetikzlibrary{arrows, decorations.markings, arrows.meta} % per a dibuixar fletxes d'intensitat
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{gris}{rgb}{0.97,0.97,0.97}
+\definecolor{gris_text}{rgb}{0.137, 0.122, 0.126}
+\definecolor{gris_comment}{rgb}{0.5,0.5,0.5}
+\definecolor{gris_pmenys}{rgb}{0.82,0.82,0.82}
+\definecolor{gris_pmes}{rgb}{0.5,0.5,0.5}
+\lstdefinestyle{mystyle}{ % defineixo l'estil
+    backgroundcolor=\color{gris},   
+    commentstyle=\color{gris_comment},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=6pt,
+    frame=single,   
+    framexleftmargin=15pt,
+    xleftmargin=18.5pt,   
+    xrightmargin=3.5pt, 
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle} % agafo l'estil definit
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16} % perquè si no el pgfplot dóna error
+\pgfplotsset{samples=2000} % número màxim de punts d'una corba que genera ell
+\usepackage{steinmetz} % per posar la fase, en forma polar
+\urlstyle{same} % per les url de la bibliografia
+\usetikzlibrary{shapes.geometric} % pels diagrames, si no, el diamond no el coneixia
+\usetikzlibrary{patterns} % per la regió shaded
+% \color{gris_text} % per tenir el text una mica grisós
+\newcommand{\incfig}[1]{% per incloure figura d'Inkscape
+    \def\svgwidth{\columnwidth}
+    \import{./Data/Drawings/}{#1.pdf_tex}
+}
+
+\usepackage[backend=biber, style=IEEE, citestyle=IEEE]{biblatex} % per la bibliografia
+\usepackage{csquotes}
+\setlength\bibitemsep{\baselineskip} % per tenir més espai entre bibliografia
+\addbibresource{bib.bib} % carregar el fitxer de bibliografia
+\renewcommand*{\nameyeardelim}{\addcomma\space} % coma entre autor i any
+\usepgfplotslibrary{fillbetween} % per tenir la grid al darrere
+\usepackage{subcaption} % per tenir subfigures
+\usepackage{lipsum} % per dummy text
+\usepackage{booktabs} % per tenir toprule i midrule
+\usepackage{lscape} % per fer landscape
+\usepackage{eurosym} % per l'euro
+\usepackage{bm}  % per la negreta
+\usepackage{algorithm} % per algoritmes
+\usepackage{algorithmic} % per algoritmes
+
+\newcommand*{\titleTMB}{\begingroup% Three Men in a Boat
+\centering 
+\settowidth{\unitlength}{\LARGE LA CASA DE LA SEDA AN ENERGY and something}
+\vspace*{\baselineskip}
+{\large\scshape Pablo Borao Fortún}\\[\baselineskip]
+{\large\scshape Josep Fanals Batllori}\\[\baselineskip]
+\vspace{60pt}
+\rule{\unitlength}{1.6pt}\vspace*{-\baselineskip}\vspace*{20pt}
+% \rule{\unitlength}{0.4pt}\\[\baselineskip]
+\setstretch{1.75}
+{\Large \textbf{SEMI-DECENTRALIZED BLOCKCHAIN-BASED OPTIMAL FRAMEWORK FOR DISTRIBUTION POWER SYSTEMS}}\\[1.5\baselineskip]
+\setstretch{1.00}
+{\itshape Team Project}\\[0.2\baselineskip]
+% \rule{\unitlength}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+\rule{\unitlength}{1.6pt}\\[\baselineskip]
+\vfill
+% {\large\scshape Electric Equipment}\\[\baselineskip]
+\includegraphics[width=10cm]{Data/Drawings/vector-edp.png}\centering\\
+\vspace{60pt}
+{\large\scshape Universitat Politècnica de Catalunya}\\[\baselineskip]
+{\small\scshape \today}\par
+\newpage
+\endgroup}
+
+\usetikzlibrary{shapes.geometric} % pels diagrames, si no, el diamond no el coneixia
+\usetikzlibrary{patterns} % per la regió shaded
+\usepackage{mathtools} % per la funció floor i ceil
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil} % per definir ceil
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor} % per definir floor
+\usepackage{anyfontsize} % per les lletres del swot, grans
+%\usepackage{times} % pel swot
+\usetikzlibrary{matrix} % pel swot
+\colorlet{helpful}{lime!70} % pel swot
+\colorlet{harmful}{red!30}
+\colorlet{internal}{yellow!40}
+\colorlet{external}{cyan!30}
+\colorlet{S}{helpful!50!internal}
+\colorlet{W}{harmful!50!internal}
+\colorlet{O}{helpful!50!external}
+\colorlet{T}{harmful!50!external}
+\newcommand{\texta}{Helpful\\ \tiny (to achieve the objective)\par}
+\newcommand{\textb}{Harmful\\ \tiny (to achieve the objective)\par}
+\newcommand{\textcn}{Internal origin\\ \tiny (product\slash company attributes)\par}
+\newcommand{\textdn}{External origin\\ \tiny (environment\slash market attributes)\par}
+\newcommand{\back}[1]{\fontsize{60}{70}\selectfont #1}
+\usepackage{epigraph} % per posar una quote
+\usepackage{pgfgantt} % per diagrama de Gantt
+
+
+\begin{document}
+
+% \begin{titlepage}
+%   \begin{center}
+% \titleTMB
+%   \end{center}
+% \end{titlepage}
+
+\newgeometry{centering}    %%% make the page centered on paper
+\begin{titlepage}
+\titleTMB
+\end{titlepage}
+\restoregeometry 
+
+\tableofcontents
+
+% \begin{center}
+% \Large SEMI-DECENTRALIZED BLOCKCHAIN-BASED OPTIMAL FRAMEWORK FOR DISTRIBUTION POWER SYSTEMS
+
+% \vspace{0.4cm}
+
+% \normalsize Pablo Borao Fortún
+
+% \normalsize Josep Fanals Batllori
+
+% \vspace{1cm}
+% \end{center}
+
+\newpage
+\section{Introduction}\label{Intro}  % basically it is the abstract with minor changes
+\input{Chapters/Introduction.tex}
+
+\newpage
+\section{State of the art}\label{State}
+\input{Chapters/State.tex}
+
+\newpage
+\section{Challenge identification}\label{Challenge}
+\input{Chapters/Challenge.tex}
+
+\newpage
+\section{Smart contracts framework}\label{Contracts}
+\input{Chapters/Contracts.tex}
+
+\newpage
+\section{Proper Generalized Decomposition}\label{PGD}
+\input{Chapters/PGD.tex}
+
+\newpage
+\section{Case study}\label{Case}
+\input{Chapters/Case.tex}
+
+\clearpage
+\newpage
+\section{Business assessment}\label{Implementation}  % talk about EDP here and economics
+\input{Chapters/Implementation.tex}
+
+\newpage
+\section{Implementation plan}\label{Plan}
+\input{Chapters/Plan.tex}
+
+\newpage
+\section{Conclusions}\label{Conclusions}
+\input{Chapters/Conclusions.tex}
+
+\newpage
+% \addtocontents{toc}{section}{Acknowledgements}
+\section*{Acknowledgements}
+\label{sec:ack}
+\addcontentsline{toc}{section}{\nameref{sec:ack}}
+The authors would like to express their gratitude to Santiago Peñate Vera, from Red Eléctrica de España, for his valuable help at parallelizing the PGD Python code.
+
+\newpage
+\printbibliography[heading=bibintoc]
+
+\newpage
+\appendix
+
+\newpage
+\section{Technical data}
+\input{Chapters/Data.tex}
+
+\newpage
+\section{Code}
+\input{Chapters/Code.tex}
+
+
+\end{document}

@@ -1,0 +1,1675 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{nakamoto2008re}{article}{}
+      \name{author}{1}{}{%
+        {{hash=1977190f018b398e43ede3de043de8ea}{%
+           family={Nakamoto},
+           familyi={N\bibinitperiod},
+           given={Satoshi},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{1977190f018b398e43ede3de043de8ea}
+      \strng{fullhash}{1977190f018b398e43ede3de043de8ea}
+      \strng{bibnamehash}{1977190f018b398e43ede3de043de8ea}
+      \strng{authorbibnamehash}{1977190f018b398e43ede3de043de8ea}
+      \strng{authornamehash}{1977190f018b398e43ede3de043de8ea}
+      \strng{authorfullhash}{1977190f018b398e43ede3de043de8ea}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Cryptography Mailing List}
+      \field{title}{Re: Bitcoin P2P e-cash paper}
+      \field{year}{2008}
+    \endentry
+    \entry{nofer2017blockchain}{article}{}
+      \name{author}{4}{}{%
+        {{hash=da2c17d84f30e35f5da981907b3346a5}{%
+           family={Nofer},
+           familyi={N\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=0f957a80d7332069cae1d2c5d2536bb8}{%
+           family={Gomber},
+           familyi={G\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=89b7c6cf134ca41ef0a96174c7642cc7}{%
+           family={Hinz},
+           familyi={H\bibinitperiod},
+           given={Oliver},
+           giveni={O\bibinitperiod}}}%
+        {{hash=526ba2fee005b53e7d2eeae289e5d5f3}{%
+           family={Schiereck},
+           familyi={S\bibinitperiod},
+           given={Dirk},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{947f5d79c4144ff0a848fa6d368eda51}
+      \strng{fullhash}{7f57d05280e98f1d721a80e2cac94cd0}
+      \strng{bibnamehash}{7f57d05280e98f1d721a80e2cac94cd0}
+      \strng{authorbibnamehash}{7f57d05280e98f1d721a80e2cac94cd0}
+      \strng{authornamehash}{947f5d79c4144ff0a848fa6d368eda51}
+      \strng{authorfullhash}{7f57d05280e98f1d721a80e2cac94cd0}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Business \& Information Systems Engineering}
+      \field{number}{3}
+      \field{title}{Blockchain}
+      \field{volume}{59}
+      \field{year}{2017}
+      \field{pages}{183\bibrangedash 187}
+      \range{pages}{5}
+    \endentry
+    \entry{zheng2018blockchain}{article}{}
+      \name{author}{5}{}{%
+        {{hash=94aeb96f7bbdfa5f304dc958ab7f265c}{%
+           family={Zheng},
+           familyi={Z\bibinitperiod},
+           given={Zibin},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=d93ea8b86f5966d92a614665f6182178}{%
+           family={Xie},
+           familyi={X\bibinitperiod},
+           given={Shaoan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=8060518804b5167fb2be592fec4be87e}{%
+           family={Dai},
+           familyi={D\bibinitperiod},
+           given={Hong-Ning},
+           giveni={H\bibinithyphendelim N\bibinitperiod}}}%
+        {{hash=3cd0ebc9a46c36ceb086385f0a9b3df4}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Xiangping},
+           giveni={X\bibinitperiod}}}%
+        {{hash=356e7b7c2a63b9a13bc494bb2b58e7ed}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Huaimin},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Inderscience Publishers (IEL)}%
+      }
+      \strng{namehash}{1c070690113903742ca5fe8b769cc1ee}
+      \strng{fullhash}{59c2e268701ca1b5b80b42e2f89938c7}
+      \strng{bibnamehash}{59c2e268701ca1b5b80b42e2f89938c7}
+      \strng{authorbibnamehash}{59c2e268701ca1b5b80b42e2f89938c7}
+      \strng{authornamehash}{1c070690113903742ca5fe8b769cc1ee}
+      \strng{authorfullhash}{59c2e268701ca1b5b80b42e2f89938c7}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Web and Grid Services}
+      \field{number}{4}
+      \field{title}{Blockchain challenges and opportunities: A survey}
+      \field{volume}{14}
+      \field{year}{2018}
+      \field{pages}{352\bibrangedash 375}
+      \range{pages}{24}
+    \endentry
+    \entry{gupta2017blockchain}{article}{}
+      \name{author}{1}{}{%
+        {{hash=9e3a850edf0433c31e9d58732419b040}{%
+           family={Gupta},
+           familyi={G\bibinitperiod},
+           given={Sourav\bibnamedelima Sen},
+           giveni={S\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{9e3a850edf0433c31e9d58732419b040}
+      \strng{fullhash}{9e3a850edf0433c31e9d58732419b040}
+      \strng{bibnamehash}{9e3a850edf0433c31e9d58732419b040}
+      \strng{authorbibnamehash}{9e3a850edf0433c31e9d58732419b040}
+      \strng{authornamehash}{9e3a850edf0433c31e9d58732419b040}
+      \strng{authorfullhash}{9e3a850edf0433c31e9d58732419b040}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IBM Onlone (http://www. IBM. COM)}
+      \field{title}{Blockchain}
+      \field{year}{2017}
+    \endentry
+    \entry{di2017blockchain}{article}{}
+      \name{author}{1}{}{%
+        {{hash=afbd37518d5057916e5407bc1b8da00e}{%
+           family={Di\bibnamedelima Pierro},
+           familyi={D\bibinitperiod\bibinitdelim P\bibinitperiod},
+           given={Massimo},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{afbd37518d5057916e5407bc1b8da00e}
+      \strng{fullhash}{afbd37518d5057916e5407bc1b8da00e}
+      \strng{bibnamehash}{afbd37518d5057916e5407bc1b8da00e}
+      \strng{authorbibnamehash}{afbd37518d5057916e5407bc1b8da00e}
+      \strng{authornamehash}{afbd37518d5057916e5407bc1b8da00e}
+      \strng{authorfullhash}{afbd37518d5057916e5407bc1b8da00e}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computing in Science \& Engineering}
+      \field{number}{5}
+      \field{title}{What is the blockchain?}
+      \field{volume}{19}
+      \field{year}{2017}
+      \field{pages}{92\bibrangedash 95}
+      \range{pages}{4}
+    \endentry
+    \entry{sankar2017survey}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=cf77efb64a64c55c16d47b613233130c}{%
+           family={Sankar},
+           familyi={S\bibinitperiod},
+           given={Lakshmi\bibnamedelima Siva},
+           giveni={L\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=76a50a5fc2b20bfc83561fb99a36c6b2}{%
+           family={Sindhu},
+           familyi={S\bibinitperiod},
+           given={M},
+           giveni={M\bibinitperiod}}}%
+        {{hash=3b9b7a3d23f334849e90831acebdc9db}{%
+           family={Sethumadhavan},
+           familyi={S\bibinitperiod},
+           given={M},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{ef5be105948bc361d522c7e3915a7bb9}
+      \strng{fullhash}{ef5be105948bc361d522c7e3915a7bb9}
+      \strng{bibnamehash}{ef5be105948bc361d522c7e3915a7bb9}
+      \strng{authorbibnamehash}{ef5be105948bc361d522c7e3915a7bb9}
+      \strng{authornamehash}{ef5be105948bc361d522c7e3915a7bb9}
+      \strng{authorfullhash}{ef5be105948bc361d522c7e3915a7bb9}
+      \field{sortinit}{6}
+      \field{sortinithash}{7851c86048328b027313775d8fbd2131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2017 4th International Conference on Advanced Computing and Communication Systems (ICACCS)}
+      \field{title}{Survey of consensus protocols on blockchain applications}
+      \field{year}{2017}
+      \field{pages}{1\bibrangedash 5}
+      \range{pages}{5}
+    \endentry
+    \entry{miller2014anonymous}{article}{}
+      \name{author}{2}{}{%
+        {{hash=403caa7edb7a2770a6a678a46079869e}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+        {{hash=106180b1302f004e9329ecf5926e737f}{%
+           family={LaViola\bibnamedelima Jr},
+           familyi={L\bibinitperiod\bibinitdelim J\bibinitperiod},
+           given={Joseph\bibnamedelima J},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{891c93b9d0960f1459ba01f866df3421}
+      \strng{fullhash}{891c93b9d0960f1459ba01f866df3421}
+      \strng{bibnamehash}{891c93b9d0960f1459ba01f866df3421}
+      \strng{authorbibnamehash}{891c93b9d0960f1459ba01f866df3421}
+      \strng{authornamehash}{891c93b9d0960f1459ba01f866df3421}
+      \strng{authorfullhash}{891c93b9d0960f1459ba01f866df3421}
+      \field{sortinit}{6}
+      \field{sortinithash}{7851c86048328b027313775d8fbd2131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{University of Central Florida Tech. Report CS-TR-14-01 (accessed 5 June 2019) https://socrates1024. s3. amazonaws. com/consensus. pdf}
+      \field{title}{Anonymous byzantine consensus from moderately-hard puzzles: A model for bitcoin}
+      \field{year}{2014}
+    \endentry
+    \entry{ethereum_market}{misc}{}
+      \field{sortinit}{7}
+      \field{sortinithash}{f615fb9c6fba11c6f962fb3fd599810e}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://coinmarketcap.com/}}
+      \field{note}{Accessed: 2021-04-19}
+      \field{title}{Today's Cryptocurrency Prices by Market Cap}
+    \endentry
+    \entry{lessig2000code}{article}{}
+      \name{author}{1}{}{%
+        {{hash=b927f6177442a683e2822507be56dbd8}{%
+           family={Lessig},
+           familyi={L\bibinitperiod},
+           given={Lawrence},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{b927f6177442a683e2822507be56dbd8}
+      \strng{fullhash}{b927f6177442a683e2822507be56dbd8}
+      \strng{bibnamehash}{b927f6177442a683e2822507be56dbd8}
+      \strng{authorbibnamehash}{b927f6177442a683e2822507be56dbd8}
+      \strng{authornamehash}{b927f6177442a683e2822507be56dbd8}
+      \strng{authorfullhash}{b927f6177442a683e2822507be56dbd8}
+      \field{sortinit}{8}
+      \field{sortinithash}{1b24cab5087933ef0826a7cd3b99e994}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Harvard magazine}
+      \field{number}{2000}
+      \field{title}{Code is law}
+      \field{volume}{1}
+      \field{year}{2000}
+    \endentry
+    \entry{szabo1994smart}{article}{}
+      \name{author}{1}{}{%
+        {{hash=7a8fa37f931a316fe587067d55ea90fb}{%
+           family={Szabo},
+           familyi={S\bibinitperiod},
+           given={Nick},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{7a8fa37f931a316fe587067d55ea90fb}
+      \strng{fullhash}{7a8fa37f931a316fe587067d55ea90fb}
+      \strng{bibnamehash}{7a8fa37f931a316fe587067d55ea90fb}
+      \strng{authorbibnamehash}{7a8fa37f931a316fe587067d55ea90fb}
+      \strng{authornamehash}{7a8fa37f931a316fe587067d55ea90fb}
+      \strng{authorfullhash}{7a8fa37f931a316fe587067d55ea90fb}
+      \field{sortinit}{9}
+      \field{sortinithash}{54047ffb55bdefa0694bbd554c1b11a0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Unpublished manuscript}
+      \field{title}{Smart contracts}
+      \field{year}{1994}
+    \endentry
+    \entry{christidis2016blockchains}{article}{}
+      \name{author}{2}{}{%
+        {{hash=aad61dbc6c1f77867a97b4a9fd043466}{%
+           family={Christidis},
+           familyi={C\bibinitperiod},
+           given={Konstantinos},
+           giveni={K\bibinitperiod}}}%
+        {{hash=1274e0f590bb60ba67ee8f8dbe141952}{%
+           family={Devetsikiotis},
+           familyi={D\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Ieee}%
+      }
+      \strng{namehash}{8c101e7175f417640a32da176fb1f2d0}
+      \strng{fullhash}{8c101e7175f417640a32da176fb1f2d0}
+      \strng{bibnamehash}{8c101e7175f417640a32da176fb1f2d0}
+      \strng{authorbibnamehash}{8c101e7175f417640a32da176fb1f2d0}
+      \strng{authornamehash}{8c101e7175f417640a32da176fb1f2d0}
+      \strng{authorfullhash}{8c101e7175f417640a32da176fb1f2d0}
+      \field{sortinit}{9}
+      \field{sortinithash}{54047ffb55bdefa0694bbd554c1b11a0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Ieee Access}
+      \field{title}{Blockchains and smart contracts for the internet of things}
+      \field{volume}{4}
+      \field{year}{2016}
+      \field{pages}{2292\bibrangedash 2303}
+      \range{pages}{12}
+    \endentry
+    \entry{eth2}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://ethereum.org/en/eth2/}}
+      \field{note}{Accessed: 2021-04-19}
+      \field{title}{The ETH2 upgrades. Upgrading Ethereum to radical new heights.}
+    \endentry
+    \entry{matic_web}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://matic.network/}}
+      \field{note}{Accessed: 2021-04-19}
+      \field{title}{Matic. Scalable and instant blockchain transactions}
+    \endentry
+    \entry{saleh2021blockchain}{article}{}
+      \name{author}{1}{}{%
+        {{hash=9eb385cf392c5f03823bf90b656487c5}{%
+           family={Saleh},
+           familyi={S\bibinitperiod},
+           given={Fahad},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press}%
+      }
+      \strng{namehash}{9eb385cf392c5f03823bf90b656487c5}
+      \strng{fullhash}{9eb385cf392c5f03823bf90b656487c5}
+      \strng{bibnamehash}{9eb385cf392c5f03823bf90b656487c5}
+      \strng{authorbibnamehash}{9eb385cf392c5f03823bf90b656487c5}
+      \strng{authornamehash}{9eb385cf392c5f03823bf90b656487c5}
+      \strng{authorfullhash}{9eb385cf392c5f03823bf90b656487c5}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Review of financial studies}
+      \field{number}{3}
+      \field{title}{Blockchain without waste: Proof-of-stake}
+      \field{volume}{34}
+      \field{year}{2021}
+      \field{pages}{1156\bibrangedash 1190}
+      \range{pages}{35}
+    \endentry
+    \entry{gavzi2019proof}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=6baae3826e59da37ab3420bc4884a209}{%
+           family={Gaži},
+           familyi={G\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=a788bdbaf3b805cdc29e079c1e4ae908}{%
+           family={Kiayias},
+           familyi={K\bibinitperiod},
+           given={Aggelos},
+           giveni={A\bibinitperiod}}}%
+        {{hash=d0d514d164d1317cacd643d0b54c32bb}{%
+           family={Zindros},
+           familyi={Z\bibinitperiod},
+           given={Dionysis},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{c3b758d07e9cdc00454fe6798e73e1fe}
+      \strng{fullhash}{c3b758d07e9cdc00454fe6798e73e1fe}
+      \strng{bibnamehash}{c3b758d07e9cdc00454fe6798e73e1fe}
+      \strng{authorbibnamehash}{c3b758d07e9cdc00454fe6798e73e1fe}
+      \strng{authornamehash}{c3b758d07e9cdc00454fe6798e73e1fe}
+      \strng{authorfullhash}{c3b758d07e9cdc00454fe6798e73e1fe}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2019 IEEE Symposium on Security and Privacy (SP)}
+      \field{title}{Proof-of-stake sidechains}
+      \field{year}{2019}
+      \field{pages}{139\bibrangedash 156}
+      \range{pages}{18}
+    \endentry
+    \entry{burger2016blockchain}{article}{}
+      \name{author}{4}{}{%
+        {{hash=c6c4cec55d1119ce33f565911ccbee0d}{%
+           family={Burger},
+           familyi={B\bibinitperiod},
+           given={Christoph},
+           giveni={C\bibinitperiod}}}%
+        {{hash=8cc0fd0d2d0dfecd0f37203094033f67}{%
+           family={Kuhlmann},
+           familyi={K\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+        {{hash=3787a286cc43717885a86870980e8c2f}{%
+           family={Richard},
+           familyi={R\bibinitperiod},
+           given={Philipp},
+           giveni={P\bibinitperiod}}}%
+        {{hash=76f9b5caff3355b36edfb8f9405cabbb}{%
+           family={Weinmann},
+           familyi={W\bibinitperiod},
+           given={Jens},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{31d3d1e7223d27e27152866e3a5ba117}
+      \strng{fullhash}{4b2ba0fc7cc69830d10093fb8e6dd4c1}
+      \strng{bibnamehash}{4b2ba0fc7cc69830d10093fb8e6dd4c1}
+      \strng{authorbibnamehash}{4b2ba0fc7cc69830d10093fb8e6dd4c1}
+      \strng{authornamehash}{31d3d1e7223d27e27152866e3a5ba117}
+      \strng{authorfullhash}{4b2ba0fc7cc69830d10093fb8e6dd4c1}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{DENA German Energy Agency}
+      \field{title}{Blockchain in the energy transition. A survey among decision-makers in the German energy industry}
+      \field{volume}{60}
+      \field{year}{2016}
+    \endentry
+    \entry{khan2019blockchain}{article}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=77a7ec70c26b688ee64d03795a08398a}{%
+           family={Khan},
+           familyi={K\bibinitperiod},
+           given={Komal},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{148e33616ec59ad1092009e3fc4ad134}
+      \strng{fullhash}{148e33616ec59ad1092009e3fc4ad134}
+      \strng{bibnamehash}{148e33616ec59ad1092009e3fc4ad134}
+      \strng{authorbibnamehash}{148e33616ec59ad1092009e3fc4ad134}
+      \strng{authornamehash}{148e33616ec59ad1092009e3fc4ad134}
+      \strng{authorfullhash}{148e33616ec59ad1092009e3fc4ad134}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Blockchain-Based Peer-to-Peer Energy Trading using IoT devices}
+      \field{year}{2019}
+    \endentry
+    \entry{el2020real}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=4cfd0a17bfb7243aa1bf44a75e7b17fe}{%
+           family={El-Sayed},
+           familyi={E\bibinithyphendelim S\bibinitperiod},
+           given={Islam},
+           giveni={I\bibinitperiod}}}%
+        {{hash=77a7ec70c26b688ee64d03795a08398a}{%
+           family={Khan},
+           familyi={K\bibinitperiod},
+           given={Komal},
+           giveni={K\bibinitperiod}}}%
+        {{hash=e0e869f2c33ba873af0858ab1e038d3f}{%
+           family={Dominguez},
+           familyi={D\bibinitperiod},
+           given={Xavier},
+           giveni={X\bibinitperiod}}}%
+        {{hash=8c1bbc06f5dcc6a23a48075429132068}{%
+           family={Arboleya},
+           familyi={A\bibinitperiod},
+           given={Pablo},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{0465ae872d7463a8b3a360bb92589f7a}
+      \strng{fullhash}{70137185e1195fd5bfd1da5850e24a2e}
+      \strng{bibnamehash}{70137185e1195fd5bfd1da5850e24a2e}
+      \strng{authorbibnamehash}{70137185e1195fd5bfd1da5850e24a2e}
+      \strng{authornamehash}{0465ae872d7463a8b3a360bb92589f7a}
+      \strng{authorfullhash}{70137185e1195fd5bfd1da5850e24a2e}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2020 IEEE Power \& Energy Society General Meeting (PESGM)}
+      \field{title}{A Real Pilot-Platform Implementation for Blockchain-Based Peer-to-Peer Energy Trading}
+      \field{year}{2020}
+      \field{pages}{1\bibrangedash 5}
+      \range{pages}{5}
+    \endentry
+    \entry{brilliantova2019blockchain}{article}{}
+      \name{author}{2}{}{%
+        {{hash=af02f0b770f4092f6a0cdc875a4abbaf}{%
+           family={Brilliantova},
+           familyi={B\bibinitperiod},
+           given={Vlada},
+           giveni={V\bibinitperiod}}}%
+        {{hash=5f83ec3059f0f8269d5bcc421c9b2e81}{%
+           family={Thurner},
+           familyi={T\bibinitperiod},
+           given={Thomas\bibnamedelima Wolfgang},
+           giveni={T\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{a34116ec8b61537930016dc937a0851c}
+      \strng{fullhash}{a34116ec8b61537930016dc937a0851c}
+      \strng{bibnamehash}{a34116ec8b61537930016dc937a0851c}
+      \strng{authorbibnamehash}{a34116ec8b61537930016dc937a0851c}
+      \strng{authornamehash}{a34116ec8b61537930016dc937a0851c}
+      \strng{authorfullhash}{a34116ec8b61537930016dc937a0851c}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Technology in Society}
+      \field{title}{Blockchain and the future of energy}
+      \field{volume}{57}
+      \field{year}{2019}
+      \field{pages}{38\bibrangedash 45}
+      \range{pages}{8}
+    \endentry
+    \entry{kang2017enabling}{article}{}
+      \name{author}{6}{}{%
+        {{hash=701512b2e19fafa6b70b8e0397f22877}{%
+           family={Kang},
+           familyi={K\bibinitperiod},
+           given={Jiawen},
+           giveni={J\bibinitperiod}}}%
+        {{hash=6ffd0307503b69f5ed91d373fe019df7}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Rong},
+           giveni={R\bibinitperiod}}}%
+        {{hash=a49fc380031619d7da34d08565c2d5cc}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Xumin},
+           giveni={X\bibinitperiod}}}%
+        {{hash=c4f29226f63630488832efc39c0efe7b}{%
+           family={Maharjan},
+           familyi={M\bibinitperiod},
+           given={Sabita},
+           giveni={S\bibinitperiod}}}%
+        {{hash=28f91f3a4b62ce57b7a533e742e8aae1}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Yan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=55953ef7ab740e1e78e8f28e77194c24}{%
+           family={Hossain},
+           familyi={H\bibinitperiod},
+           given={Ekram},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{94471ce20d1c69cda633554bc56ab1cf}
+      \strng{fullhash}{ba6dfe07a51ffe3f95bd2deae4bc12b1}
+      \strng{bibnamehash}{ba6dfe07a51ffe3f95bd2deae4bc12b1}
+      \strng{authorbibnamehash}{ba6dfe07a51ffe3f95bd2deae4bc12b1}
+      \strng{authornamehash}{94471ce20d1c69cda633554bc56ab1cf}
+      \strng{authorfullhash}{ba6dfe07a51ffe3f95bd2deae4bc12b1}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Industrial Informatics}
+      \field{number}{6}
+      \field{title}{Enabling localized peer-to-peer electricity trading among plug-in hybrid electric vehicles using consortium blockchains}
+      \field{volume}{13}
+      \field{year}{2017}
+      \field{pages}{3154\bibrangedash 3164}
+      \range{pages}{11}
+    \endentry
+    \entry{pipattanasomporn2018blockchain}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=1fbb8e92e29aae0051563a30ff4eef43}{%
+           family={Pipattanasomporn},
+           familyi={P\bibinitperiod},
+           given={Manisa},
+           giveni={M\bibinitperiod}}}%
+        {{hash=11989af89da133f58079a84e9fa27854}{%
+           family={Kuzlu},
+           familyi={K\bibinitperiod},
+           given={Murat},
+           giveni={M\bibinitperiod}}}%
+        {{hash=6df4eb9a207e59d008986da3dda165db}{%
+           family={Rahman},
+           familyi={R\bibinitperiod},
+           given={Saifur},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{1d2d95044b98794939eaaa63c92160fb}
+      \strng{fullhash}{1d2d95044b98794939eaaa63c92160fb}
+      \strng{bibnamehash}{1d2d95044b98794939eaaa63c92160fb}
+      \strng{authorbibnamehash}{1d2d95044b98794939eaaa63c92160fb}
+      \strng{authornamehash}{1d2d95044b98794939eaaa63c92160fb}
+      \strng{authorfullhash}{1d2d95044b98794939eaaa63c92160fb}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2018 International Conference and Utility Exhibition on Green Energy for Sustainable Development (ICUE)}
+      \field{title}{A blockchain-based platform for exchange of solar energy: Laboratory-scale implementation}
+      \field{year}{2018}
+      \field{pages}{1\bibrangedash 9}
+      \range{pages}{9}
+    \endentry
+    \entry{faugueras2019state}{report}{}
+      \name{author}{1}{}{%
+        {{hash=d830b5720df4474748f9bcf123f6d992}{%
+           family={Faugeras},
+           familyi={F\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Interreg, North-West Europe D2Grids}%
+      }
+      \strng{namehash}{d830b5720df4474748f9bcf123f6d992}
+      \strng{fullhash}{d830b5720df4474748f9bcf123f6d992}
+      \strng{bibnamehash}{d830b5720df4474748f9bcf123f6d992}
+      \strng{authorbibnamehash}{d830b5720df4474748f9bcf123f6d992}
+      \strng{authornamehash}{d830b5720df4474748f9bcf123f6d992}
+      \strng{authorfullhash}{d830b5720df4474748f9bcf123f6d992}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{State of the art report smart contract and blockchain}
+      \field{type}{techreport}
+      \field{year}{2019}
+    \endentry
+    \entry{vangulick2018blockchain}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=b7d4441068135b83a3ea0761038e2c58}{%
+           family={Vangulick},
+           familyi={V\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=62ac593786e28c2e56fab28d272346bf}{%
+           family={Cornélusse},
+           familyi={C\bibinitperiod},
+           given={Bertrand},
+           giveni={B\bibinitperiod}}}%
+        {{hash=6fbe33fd3b6a25f54629f311cb113551}{%
+           family={Ernst},
+           familyi={E\bibinitperiod},
+           given={Damien},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{ff09df018dfa4823b49bbcc34b190ad6}
+      \strng{fullhash}{ff09df018dfa4823b49bbcc34b190ad6}
+      \strng{bibnamehash}{ff09df018dfa4823b49bbcc34b190ad6}
+      \strng{authorbibnamehash}{ff09df018dfa4823b49bbcc34b190ad6}
+      \strng{authornamehash}{ff09df018dfa4823b49bbcc34b190ad6}
+      \strng{authorfullhash}{ff09df018dfa4823b49bbcc34b190ad6}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2018 Power Systems Computation Conference (PSCC)}
+      \field{title}{Blockchain for peer-to-peer energy exchanges: design and recommendations}
+      \field{year}{2018}
+      \field{pages}{1\bibrangedash 7}
+      \range{pages}{7}
+    \endentry
+    \entry{wang2019energy}{article}{}
+      \name{author}{5}{}{%
+        {{hash=2f2bb9422125d3f4e6a018760477a75e}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Shen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=0247ddf38315c1c351925261f3e2af88}{%
+           family={Taha},
+           familyi={T\bibinitperiod},
+           given={Ahmad\bibnamedelima F},
+           giveni={A\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=735251ff30c1ec1c149b7acd80972b97}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Jianhui},
+           giveni={J\bibinitperiod}}}%
+        {{hash=c1e6506bd1eec6d150cd71361cb5e54b}{%
+           family={Kvaternik},
+           familyi={K\bibinitperiod},
+           given={Karla},
+           giveni={K\bibinitperiod}}}%
+        {{hash=944eb960106b96d985f5e822cb43eb2e}{%
+           family={Hahn},
+           familyi={H\bibinitperiod},
+           given={Adam},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{86f6daf79fc563dda86e9cb30aecdc8e}
+      \strng{fullhash}{fa47719f290e51a5e2c46b29eb1d65ad}
+      \strng{bibnamehash}{fa47719f290e51a5e2c46b29eb1d65ad}
+      \strng{authorbibnamehash}{fa47719f290e51a5e2c46b29eb1d65ad}
+      \strng{authornamehash}{86f6daf79fc563dda86e9cb30aecdc8e}
+      \strng{authorfullhash}{fa47719f290e51a5e2c46b29eb1d65ad}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Systems, Man, and Cybernetics: Systems}
+      \field{number}{8}
+      \field{title}{Energy crowdsourcing and peer-to-peer energy trading in blockchain-enabled smart grids}
+      \field{volume}{49}
+      \field{year}{2019}
+      \field{pages}{1612\bibrangedash 1623}
+      \range{pages}{12}
+    \endentry
+    \entry{thakur2018peer}{article}{}
+      \name{author}{2}{}{%
+        {{hash=4d9939f6c71b7e51193cee27fed0f933}{%
+           family={Thakur},
+           familyi={T\bibinitperiod},
+           given={Subhasis},
+           giveni={S\bibinitperiod}}}%
+        {{hash=94f4b58cd429794c0ee2d7e8739aa5ae}{%
+           family={Breslin},
+           familyi={B\bibinitperiod},
+           given={John\bibnamedelima G},
+           giveni={J\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{8f96e8bd7c8339e86d497493a05bcdb9}
+      \strng{fullhash}{8f96e8bd7c8339e86d497493a05bcdb9}
+      \strng{bibnamehash}{8f96e8bd7c8339e86d497493a05bcdb9}
+      \strng{authorbibnamehash}{8f96e8bd7c8339e86d497493a05bcdb9}
+      \strng{authornamehash}{8f96e8bd7c8339e86d497493a05bcdb9}
+      \strng{authorfullhash}{8f96e8bd7c8339e86d497493a05bcdb9}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Technology and Economics of Smart Grids and Sustainable Energy}
+      \field{number}{1}
+      \field{title}{Peer to peer energy trade among microgrids using blockchain based distributed coalition formation method}
+      \field{volume}{3}
+      \field{year}{2018}
+      \field{pages}{1\bibrangedash 17}
+      \range{pages}{17}
+    \endentry
+    \entry{verma2018enerport}{article}{}
+      \name{author}{5}{}{%
+        {{hash=c8b23af1f07f12e043eb408111568419}{%
+           family={Verma},
+           familyi={V\bibinitperiod},
+           given={Piyush},
+           giveni={P\bibinitperiod}}}%
+        {{hash=973107e46132deb1671eee8e9a52583f}{%
+           family={O’Regan},
+           familyi={O\bibinitperiod},
+           given={Brian},
+           giveni={B\bibinitperiod}}}%
+        {{hash=a6d914fa5f104e0b67169a93473bb599}{%
+           family={Hayes},
+           familyi={H\bibinitperiod},
+           given={Barry},
+           giveni={B\bibinitperiod}}}%
+        {{hash=4d9939f6c71b7e51193cee27fed0f933}{%
+           family={Thakur},
+           familyi={T\bibinitperiod},
+           given={Subhasis},
+           giveni={S\bibinitperiod}}}%
+        {{hash=94f4b58cd429794c0ee2d7e8739aa5ae}{%
+           family={Breslin},
+           familyi={B\bibinitperiod},
+           given={John\bibnamedelima G},
+           giveni={J\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{c34c6a6deedc349989cc6c82c1f1b2eb}
+      \strng{fullhash}{d366258e177fa03ba098678b6ae52cef}
+      \strng{bibnamehash}{d366258e177fa03ba098678b6ae52cef}
+      \strng{authorbibnamehash}{d366258e177fa03ba098678b6ae52cef}
+      \strng{authornamehash}{c34c6a6deedc349989cc6c82c1f1b2eb}
+      \strng{authorfullhash}{d366258e177fa03ba098678b6ae52cef}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Energy Informatics}
+      \field{number}{1}
+      \field{title}{EnerPort: Irish Blockchain project for peer-to-peer energy trading}
+      \field{volume}{1}
+      \field{year}{2018}
+      \field{pages}{1\bibrangedash 9}
+      \range{pages}{9}
+    \endentry
+    \entry{neos}{misc}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://neos-guide.org/content/optimal-power-flow}}
+      \field{note}{Accessed: 2021-04-22}
+      \field{title}{Electricity and Power. The Optimal Power Flow (OPF).}
+    \endentry
+    \entry{ebeed2018optimal}{incollection}{}
+      \name{author}{3}{}{%
+        {{hash=c4d542ad2d2b27823a7d2290c7b56793}{%
+           family={Ebeed},
+           familyi={E\bibinitperiod},
+           given={Mohamed},
+           giveni={M\bibinitperiod}}}%
+        {{hash=da045422c66a4594174d6a0fcf04f9ad}{%
+           family={Kamel},
+           familyi={K\bibinitperiod},
+           given={Salah},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2ccaf4bce748f1200c906d643c06bfc6}{%
+           family={Jurado},
+           familyi={J\bibinitperiod},
+           given={Francisco},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{e232ec3c9442918776ecbb75f7ba2707}
+      \strng{fullhash}{e232ec3c9442918776ecbb75f7ba2707}
+      \strng{bibnamehash}{e232ec3c9442918776ecbb75f7ba2707}
+      \strng{authorbibnamehash}{e232ec3c9442918776ecbb75f7ba2707}
+      \strng{authornamehash}{e232ec3c9442918776ecbb75f7ba2707}
+      \strng{authorfullhash}{e232ec3c9442918776ecbb75f7ba2707}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Classical and recent aspects of power system optimization}
+      \field{title}{Optimal power flow using recent optimization techniques}
+      \field{year}{2018}
+      \field{pages}{157\bibrangedash 183}
+      \range{pages}{27}
+    \endentry
+    \entry{carpentier1962contribution}{article}{}
+      \name{author}{1}{}{%
+        {{hash=c0ac09f85987c9e8e6273aa3ab9d72f8}{%
+           family={Carpentier},
+           familyi={C\bibinitperiod},
+           given={J},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{c0ac09f85987c9e8e6273aa3ab9d72f8}
+      \strng{fullhash}{c0ac09f85987c9e8e6273aa3ab9d72f8}
+      \strng{bibnamehash}{c0ac09f85987c9e8e6273aa3ab9d72f8}
+      \strng{authorbibnamehash}{c0ac09f85987c9e8e6273aa3ab9d72f8}
+      \strng{authornamehash}{c0ac09f85987c9e8e6273aa3ab9d72f8}
+      \strng{authorfullhash}{c0ac09f85987c9e8e6273aa3ab9d72f8}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Bulletin de la Societe Francaise des Electriciens}
+      \field{number}{1}
+      \field{title}{Contribution a l’etude du dispatching economique}
+      \field{volume}{3}
+      \field{year}{1962}
+      \field{pages}{431\bibrangedash 447}
+      \range{pages}{17}
+    \endentry
+    \entry{frank2012optimal}{article}{}
+      \name{author}{3}{}{%
+        {{hash=e1366e3cdc9ac7be386db2b038a49983}{%
+           family={Frank},
+           familyi={F\bibinitperiod},
+           given={Stephen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=4e62c9a47525ba46250fd3a3deebc9ac}{%
+           family={Steponavice},
+           familyi={S\bibinitperiod},
+           given={Ingrida},
+           giveni={I\bibinitperiod}}}%
+        {{hash=dfa4f8a824d0dcd9cdf8d71c4f5757c1}{%
+           family={Rebennack},
+           familyi={R\bibinitperiod},
+           given={Steffen},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{1fa21b47c54bc0efc182b00f8edab83e}
+      \strng{fullhash}{1fa21b47c54bc0efc182b00f8edab83e}
+      \strng{bibnamehash}{1fa21b47c54bc0efc182b00f8edab83e}
+      \strng{authorbibnamehash}{1fa21b47c54bc0efc182b00f8edab83e}
+      \strng{authornamehash}{1fa21b47c54bc0efc182b00f8edab83e}
+      \strng{authorfullhash}{1fa21b47c54bc0efc182b00f8edab83e}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Energy systems}
+      \field{number}{3}
+      \field{title}{Optimal power flow: a bibliographic survey II}
+      \field{volume}{3}
+      \field{year}{2012}
+      \field{pages}{259\bibrangedash 289}
+      \range{pages}{31}
+    \endentry
+    \entry{momoh1999improved}{article}{}
+      \name{author}{2}{}{%
+        {{hash=3eff86626cb4a28ca814553fcdd6b2db}{%
+           family={Momoh},
+           familyi={M\bibinitperiod},
+           given={James\bibnamedelima A},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=fef3dbba67e95b4c57579394e390b1db}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={JZ},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{a9717200484aba27c16bf68cf8dc8e16}
+      \strng{fullhash}{a9717200484aba27c16bf68cf8dc8e16}
+      \strng{bibnamehash}{a9717200484aba27c16bf68cf8dc8e16}
+      \strng{authorbibnamehash}{a9717200484aba27c16bf68cf8dc8e16}
+      \strng{authornamehash}{a9717200484aba27c16bf68cf8dc8e16}
+      \strng{authorfullhash}{a9717200484aba27c16bf68cf8dc8e16}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Power Systems}
+      \field{number}{3}
+      \field{title}{Improved interior point method for OPF problems}
+      \field{volume}{14}
+      \field{year}{1999}
+      \field{pages}{1114\bibrangedash 1120}
+      \range{pages}{7}
+    \endentry
+    \entry{qiu2009literature}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=2e7eec5e266affc4ab49c19995d33eef}{%
+           family={Qiu},
+           familyi={Q\bibinitperiod},
+           given={Zhifeng},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=5e360c285eb99748cb05e86f06f5e73d}{%
+           family={Deconinck},
+           familyi={D\bibinitperiod},
+           given={Geert},
+           giveni={G\bibinitperiod}}}%
+        {{hash=b6b7f0b748570582fd7b009e71adbe91}{%
+           family={Belmans},
+           familyi={B\bibinitperiod},
+           given={Ronnie},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{0f10d8667ec02c797e160b0c507af080}
+      \strng{fullhash}{0f10d8667ec02c797e160b0c507af080}
+      \strng{bibnamehash}{0f10d8667ec02c797e160b0c507af080}
+      \strng{authorbibnamehash}{0f10d8667ec02c797e160b0c507af080}
+      \strng{authornamehash}{0f10d8667ec02c797e160b0c507af080}
+      \strng{authorfullhash}{0f10d8667ec02c797e160b0c507af080}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2009 IEEE/PES Power Systems Conference and Exposition}
+      \field{title}{A literature survey of optimal power flow problems in the electricity market context}
+      \field{year}{2009}
+      \field{pages}{1\bibrangedash 6}
+      \range{pages}{6}
+    \endentry
+    \entry{khamees2016optimal}{article}{}
+      \name{author}{3}{}{%
+        {{hash=dfee385d305f965459bbcfdcf89a054a}{%
+           family={Khamees},
+           familyi={K\bibinitperiod},
+           given={Amr\bibnamedelima Khaled},
+           giveni={A\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=d456501e2fef44232635fd41936e6378}{%
+           family={Badra},
+           familyi={B\bibinitperiod},
+           given={Niveen},
+           giveni={N\bibinitperiod}}}%
+        {{hash=85fff7ccf1392a0a6f3d79cbade2640a}{%
+           family={Abdelaziz},
+           familyi={A\bibinitperiod},
+           given={Almoataz\bibnamedelima Y},
+           giveni={A\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{2671420eb2c7745fce02bf334eb3c164}
+      \strng{fullhash}{2671420eb2c7745fce02bf334eb3c164}
+      \strng{bibnamehash}{2671420eb2c7745fce02bf334eb3c164}
+      \strng{authorbibnamehash}{2671420eb2c7745fce02bf334eb3c164}
+      \strng{authornamehash}{2671420eb2c7745fce02bf334eb3c164}
+      \strng{authorfullhash}{2671420eb2c7745fce02bf334eb3c164}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Electrical Engineering Journal (IEEJ)}
+      \field{number}{4}
+      \field{title}{Optimal power flow methods: A comprehensive survey}
+      \field{volume}{7}
+      \field{year}{2016}
+      \field{pages}{2228\bibrangedash 2239}
+      \range{pages}{12}
+    \endentry
+    \entry{alrashidi2008survey}{article}{}
+      \name{author}{2}{}{%
+        {{hash=4f936b8a492e18830129d2e87259163f}{%
+           family={AlRashidi},
+           familyi={A\bibinitperiod},
+           given={Mohammed\bibnamedelima R},
+           giveni={M\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=2e13d6b0309065aa578fb9080ba4d88d}{%
+           family={El-Hawary},
+           familyi={E\bibinithyphendelim H\bibinitperiod},
+           given={Mohamed\bibnamedelima E},
+           giveni={M\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{1aa4e039f443bc7ca421f18fb64d2e6e}
+      \strng{fullhash}{1aa4e039f443bc7ca421f18fb64d2e6e}
+      \strng{bibnamehash}{1aa4e039f443bc7ca421f18fb64d2e6e}
+      \strng{authorbibnamehash}{1aa4e039f443bc7ca421f18fb64d2e6e}
+      \strng{authornamehash}{1aa4e039f443bc7ca421f18fb64d2e6e}
+      \strng{authorfullhash}{1aa4e039f443bc7ca421f18fb64d2e6e}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE transactions on evolutionary computation}
+      \field{number}{4}
+      \field{title}{A survey of particle swarm optimization applications in electric power systems}
+      \field{volume}{13}
+      \field{year}{2008}
+      \field{pages}{913\bibrangedash 918}
+      \range{pages}{6}
+    \endentry
+    \entry{chinesta2013proper}{book}{}
+      \name{author}{3}{}{%
+        {{hash=387729112d9b3ef8ab4a11507c0b4ec5}{%
+           family={Chinesta},
+           familyi={C\bibinitperiod},
+           given={Francisco},
+           giveni={F\bibinitperiod}}}%
+        {{hash=8002eee93fd621bffa7c313b9f8d8ce4}{%
+           family={Keunings},
+           familyi={K\bibinitperiod},
+           given={Roland},
+           giveni={R\bibinitperiod}}}%
+        {{hash=93c10be56b99773e1ca32c3c0b0c2712}{%
+           family={Leygue},
+           familyi={L\bibinitperiod},
+           given={Adrien},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Science \& Business Media}%
+      }
+      \strng{namehash}{918b8093daad0b8f441f59df4b303057}
+      \strng{fullhash}{918b8093daad0b8f441f59df4b303057}
+      \strng{bibnamehash}{918b8093daad0b8f441f59df4b303057}
+      \strng{authorbibnamehash}{918b8093daad0b8f441f59df4b303057}
+      \strng{authornamehash}{918b8093daad0b8f441f59df4b303057}
+      \strng{authorfullhash}{918b8093daad0b8f441f59df4b303057}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The proper generalized decomposition for advanced numerical simulations: a primer}
+      \field{year}{2013}
+    \endentry
+    \entry{blanco2017efficient}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=bbed332991d9e5268ab0059c3d8c41c6}{%
+           family={Blanco},
+           familyi={B\bibinitperiod},
+           given={Raquel\bibnamedelima Garcı́a},
+           giveni={R\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Universitat Politècnica de Catalunya (UPC)}%
+      }
+      \strng{namehash}{bbed332991d9e5268ab0059c3d8c41c6}
+      \strng{fullhash}{bbed332991d9e5268ab0059c3d8c41c6}
+      \strng{bibnamehash}{bbed332991d9e5268ab0059c3d8c41c6}
+      \strng{authorbibnamehash}{bbed332991d9e5268ab0059c3d8c41c6}
+      \strng{authornamehash}{bbed332991d9e5268ab0059c3d8c41c6}
+      \strng{authorfullhash}{bbed332991d9e5268ab0059c3d8c41c6}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Efficient solvers for power flow equations: parametric solutions with accuracy control assessment}
+      \field{type}{phdthesis}
+      \field{year}{2017}
+    \endentry
+    \entry{eth_gas}{misc}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://ethereumprice.org/gas/}}
+      \field{note}{Accessed: 2021-04-22}
+      \field{title}{Ethereum price. Ethereum Gas Charts.}
+    \endentry
+    \entry{eth_price}{misc}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://etherscan.io/gastracker}}
+      \field{note}{Accessed: 2021-04-22}
+      \field{title}{Etherscan. Ethereum Gas Tracker.}
+    \endentry
+    \entry{eth_price2}{misc}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://ycharts.com/indicators/ethereum_average_block_time}}
+      \field{note}{Accessed: 2021-04-22}
+      \field{title}{YCharts. Ethereum Average Block Time.}
+    \endentry
+    \entry{matic_expl}{misc}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://explorer-mainnet.maticvigil.com/}}
+      \field{note}{Accessed: 2021-04-22}
+      \field{title}{Matic mainnet explorer.}
+    \endentry
+    \entry{onaiwu2009does}{article}{}
+      \name{author}{1}{}{%
+        {{hash=6709791917945411167026e879594960}{%
+           family={Onaiwu},
+           familyi={O\bibinitperiod},
+           given={Egheosa},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{6709791917945411167026e879594960}
+      \strng{fullhash}{6709791917945411167026e879594960}
+      \strng{bibnamehash}{6709791917945411167026e879594960}
+      \strng{authorbibnamehash}{6709791917945411167026e879594960}
+      \strng{authornamehash}{6709791917945411167026e879594960}
+      \strng{authorfullhash}{6709791917945411167026e879594960}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Universisty of Dundee}
+      \field{title}{How does bilateral trading differ from electricity pooling}
+      \field{year}{2009}
+    \endentry
+    \entry{chaves2015spanish}{article}{}
+      \name{author}{2}{}{%
+        {{hash=4508031b4d08de3b49e87f9b3f5f96ff}{%
+           family={Chaves-Ávila},
+           familyi={C\bibinithyphendelim Á\bibinitperiod},
+           given={José\bibnamedelima Pablo},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=d028d1a97ec7cb4a10a966437c45b1c1}{%
+           family={Fernandes},
+           familyi={F\bibinitperiod},
+           given={Camila},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{7becc30708dae2754f52280d2311d92a}
+      \strng{fullhash}{7becc30708dae2754f52280d2311d92a}
+      \strng{bibnamehash}{7becc30708dae2754f52280d2311d92a}
+      \strng{authorbibnamehash}{7becc30708dae2754f52280d2311d92a}
+      \strng{authornamehash}{7becc30708dae2754f52280d2311d92a}
+      \strng{authorfullhash}{7becc30708dae2754f52280d2311d92a}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Renewable Energy}
+      \field{title}{The Spanish intraday market design: A successful solution to balance renewable generation?}
+      \field{volume}{74}
+      \field{year}{2015}
+      \field{pages}{422\bibrangedash 432}
+      \range{pages}{11}
+    \endentry
+    \entry{ree_datahub}{misc}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.ree.es/sites/default/files/11_PUBLICACIONES/Documentos/Transicion_Energetica.pdf}}
+      \field{note}{Accessed: 2021-04-30}
+      \field{title}{Hacer posible la transición energética. Red Eléctrica y la integración de renovables}
+    \endentry
+    \entry{aderibole2020blockchain}{article}{}
+      \name{author}{8}{}{%
+        {{hash=a76fa352318f2ec5a09237db03cb1e5d}{%
+           family={Aderibole},
+           familyi={A\bibinitperiod},
+           given={Adedayo},
+           giveni={A\bibinitperiod}}}%
+        {{hash=15985127f0432b202c8cae3392d2a7c3}{%
+           family={Aljarwan},
+           familyi={A\bibinitperiod},
+           given={Aamna},
+           giveni={A\bibinitperiod}}}%
+        {{hash=5268890df55749c9c8a41370b1d80559}{%
+           family={Rehman},
+           familyi={R\bibinitperiod},
+           given={Muhammad\bibnamedelimb Habib\bibnamedelima Ur},
+           giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim U\bibinitperiod}}}%
+        {{hash=9fb0527569d7363e7d41516f502856df}{%
+           family={Zeineldin},
+           familyi={Z\bibinitperiod},
+           given={Hatem\bibnamedelima H},
+           giveni={H\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=b172770e8688bab086d05c706b8ec2eb}{%
+           family={Mezher},
+           familyi={M\bibinitperiod},
+           given={Toufic},
+           giveni={T\bibinitperiod}}}%
+        {{hash=507152ddd5fb1fb6bc999623839cb73c}{%
+           family={Salah},
+           familyi={S\bibinitperiod},
+           given={Khaled},
+           giveni={K\bibinitperiod}}}%
+        {{hash=832654d2c401b8bf9a040fe6056d3a49}{%
+           family={Damiani},
+           familyi={D\bibinitperiod},
+           given={Ernesto},
+           giveni={E\bibinitperiod}}}%
+        {{hash=d6d6095c27a547eed5056f1c6c0abcd2}{%
+           family={Svetinovic},
+           familyi={S\bibinitperiod},
+           given={Davor},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{c0661f115a0d6163d878aafb63a01246}
+      \strng{fullhash}{606d9fbb7ea3f049017b0223fc0b6586}
+      \strng{bibnamehash}{606d9fbb7ea3f049017b0223fc0b6586}
+      \strng{authorbibnamehash}{606d9fbb7ea3f049017b0223fc0b6586}
+      \strng{authornamehash}{c0661f115a0d6163d878aafb63a01246}
+      \strng{authorfullhash}{606d9fbb7ea3f049017b0223fc0b6586}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Access}
+      \field{title}{Blockchain technology for smart grids: Decentralized nist conceptual model}
+      \field{volume}{8}
+      \field{year}{2020}
+      \field{pages}{43177\bibrangedash 43190}
+      \range{pages}{14}
+    \endentry
+    \entry{alladi2019blockchain}{article}{}
+      \name{author}{4}{}{%
+        {{hash=b220e5c40bddf248f8947b4f2ca59756}{%
+           family={Alladi},
+           familyi={A\bibinitperiod},
+           given={Tejasvi},
+           giveni={T\bibinitperiod}}}%
+        {{hash=b739bdf70b8d0a68cb988c0f29cc3b7e}{%
+           family={Chamola},
+           familyi={C\bibinitperiod},
+           given={Vinay},
+           giveni={V\bibinitperiod}}}%
+        {{hash=e311cf79273c06a0fe3b1b4f6effc40f}{%
+           family={Rodrigues},
+           familyi={R\bibinitperiod},
+           given={Joel\bibnamedelima JPC},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=6963935cc974ba630479d5f9ec21dc15}{%
+           family={Kozlov},
+           familyi={K\bibinitperiod},
+           given={Sergei\bibnamedelima A},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Multidisciplinary Digital Publishing Institute}%
+      }
+      \strng{namehash}{dc9f172d2246aa472d9c50f6c793d991}
+      \strng{fullhash}{36ee36113944aaacdfb35a332e5a472e}
+      \strng{bibnamehash}{36ee36113944aaacdfb35a332e5a472e}
+      \strng{authorbibnamehash}{36ee36113944aaacdfb35a332e5a472e}
+      \strng{authornamehash}{dc9f172d2246aa472d9c50f6c793d991}
+      \strng{authorfullhash}{36ee36113944aaacdfb35a332e5a472e}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Sensors}
+      \field{number}{22}
+      \field{title}{Blockchain in smart grids: A review on different use cases}
+      \field{volume}{19}
+      \field{year}{2019}
+      \field{pages}{4862}
+      \range{pages}{1}
+    \endentry
+    \entry{musleh2019blockchain}{article}{}
+      \name{author}{3}{}{%
+        {{hash=55d37540ba4a6e09a666ba4ff7de441f}{%
+           family={Musleh},
+           familyi={M\bibinitperiod},
+           given={Ahmed\bibnamedelima S},
+           giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=4117253179404561dff236e1ce1b1cab}{%
+           family={Yao},
+           familyi={Y\bibinitperiod},
+           given={Gang},
+           giveni={G\bibinitperiod}}}%
+        {{hash=d572470251a2a63d1344be58bcf72ea9}{%
+           family={Muyeen},
+           familyi={M\bibinitperiod},
+           given={SM},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{fd9817f659baa99787ab431dc4b0d006}
+      \strng{fullhash}{fd9817f659baa99787ab431dc4b0d006}
+      \strng{bibnamehash}{fd9817f659baa99787ab431dc4b0d006}
+      \strng{authorbibnamehash}{fd9817f659baa99787ab431dc4b0d006}
+      \strng{authornamehash}{fd9817f659baa99787ab431dc4b0d006}
+      \strng{authorfullhash}{fd9817f659baa99787ab431dc4b0d006}
+      \field{sortinit}{3}
+      \field{sortinithash}{a37a8ef248a93c322189792c34fc68c9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Ieee Access}
+      \field{title}{Blockchain applications in smart grid--review and frameworks}
+      \field{volume}{7}
+      \field{year}{2019}
+      \field{pages}{86746\bibrangedash 86757}
+      \range{pages}{12}
+    \endentry
+    \entry{power_ledger}{misc}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.powerledger.io/}}
+      \field{note}{Accessed: 2021-04-30}
+      \field{title}{Power Ledger. The power behind new energy}
+    \endentry
+    \entry{lightency}{misc}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://lightency.io/}}
+      \field{note}{Accessed: 2021-04-30}
+      \field{title}{Lightency. The sustainable African energy platform}
+    \endentry
+    \entry{electrify}{misc}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://electrify.asia/}}
+      \field{note}{Accessed: 2021-04-30}
+      \field{title}{Electrify. Transactive, energy, sustainable future}
+    \endentry
+    \entry{eth_berlin}{misc}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://blog.ethereum.org/2021/03/08/ethereum-berlin-upgrade-announcement/}}
+      \field{note}{Accessed: 2021-05-02}
+      \field{title}{Ethereum Berlin Upgrade Announcement}
+    \endentry
+    \entry{chinesta2010recent}{article}{}
+      \name{author}{3}{}{%
+        {{hash=387729112d9b3ef8ab4a11507c0b4ec5}{%
+           family={Chinesta},
+           familyi={C\bibinitperiod},
+           given={Francisco},
+           giveni={F\bibinitperiod}}}%
+        {{hash=617e49690b1737e0dc3630ee39061db0}{%
+           family={Ammar},
+           familyi={A\bibinitperiod},
+           given={Amine},
+           giveni={A\bibinitperiod}}}%
+        {{hash=5456656c6332de60ab54395d16b1ed5b}{%
+           family={Cueto},
+           familyi={C\bibinitperiod},
+           given={Elías},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{914bef93ae8b13728ea1016be22377f3}
+      \strng{fullhash}{914bef93ae8b13728ea1016be22377f3}
+      \strng{bibnamehash}{914bef93ae8b13728ea1016be22377f3}
+      \strng{authorbibnamehash}{914bef93ae8b13728ea1016be22377f3}
+      \strng{authornamehash}{914bef93ae8b13728ea1016be22377f3}
+      \strng{authorfullhash}{914bef93ae8b13728ea1016be22377f3}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Archives of Computational methods in Engineering}
+      \field{number}{4}
+      \field{title}{Recent advances and new challenges in the use of the proper generalized decomposition for solving multidimensional models}
+      \field{volume}{17}
+      \field{year}{2010}
+      \field{pages}{327\bibrangedash 350}
+      \range{pages}{24}
+    \endentry
+    \entry{garcia2016reduced}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=74d304778df8e1ae757d84311f3da101}{%
+           family={García-Blanco},
+           familyi={G\bibinithyphendelim B\bibinitperiod},
+           given={Raquel},
+           giveni={R\bibinitperiod}}}%
+        {{hash=0c5a796b17877b66fb44d8afe7a8e470}{%
+           family={Díez},
+           familyi={D\bibinitperiod},
+           given={Pedro},
+           giveni={P\bibinitperiod}}}%
+        {{hash=092a761226b5e97f65ec48824c4c6145}{%
+           family={Borzacchiello},
+           familyi={B\bibinitperiod},
+           given={Domenico},
+           giveni={D\bibinitperiod}}}%
+        {{hash=387729112d9b3ef8ab4a11507c0b4ec5}{%
+           family={Chinesta},
+           familyi={C\bibinitperiod},
+           given={Francisco},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{2f89e3c06dd444b6fd991a2c7113c3d8}
+      \strng{fullhash}{16ea316548f2e946d5532797a8b6f1a4}
+      \strng{bibnamehash}{16ea316548f2e946d5532797a8b6f1a4}
+      \strng{authorbibnamehash}{16ea316548f2e946d5532797a8b6f1a4}
+      \strng{authornamehash}{2f89e3c06dd444b6fd991a2c7113c3d8}
+      \strng{authorfullhash}{16ea316548f2e946d5532797a8b6f1a4}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2016 IEEE International Energy Conference (ENERGYCON)}
+      \field{title}{A reduced order modeling approach for optimal allocation of distributed generation in power distribution systems}
+      \field{year}{2016}
+      \field{pages}{1\bibrangedash 6}
+      \range{pages}{6}
+    \endentry
+    \entry{black2005greedy}{article}{}
+      \name{author}{1}{}{%
+        {{hash=e1095394554f731b945d74cd0d458d0c}{%
+           family={Black},
+           familyi={B\bibinitperiod},
+           given={Paul\bibnamedelima E},
+           giveni={P\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {US National Institute of Standards}%
+        {Technology}%
+      }
+      \strng{namehash}{e1095394554f731b945d74cd0d458d0c}
+      \strng{fullhash}{e1095394554f731b945d74cd0d458d0c}
+      \strng{bibnamehash}{e1095394554f731b945d74cd0d458d0c}
+      \strng{authorbibnamehash}{e1095394554f731b945d74cd0d458d0c}
+      \strng{authornamehash}{e1095394554f731b945d74cd0d458d0c}
+      \strng{authorfullhash}{e1095394554f731b945d74cd0d458d0c}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Dictionary of Algorithms and Data Structures}
+      \field{title}{Greedy algorithm}
+      \field{volume}{2}
+      \field{year}{2005}
+      \field{pages}{62}
+      \range{pages}{1}
+    \endentry
+    \entry{he2009research}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=b764eaeb6d79da801dec712b3867a0f5}{%
+           family={He},
+           familyi={H\bibinitperiod},
+           given={Yingying},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=0263e2375f15a6b3c8e5d2bb16fac04e}{%
+           family={Song},
+           familyi={S\bibinitperiod},
+           given={Yukun},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=ed1c5bae80e3574d7f03dcd1b9aa683d}{%
+           family={Du},
+           familyi={D\bibinitperiod},
+           given={Gaoming},
+           giveni={G\bibinitperiod}}}%
+        {{hash=15dc6977deffbb2732f64b7f7b647ab7}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Duoli},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{b57a67ef69fce9c55691834366f162d0}
+      \strng{fullhash}{4fcac111eb90603be7c90ef102b69fb9}
+      \strng{bibnamehash}{4fcac111eb90603be7c90ef102b69fb9}
+      \strng{authorbibnamehash}{4fcac111eb90603be7c90ef102b69fb9}
+      \strng{authornamehash}{b57a67ef69fce9c55691834366f162d0}
+      \strng{authorfullhash}{4fcac111eb90603be7c90ef102b69fb9}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2009 International Conference on Computational Intelligence and Software Engineering}
+      \field{title}{Research of matrix inversion acceleration method}
+      \field{year}{2009}
+      \field{pages}{1\bibrangedash 4}
+      \range{pages}{4}
+    \endentry
+    \entry{ree_demand}{misc}{}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://demanda.ree.es/visiona/peninsula/demanda/total}}
+      \field{note}{Accessed: 2021-04-25}
+      \field{title}{Península - Seguimiento de la demanda de energía eléctrica}
+    \endentry
+    \entry{cimbal}{misc}{}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://cimbal.pt/pt/menu/598/caraterizacao-do-baixo-alentejo.aspx}}
+      \field{note}{Accessed: 2021-05-08}
+      \field{title}{Caraterização do Baixo Alentejo}
+    \endentry
+    \entry{entsoe}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=2cdf01a1dacd4fc793f59761eea73957}{%
+           family={ENTSO-E},
+           familyi={E\bibinithyphendelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{2cdf01a1dacd4fc793f59761eea73957}
+      \strng{fullhash}{2cdf01a1dacd4fc793f59761eea73957}
+      \strng{bibnamehash}{2cdf01a1dacd4fc793f59761eea73957}
+      \strng{authorbibnamehash}{2cdf01a1dacd4fc793f59761eea73957}
+      \strng{authornamehash}{2cdf01a1dacd4fc793f59761eea73957}
+      \strng{authorfullhash}{2cdf01a1dacd4fc793f59761eea73957}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.entsoe.eu/data/map/}}
+      \field{note}{Accessed: 2021-05-09}
+      \field{title}{ENTSO-E Transmission System Map}
+    \endentry
+    \entry{wiki1}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=9c677286866aad38f8e9b660f5411814}{%
+           family={Wikipedia},
+           familyi={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{fullhash}{9c677286866aad38f8e9b660f5411814}
+      \strng{bibnamehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{authorbibnamehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{authornamehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{authorfullhash}{9c677286866aad38f8e9b660f5411814}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://en.wikipedia.org/wiki/Baixo_Alentejo_(intermunicipal_community)}}
+      \field{note}{Accessed: 2021-05-09}
+      \field{title}{Baixo Alentejo (intermunicipal community)}
+    \endentry
+    \entry{edpp}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=445bdca3c41ac08291fcf2db8c941dbc}{%
+           family={{Expansión}},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{445bdca3c41ac08291fcf2db8c941dbc}
+      \strng{fullhash}{445bdca3c41ac08291fcf2db8c941dbc}
+      \strng{bibnamehash}{445bdca3c41ac08291fcf2db8c941dbc}
+      \strng{authorbibnamehash}{445bdca3c41ac08291fcf2db8c941dbc}
+      \strng{authornamehash}{445bdca3c41ac08291fcf2db8c941dbc}
+      \strng{authorfullhash}{445bdca3c41ac08291fcf2db8c941dbc}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://datosmacro.expansion.com/energia-y-medio-ambiente/electricidad-consumo/portugal}}
+      \field{note}{Accessed: 2021-05-14}
+      \field{title}{Portugal - Consumo de electricidad}
+    \endentry
+    \entry{edpr}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=590d53d7397b9937b6be9d4935612757}{%
+           family={EDP},
+           familyi={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{590d53d7397b9937b6be9d4935612757}
+      \strng{fullhash}{590d53d7397b9937b6be9d4935612757}
+      \strng{bibnamehash}{590d53d7397b9937b6be9d4935612757}
+      \strng{authorbibnamehash}{590d53d7397b9937b6be9d4935612757}
+      \strng{authornamehash}{590d53d7397b9937b6be9d4935612757}
+      \strng{authorfullhash}{590d53d7397b9937b6be9d4935612757}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.edp.com/sites/default/files/rc_2018_en_compress.pdf}}
+      \field{note}{Accessed: 2021-05-14}
+      \field{title}{Annual report, 2018.}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

@@ -1,0 +1,71 @@
+Electricity markets have revolved around the concept of a pool, an environment where buyers submit bids and sellers submit offers \cite{onaiwu2009does}. This is the typical structure of the day-ahead market, where most of the energy is traded. The increase in renewables justifies a transition towards a fast operating scheme since generation becomes rather unpredictable. While a near real-time intraday market tends to minimize the impact of this issue \cite{chaves2015spanish}, in all these structures there is no place for empowering prosumers. One of the many fields of application of smart contracts is precisely in the energy sector; they could very likely motivate the active participation of prosumers. 
+
+For this reason, this chapter depicts the methodologies to integrate smart contracts with the electricity market known up to date. Then, the chosen option is explained in greater detail from a structural perspective but also regarding technical aspects related to the deployment of these smart contracts. 
+
+\subsection{Smart contracts for energy transactions} % peer-to-peer, review of what has been done up to now, talk about some companies that already do this
+The decentralized nature of blockchain has inspired the proposal of peer-to-peer (P2P) electricity trading schemes. As shown in Figure \ref{fig:central1} participants trade electricity bilaterally according to their needs without a trusted third party. Aspects such as the amount of energy, the time frames, the pricing of the offer/bid have to be specified in the smart contract, to name a few. Figure \ref{fig:central1} compares both options.
+
+\begin{figure}[!htb]\centering
+    \incfig{centralized6}
+    \caption{Schematic comparison between a centralized system and a decentralized peer-to-peer structure}
+    \label{fig:central1}
+\end{figure}
+On the contrary, the centralized scheme relies on an entity that agglutinates information, imposes a price for electricity as well as terms and conditions. This is in essence the retailer. Despite the fact that users (or nodes) can choose amongst many retailers in a de-regulated environment, they are still restricted to agree on prices. This aspect complicates the integration of renewables at the household level since prosumers inject power at a predefined price without any stimulus to support the grid. Therefore, it seems logical to think that the electricity grid will physically change to accommodate renewables and at the same time there will be an underlying layer managing the information. 
+
+The grid of the future is expected to be decentralized. For instance, the Spanish TSO Red Eléctrica conceptualizes a modern power system where distributed generation will be combined with the typical transmission and distribution systems; in addition, this complex network should be sustained by a data hub that employs blockchain technologies \cite{ree_datahub}. In that regard, blockchain is seen as a fundamental pillar for smart grids \cite{aderibole2020blockchain, alladi2019blockchain, musleh2019blockchain}. 
+
+% talk about companies that implement blockchain and smart contracts
+Some companies have started to implement blockchain into local electricity markets based on the P2P concept. Such is the case of PowerLedger, a precursor in the application of blockchain to empower prosumers, especially focused on the integration of photovoltaic generation. Even though it has its own ERC20 token, the deployment takes place in the Ethereum network \cite{power_ledger}, so the transactions are not precisely cheap. Lightency and Electrify are other examples of companies devoted to blockchain for P2P energy trading, although their solutions seem to be in the early stages \cite{lightency, electrify}. % continue this
+
+In short, current P2P decentralized schemes have two main issues. One is the fact that decentralized systems completely remove the dependency on utilities. The lack of interaction between a node and the grid becomes fruitless when trying to enhance communications in a smart grid environment. The second issue has to do with the deployment of the contracts on the Ethereum network. If electricity trading has to evolve towards a continuous market, paying several euros for a single transaction is unacceptable.
+
+
+\subsection{Chosen framework} % semi-decentralized
+As depicted in Figure \ref{fig:central1}, the information flows between peers or nodes in the network but does not interact directly with grid operators. Yet, transmission system operators (TSO) and distribution system operators (DSO) ought to interact in some shape or form with the bilateral trades of electricity. There are physical constraints such as ampacity limits and voltage safe-operating margins that can not be neglected. Although renewable distributed generation is still not predominant in today's system, a decision framework to determine the optimal generation of renewables could be of great interest to reduce the losses and make the prices more competitive. This justifies why we believe semi-decentralized systems have a bright future ahead of them.
+
+The idea of the chosen semi-centralized framework is shown in Figure \ref{fig:central2}. In essence, the DSO behaves like another node in the blockchain network.
+
+\begin{figure}[!htb]\centering
+    \incfig{semidecentral2}
+    \caption{Schematic representation of the proposed semi-decentralized approach}
+    \label{fig:central2}
+\end{figure}
+
+% put figure of semidecentralized
+
+A semi-centralized framework means that transactions will still take place between nodes (or prosumers) without a trusted third party, but there will be communication between the nodes and the DSO to motivate prosumers to operate close to the optimal point. This does not mean prosumers lose freedom of choice. They may still find it convenient to consume or generate a certain amount of power without caring about the status of the grid. However, if they act following the grid requirements, lower prices will have to be paid by the DSO and the prosumer will obtain more revenue for generating energy.  
+
+On the other hand, the deployment of the contracts takes place on Matic's Mainnet. Matic is a layer 2 blockchain network. It is built on top of Ethereum, which means that every once in a while, some of its blocks that group multiple transactions are embedded into a block from the Ethereum network. Table \ref{tab:compare} shows a comparison of the most notable aspects of each network\footnote{Numerical values are highly variable across time. Data gathered here were representative for the 3rd of May of 2021.}.
+
+\begin{table}[!htb]\centering
+    \caption{Comparison of attributes between Ethereum and Matic. Technical data about both networks was extracted from \cite{matic_expl, eth_price2, eth_price}.}
+    \begin{tabular}{lcc}
+        \hline
+       \textbf{Characteristic} & \textbf{Ethereum} & \textbf{Matic}\\ 
+       \hline
+       Consensus mechanism & Proof of work & Proof of stake \\
+       Average block time (s) & 13.1 & 2.1 \\
+       Scalable & Yes & Yes \\
+       Cost per transaction (\$) & 3.40 & 0.0001 \\
+       Transactions per day & $1.43\cdot 10^6$ & $1.53\cdot 10^6$ \\
+       Total transactions & $1113\cdot 10^6$ & $31\cdot 10^6$ \\
+       Market capitalization (M\$) & $342\cdot 10^3$ & $4.12\cdot 10^3$ \\
+       \hline
+    \end{tabular}
+    \label{tab:compare}
+\end{table}
+Both options are scalable compared to Bitcoin, in the sense that they have the capability of handling a large volume of transactions. Despite Matic being a much more immature network, two characteristics make it stand above: its average block time and the cost per transaction. A lower average block time means that Matic is more suitable to react fast to new setpoints. The cost per transaction is the main issue with Ethereum; even though the Berlin hard fork, aimed at reducing gas fees, has been implemented at the time of writing this \cite{eth_berlin}, Matic's costs are still several orders of magnitude lower. 
+
+\subsection{Algorithm} 
+A generic network is formed by nodes, which make proposals depending on their needs, capabilities, and preferences. They specify a feasible range of powers, and with each power there is an associated price. This is the amount of money they are willing to pay or earn for their consumption/generation. A smart contract is built considering all these data. Then, the DSO looks for the optimal solution and determines the incentives it is prone to give to each node. Finally, the nodes could choose which offer they shall pick. Figure \ref{fig:algo1} visually shows the high-level algorithm particularized for a node $i$.  
+
+\begin{figure}[!htb]\centering
+    \incfig{algo2}
+    \caption{High-level scheme to trade electricity}
+    \label{fig:algo1}
+\end{figure}
+Nodes specify a discretized range of powers with the associated range of prices. Yet, this input object depends on the decisions of the node. The node can choose to offer a wide range of powers if it can provide flexibility, or on the contrary, it may be interested in just consuming a fixed amount of power, for instance. With this information, the DSO then runs the PGD to look for an optimal solution. 
+
+Notice that the optimality of an operation point is again an arbitrary concept. The company may prioritize low power losses, voltages close to the nominal value, or it could also try to maximize power from renewable sources. The decision is entirely up to the DSO, and it does not have to be static, that is, it could change across time. In any case, the DSO calls the smart contract and then writes on it a modified range of powers with also modified prices. The new ranges of power ought to be constrained to the limits of the initial powers, if not more. Finally, the $i$ node picks a power $P'^i_k$ with the associated cost $C'^i_k$. Again, the node is free to select among all possibilities. It will depend on its preferences. One option would be to choose the cheapest alternative.
+
+Here a node can represent either a single user, a neighborhood, a community, etc. There are no restrictions in this case, although nodes could be capable of offering more flexibility if they were aggregated. This general formulation of the problem is likely to empower them to vary powers in order to participate in demand response schemes and motivate the generation from renewable sources.

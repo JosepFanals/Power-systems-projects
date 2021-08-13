@@ -1,0 +1,18 @@
+[0] Config.pm:312> INFO - This is Biber 2.15 (beta)
+[0] Config.pm:315> INFO - Logfile is 'Text.blg'
+[93] biber-MSWIN64:330> INFO - === 
+[111] Biber.pm:415> INFO - Reading 'Text.bcf'
+[222] Biber.pm:952> INFO - Found 60 citekeys in bib section 0
+[239] Biber.pm:4334> INFO - Processing section 0
+[254] Biber.pm:4523> INFO - Looking for bibtex format file 'bib.bib' for section 0
+[270] bibtex.pm:1682> INFO - LaTeX decoding ...
+[364] bibtex.pm:1494> INFO - Found BibTeX data source 'bib.bib'
+[369] Utils.pm:395> WARN - Duplicate entry key: 'frank2012optimal' in file 'bib.bib', skipping ...
+[371] Utils.pm:395> WARN - Duplicate entry key: 'blanco2017efficient' in file 'bib.bib', skipping ...
+[625] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[626] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[626] Biber.pm:4162> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[626] Biber.pm:4168> INFO - No sort tailoring available for locale 'en-US'
+[663] bbl.pm:651> INFO - Writing 'Text.bbl' with encoding 'UTF-8'
+[687] bbl.pm:754> INFO - Output to Text.bbl
+[688] Biber.pm:128> INFO - WARNINGS: 2

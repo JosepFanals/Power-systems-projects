@@ -1,0 +1,101 @@
+%% Creator: Inkscape 1.0 (4035a4fb49, 2020-05-01), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'smarts3_2.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{394.18565224bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.67618786)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{smarts3_2.pdf}}%
+    \put(0.02930876,0.58527042){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Address: 0xDc58...F163 \end{tabular}}}}%
+    \put(0.02868638,0.54744548){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Private key: e84b...a985\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{smarts3_2.pdf}}%
+    \put(0.02934607,0.4413399){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Address: 0x01E4...6A60 \end{tabular}}}}%
+    \put(0.02872369,0.40351497){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Private key: 0422...5824\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{smarts3_2.pdf}}%
+    \put(0.02932489,0.29739688){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Address: 0x5e33...A8C8 \end{tabular}}}}%
+    \put(0.02870251,0.25957194){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Private key: ddb0...e754\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{smarts3_2.pdf}}%
+    \put(0.0293622,0.15346636){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Address: 0xC19B...99ea \end{tabular}}}}%
+    \put(0.02873982,0.11564148){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Private key: 7c78...c701\end{tabular}}}}%
+    \put(0.13126494,0.62794001){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Beja\end{tabular}}}}%
+    \put(0.10151989,0.48180592){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Almodôvar\end{tabular}}}}%
+    \put(0.12005879,0.33687064){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Mértola\end{tabular}}}}%
+    \put(0.12285069,0.19343725){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Moura\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{smarts3_2.pdf}}%
+    \put(0.41266911,0.60223091){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Hash: 0xcbd4...130d \end{tabular}}}}%
+    \put(0.41233581,0.56440597){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Block: 14437248\end{tabular}}}}%
+    \put(0.41801385,0.03490093){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Speed: 2.04 s\end{tabular}}}}%
+    \put(0.41234151,0.52645652){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Power: 30.00 MW \end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{smarts3_2.pdf}}%
+    \put(0.41871836,0.00373166){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Tx fee: 0.000376 \euro\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{smarts3_2.pdf}}%
+    \put(0.41267476,0.45891745){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Hash: 0xb9ab...3a55 \end{tabular}}}}%
+    \put(0.41234173,0.42109251){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Block: 14437257\end{tabular}}}}%
+    \put(0.41234722,0.38314311){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Power: 9.81 MW \end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{smarts3_2.pdf}}%
+    \put(0.41267926,0.31467741){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Hash: 0x826d...9a2c \end{tabular}}}}%
+    \put(0.4123459,0.27685248){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Block: 14437322\end{tabular}}}}%
+    \put(0.41235177,0.238903){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Power: 8.85 MW \end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{smarts3_2.pdf}}%
+    \put(0.41235446,0.17102928){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Hash: 0x8a11...29db \end{tabular}}}}%
+    \put(0.41202111,0.13320434){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Block: 14437332\end{tabular}}}}%
+    \put(0.41202687,0.09525498){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Power: 13.44 MW \end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{smarts3_2.pdf}}%
+    \put(0.43913405,0.66004926){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textsc{Transactions}\end{tabular}}}}%
+    \put(0.79530947,0.42194886){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textsc{Contract}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{smarts3_2.pdf}}%
+    \put(0.75097008,0.37187091){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Hash: 0xD58E...9a98 \end{tabular}}}}%
+    \put(0.75102231,0.32695566){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Block: 14435886\end{tabular}}}}%
+    \put(0.76013919,0.2724233){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Speed: 2.64 s\end{tabular}}}}%
+    \put(0.76084364,0.24125403){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Tx fee: 0.000237 \euro\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{smarts3_2.pdf}}%
+  \end{picture}%
+\endgroup%
