@@ -1,0 +1,353 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{borkowska1974}{article}{}
+      \name{author}{1}{}{%
+        {{hash=2bb520ca196cf82855e299eadbf6acfb}{%
+           family={Borkowska},
+           familyi={B\bibinitperiod},
+           given={Barbara},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{2bb520ca196cf82855e299eadbf6acfb}
+      \strng{fullhash}{2bb520ca196cf82855e299eadbf6acfb}
+      \strng{bibnamehash}{2bb520ca196cf82855e299eadbf6acfb}
+      \strng{authorbibnamehash}{2bb520ca196cf82855e299eadbf6acfb}
+      \strng{authornamehash}{2bb520ca196cf82855e299eadbf6acfb}
+      \strng{authorfullhash}{2bb520ca196cf82855e299eadbf6acfb}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Power Apparatus and Systems}
+      \field{number}{3}
+      \field{title}{Probabilistic load flow}
+      \field{year}{1974}
+      \field{pages}{752\bibrangedash 759}
+      \range{pages}{8}
+    \endentry
+    \entry{li2019}{article}{}
+      \name{author}{5}{}{%
+        {{hash=44614b5f5ec8f4fe27540b1f3f99e6d0}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Guoqing},
+           giveni={G\bibinitperiod}}}%
+        {{hash=2a2ce89b079f841633264d61b61e3a04}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Weihua},
+           giveni={W\bibinitperiod}}}%
+        {{hash=9933828e7b859ff0d257dda6ea2a566f}{%
+           family={Bian},
+           familyi={B\bibinitperiod},
+           given={Jing},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e418517a73fb5ac2a2106909034e7103}{%
+           family={Qin},
+           familyi={Q\bibinitperiod},
+           given={Fang},
+           giveni={F\bibinitperiod}}}%
+        {{hash=29555f94e5aaaa7ff970551f16db0bc9}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Ji},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Frontiers}%
+      }
+      \strng{namehash}{cde5603ec0d391325840d4c0f899d073}
+      \strng{fullhash}{ecf4b4422805443ede31330145f30f2e}
+      \strng{bibnamehash}{ecf4b4422805443ede31330145f30f2e}
+      \strng{authorbibnamehash}{ecf4b4422805443ede31330145f30f2e}
+      \strng{authornamehash}{cde5603ec0d391325840d4c0f899d073}
+      \strng{authorfullhash}{ecf4b4422805443ede31330145f30f2e}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Frontiers in Energy Research}
+      \field{title}{Probabilistic optimal power flow calculation method based on adaptive diffusion kernel density estimation}
+      \field{volume}{7}
+      \field{year}{2019}
+      \field{pages}{128}
+      \range{pages}{1}
+    \endentry
+    \entry{morales2010}{article}{}
+      \name{author}{4}{}{%
+        {{hash=1ad1a3cf42ddbc09f577b64b66413a0b}{%
+           family={Morales},
+           familyi={M\bibinitperiod},
+           given={Juan\bibnamedelima M},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=2d759d4b180982936b8f736acd462276}{%
+           family={Baringo},
+           familyi={B\bibinitperiod},
+           given={Luis},
+           giveni={L\bibinitperiod}}}%
+        {{hash=aba88c01ff0b7da344a4e8188170b122}{%
+           family={Conejo},
+           familyi={C\bibinitperiod},
+           given={Antonio\bibnamedelima J},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=b5a194a47e1d5d2375c488997ee25bdb}{%
+           family={Mínguez},
+           familyi={M\bibinitperiod},
+           given={Roberto},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IET}%
+      }
+      \strng{namehash}{fefe0360505448adf6bf8c17b77aefa9}
+      \strng{fullhash}{c20491799689c67be807a2860986b47f}
+      \strng{bibnamehash}{c20491799689c67be807a2860986b47f}
+      \strng{authorbibnamehash}{c20491799689c67be807a2860986b47f}
+      \strng{authornamehash}{fefe0360505448adf6bf8c17b77aefa9}
+      \strng{authorfullhash}{c20491799689c67be807a2860986b47f}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IET generation, transmission \& distribution}
+      \field{number}{5}
+      \field{title}{Probabilistic power flow with correlated wind sources}
+      \field{volume}{4}
+      \field{year}{2010}
+      \field{pages}{641\bibrangedash 651}
+      \range{pages}{11}
+    \endentry
+    \entry{fan2012}{article}{}
+      \name{author}{4}{}{%
+        {{hash=e0275173a7ef80914382a6b7ee6db7d6}{%
+           family={Fan},
+           familyi={F\bibinitperiod},
+           given={Miao},
+           giveni={M\bibinitperiod}}}%
+        {{hash=e3eb2323cfc519b09f12d8ce1bb715d6}{%
+           family={Vittal},
+           familyi={V\bibinitperiod},
+           given={Vijay},
+           giveni={V\bibinitperiod}}}%
+        {{hash=032cc2d04c16dbcc9fedc823155094e4}{%
+           family={Heydt},
+           familyi={H\bibinitperiod},
+           given={Gerald\bibnamedelima Thomas},
+           giveni={G\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=ae60da2d1b3880aec819d7f21754b0f3}{%
+           family={Ayyanar},
+           familyi={A\bibinitperiod},
+           given={Raja},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{03f46ccdab6504ffed050c1874978e3e}
+      \strng{fullhash}{8b840ca01722afe69cb602d281cc4abd}
+      \strng{bibnamehash}{8b840ca01722afe69cb602d281cc4abd}
+      \strng{authorbibnamehash}{8b840ca01722afe69cb602d281cc4abd}
+      \strng{authornamehash}{03f46ccdab6504ffed050c1874978e3e}
+      \strng{authorfullhash}{8b840ca01722afe69cb602d281cc4abd}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Power Systems}
+      \field{number}{4}
+      \field{title}{Probabilistic power flow studies for transmission systems with photovoltaic generation using cumulants}
+      \field{volume}{27}
+      \field{year}{2012}
+      \field{pages}{2251\bibrangedash 2261}
+      \range{pages}{11}
+    \endentry
+    \entry{li2012}{article}{}
+      \name{author}{2}{}{%
+        {{hash=86e11e28ff3e08f6b103fe1039447015}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Gan},
+           giveni={G\bibinitperiod}}}%
+        {{hash=ac8341e3048fc04a833bb65a5d1f7961}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Xiao-Ping},
+           giveni={X\bibinithyphendelim P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{2105454c3c7b9befdea9d5203a5f6113}
+      \strng{fullhash}{2105454c3c7b9befdea9d5203a5f6113}
+      \strng{bibnamehash}{2105454c3c7b9befdea9d5203a5f6113}
+      \strng{authorbibnamehash}{2105454c3c7b9befdea9d5203a5f6113}
+      \strng{authornamehash}{2105454c3c7b9befdea9d5203a5f6113}
+      \strng{authorfullhash}{2105454c3c7b9befdea9d5203a5f6113}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Smart Grid}
+      \field{number}{1}
+      \field{title}{Modeling of plug-in hybrid electric vehicle charging demand in probabilistic power flow calculations}
+      \field{volume}{3}
+      \field{year}{2012}
+      \field{pages}{492\bibrangedash 499}
+      \range{pages}{8}
+    \endentry
+    \entry{almeida1994}{article}{}
+      \name{author}{3}{}{%
+        {{hash=26473cd3851580450d309a58a3299af1}{%
+           family={Almeida},
+           familyi={A\bibinitperiod},
+           given={KC\bibnamedelima de},
+           giveni={K\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+        {{hash=848c3263d203d3c660fe5a29a3a23110}{%
+           family={Galiana},
+           familyi={G\bibinitperiod},
+           given={FD},
+           giveni={F\bibinitperiod}}}%
+        {{hash=82beb780ee837f907522b54b651ff2fa}{%
+           family={Soares},
+           familyi={S\bibinitperiod},
+           given={S},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{3971a356ebe3cbe8dfc268bf278dc550}
+      \strng{fullhash}{3971a356ebe3cbe8dfc268bf278dc550}
+      \strng{bibnamehash}{3971a356ebe3cbe8dfc268bf278dc550}
+      \strng{authorbibnamehash}{3971a356ebe3cbe8dfc268bf278dc550}
+      \strng{authornamehash}{3971a356ebe3cbe8dfc268bf278dc550}
+      \strng{authorfullhash}{3971a356ebe3cbe8dfc268bf278dc550}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Power Systems}
+      \field{number}{1}
+      \field{title}{A general parametric optimal power flow}
+      \field{volume}{9}
+      \field{year}{1994}
+      \field{pages}{540\bibrangedash 547}
+      \range{pages}{8}
+    \endentry
+    \entry{garcia2017}{article}{}
+      \name{author}{1}{}{%
+        {{hash=74d304778df8e1ae757d84311f3da101}{%
+           family={García-Blanco},
+           familyi={G\bibinithyphendelim B\bibinitperiod},
+           given={Raquel},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Universitat Politècnica de Catalunya}%
+      }
+      \strng{namehash}{74d304778df8e1ae757d84311f3da101}
+      \strng{fullhash}{74d304778df8e1ae757d84311f3da101}
+      \strng{bibnamehash}{74d304778df8e1ae757d84311f3da101}
+      \strng{authorbibnamehash}{74d304778df8e1ae757d84311f3da101}
+      \strng{authornamehash}{74d304778df8e1ae757d84311f3da101}
+      \strng{authorfullhash}{74d304778df8e1ae757d84311f3da101}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Efficient solvers for power flow equations: parametric solutions with accuracy control assessment}
+      \field{year}{2017}
+    \endentry
+    \entry{blanco2017}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=58db276e4b4d8fc8e0a45547547e47cc}{%
+           family={Blanco},
+           familyi={B\bibinitperiod},
+           given={Raquel\bibnamedelima García},
+           giveni={R\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Universitat Politècnica de Catalunya (UPC)}%
+      }
+      \strng{namehash}{58db276e4b4d8fc8e0a45547547e47cc}
+      \strng{fullhash}{58db276e4b4d8fc8e0a45547547e47cc}
+      \strng{bibnamehash}{58db276e4b4d8fc8e0a45547547e47cc}
+      \strng{authorbibnamehash}{58db276e4b4d8fc8e0a45547547e47cc}
+      \strng{authornamehash}{58db276e4b4d8fc8e0a45547547e47cc}
+      \strng{authorfullhash}{58db276e4b4d8fc8e0a45547547e47cc}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Efficient solvers for power flow equations: parametric solutions with accuracy control assessment}
+      \field{type}{phdthesis}
+      \field{year}{2017}
+    \endentry
+    \entry{shen2020}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=e701c331422024910c1fa02731dc3ef2}{%
+           family={Shen},
+           familyi={S\bibinitperiod},
+           given={Danfeng},
+           giveni={D\bibinitperiod}}}%
+        {{hash=d0d5a12b1f5bae45ea7780158b3b35c8}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Hao},
+           giveni={H\bibinitperiod}}}%
+        {{hash=e5db9754e4e4591c78dc0fc7728376f5}{%
+           family={Xia},
+           familyi={X\bibinitperiod},
+           given={Bingqing},
+           giveni={B\bibinitperiod}}}%
+        {{hash=7ec18668cbd1016b124524479809effd}{%
+           family={Gan},
+           familyi={G\bibinitperiod},
+           given={Deqiang},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{04d1feb6b6451c125a65b121359f574a}
+      \strng{fullhash}{fe776f4e717f755cb408db0361afb429}
+      \strng{bibnamehash}{fe776f4e717f755cb408db0361afb429}
+      \strng{authorbibnamehash}{fe776f4e717f755cb408db0361afb429}
+      \strng{authornamehash}{04d1feb6b6451c125a65b121359f574a}
+      \strng{authorfullhash}{fe776f4e717f755cb408db0361afb429}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2020 12th IEEE PES Asia-Pacific Power and Energy Engineering Conference (APPEEC)}
+      \field{title}{A Principal Component Analysis-Based Dimension Reduction Method for Parametric Power Flow}
+      \field{year}{2020}
+      \field{pages}{1\bibrangedash 5}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1109/APPEEC48164.2020.9220420
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

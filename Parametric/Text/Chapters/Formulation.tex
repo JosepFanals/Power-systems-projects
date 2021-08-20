@@ -1,0 +1,41 @@
+\section{What are states, parameters and dimensions?}
+States are denoted by $\mathbf{x}$ and stand for the unknowns of the power flow, such as the voltage magnitude. The traditional power flow looks to obtain a solution for all states; in the parametric power flow, this is not necessarily the case, as there might be only one bus under study. 
+
+Parameters are defined as the input data which are meant to vary. Powers are part of this category, since loads change over time and most generation sources also experience variations. Considering a total of $m$ parameters, grouped under $\mathbf{p} = [p_1, p_2, ..., p_m]$, each parameter $p_k \ \forall k \in \{1, ..., m\}$ takes values inside the $[a_k, b_k]$ range. 
+
+This way, the power flow problem can be written as:
+\begin{equation}
+  \mathbf{f}(\mathbf{x}, \mathbf{p}) = 0,
+  \label{eq:power1}
+\end{equation}
+where $\mathbf{f}$ symbolizes all implicit functions involved in the solution of the problem. The formulation that follows is generic, in the sense that the methodology would be equally valid for other problems. Hence, this technique is not limited to the traditional power flow. 
+
+The parametric approach looks to express a certain state as a function of the parameters:
+\begin{equation}
+  x = g(\mathbf{p}), 
+  \label{eq:param1}
+\end{equation}
+where $g$ is a function pending to be found. 
+
+From \eqref{eq:param1} it becomes clear that all parameters will potentially affect a given state. Visually speaking, Fig. \ref{fig:1ax}.a shows a representation of a state as a function of a single parameter, that is, assuming that only one input changes. Fig. \ref{fig:1ax}.b presents a similar visualization with two parameters involved. This justifies why, when viewed as a spatial representation, parameters are also denoted as dimensions. Each one of them stands for a new axis independent axis, and thus, orthogonal to the rest. 
+
+\begin{figure}[!htb]
+
+  \begin{subfigure}{0.49\textwidth}
+    \incfig{p1_1}
+    \caption{one-axis representation}
+  \end{subfigure}
+  \hspace*{\fill}
+  \begin{subfigure}{0.49\textwidth}
+    \incfig{p2_1}
+    \caption{two-axis representation}
+  \end{subfigure}
+
+  \caption{Representation of a state with one or two parameters}
+  \label{fig:1ax}
+\end{figure}
+
+More than two dimensions are expected to be present in a typical analysis of the parametric power flow. In a mid-size system, assuming all powers are treated as parameters, there could be hundreds of dimensions. If $m \approx 100$, opting for the naive approach with $m^n$ cases would be painful to compute. This is often called the curse of dimensionality. 
+
+One fundamental step to circumvent this challenge is to reduce the dimensions. Note that in Fig. \ref{fig:1ax} the value of $x$ is more or less the same in both Fig. \ref{fig:1ax}.a and Fig. \ref{fig:1ax}.b. That is, $p_1$ has a larger influence than $p_2$. The essence of dimensionality reduction lies in weighting each parameter according to its impact on the state and compacting them as a single parameter. 
+
