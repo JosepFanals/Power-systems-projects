@@ -9,7 +9,7 @@
 \usepackage[font=footnotesize, labelsep=period]{caption}
 \usepackage{fancyhdr}
 \fancyhf{}
-\lhead{\footnotesize Dimension reduction and parametric analysis applied to power systems}
+\lhead{\footnotesize Efficient parametric analysis of power systems}
 % \rhead{\footnotesize CITCEA}
 \rfoot{\footnotesize \thepage}
 \pagestyle{fancy}
@@ -25,6 +25,7 @@
 {\bfseries}{\thesubsection.}{0.5em}{\normalsize}
 \titlespacing*{\subsection}{0pt}{1.5em}{1.5em}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \makeatletter
 \g@addto@macro\normalsize{%
 \setlength{\abovedisplayskip}{0.5em}%
@@ -99,6 +100,11 @@ tabsize=2
 \counterwithout{table}{chapter}
 \counterwithout{table}{section}
 \counterwithout{table}{subsection}
+\counterwithout{equation}{chapter}
+\counterwithout{equation}{section}
+\counterwithout{equation}{subsection}
+
+
 
 
 \usepackage{csquotes}

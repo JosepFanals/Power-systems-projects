@@ -347,6 +347,147 @@
       \verb 10.1109/APPEEC48164.2020.9220420
       \endverb
     \endentry
+    \entry{berkooz1993}{article}{}
+      \name{author}{3}{}{%
+        {{hash=4943ab34a20da492475f2c59208d61a4}{%
+           family={Berkooz},
+           familyi={B\bibinitperiod},
+           given={Gal},
+           giveni={G\bibinitperiod}}}%
+        {{hash=949efe8a383e75de52b11d35676ae5a0}{%
+           family={Holmes},
+           familyi={H\bibinitperiod},
+           given={Philip},
+           giveni={P\bibinitperiod}}}%
+        {{hash=be8ece05a80e0b10446f677855380ff9}{%
+           family={Lumley},
+           familyi={L\bibinitperiod},
+           given={John\bibnamedelima L},
+           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Annual Reviews 4139 El Camino Way, PO Box 10139, Palo Alto, CA 94303-0139, USA}%
+      }
+      \strng{namehash}{20137090d412a2b986372d929df7d3e2}
+      \strng{fullhash}{20137090d412a2b986372d929df7d3e2}
+      \strng{bibnamehash}{20137090d412a2b986372d929df7d3e2}
+      \strng{authorbibnamehash}{20137090d412a2b986372d929df7d3e2}
+      \strng{authornamehash}{20137090d412a2b986372d929df7d3e2}
+      \strng{authorfullhash}{20137090d412a2b986372d929df7d3e2}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Annual review of fluid mechanics}
+      \field{number}{1}
+      \field{title}{The proper orthogonal decomposition in the analysis of turbulent flows}
+      \field{volume}{25}
+      \field{year}{1993}
+      \field{pages}{539\bibrangedash 575}
+      \range{pages}{37}
+    \endentry
+    \entry{weiss2019}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=10f7bdf86294121fa02cfe6790a8d971}{%
+           family={Weiss},
+           familyi={W\bibinitperiod},
+           given={Julien},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{10f7bdf86294121fa02cfe6790a8d971}
+      \strng{fullhash}{10f7bdf86294121fa02cfe6790a8d971}
+      \strng{bibnamehash}{10f7bdf86294121fa02cfe6790a8d971}
+      \strng{authorbibnamehash}{10f7bdf86294121fa02cfe6790a8d971}
+      \strng{authornamehash}{10f7bdf86294121fa02cfe6790a8d971}
+      \strng{authorfullhash}{10f7bdf86294121fa02cfe6790a8d971}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{AIAA Aviation 2019 Forum}
+      \field{title}{A tutorial on the proper orthogonal decomposition}
+      \field{year}{2019}
+      \field{pages}{3333}
+      \range{pages}{1}
+    \endentry
+    \entry{zhou2016}{article}{}
+      \name{author}{4}{}{%
+        {{hash=8d1882b1e718ecca3e799fc595eaab76}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Yongzhi},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=d0d5a12b1f5bae45ea7780158b3b35c8}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Hao},
+           giveni={H\bibinitperiod}}}%
+        {{hash=bb7842531523bbf3acc6c6be2154caf9}{%
+           family={Gu},
+           familyi={G\bibinitperiod},
+           given={Chenghong},
+           giveni={C\bibinitperiod}}}%
+        {{hash=98a027cfdffa93121d39b370d9411c2d}{%
+           family={Song},
+           familyi={S\bibinitperiod},
+           given={Yonghua},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{346685403d7ef589f08b19fc5ce36808}
+      \strng{fullhash}{d666ef5b558f1d84388a228a7712ffa3}
+      \strng{bibnamehash}{d666ef5b558f1d84388a228a7712ffa3}
+      \strng{authorbibnamehash}{d666ef5b558f1d84388a228a7712ffa3}
+      \strng{authornamehash}{346685403d7ef589f08b19fc5ce36808}
+      \strng{authorfullhash}{d666ef5b558f1d84388a228a7712ffa3}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Power Systems}
+      \field{number}{4}
+      \field{title}{A novel method of polynomial approximation for parametric problems in power systems}
+      \field{volume}{32}
+      \field{year}{2016}
+      \field{pages}{3298\bibrangedash 3307}
+      \range{pages}{10}
+    \endentry
+    \entry{shin2016}{article}{}
+      \name{author}{2}{}{%
+        {{hash=c4f69b1f3513c44630daa483e6282fc2}{%
+           family={Shin},
+           familyi={S\bibinitperiod},
+           given={Yeonjong},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=769dea06d4cd7f7e27157bc7195b7ac4}{%
+           family={Xiu},
+           familyi={X\bibinitperiod},
+           given={Dongbin},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {SIAM}%
+      }
+      \strng{namehash}{316c32eb2739ecb29cad713aee89a9fe}
+      \strng{fullhash}{316c32eb2739ecb29cad713aee89a9fe}
+      \strng{bibnamehash}{316c32eb2739ecb29cad713aee89a9fe}
+      \strng{authorbibnamehash}{316c32eb2739ecb29cad713aee89a9fe}
+      \strng{authornamehash}{316c32eb2739ecb29cad713aee89a9fe}
+      \strng{authorfullhash}{316c32eb2739ecb29cad713aee89a9fe}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Scientific Computing}
+      \field{number}{1}
+      \field{title}{Nonadaptive quasi-optimal points selection for least squares linear regression}
+      \field{volume}{38}
+      \field{year}{2016}
+      \field{pages}{A385\bibrangedash A411}
+      \range{pages}{-1}
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

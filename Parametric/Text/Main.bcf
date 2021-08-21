@@ -2357,6 +2357,14 @@
     <bcf:citekey order="5">garcia2017</bcf:citekey>
     <bcf:citekey order="5">blanco2017</bcf:citekey>
     <bcf:citekey order="6">shen2020</bcf:citekey>
+    <bcf:citekey order="7">shen2020</bcf:citekey>
+    <bcf:citekey order="8">berkooz1993</bcf:citekey>
+    <bcf:citekey order="8">weiss2019</bcf:citekey>
+    <bcf:citekey order="9">shen2020</bcf:citekey>
+    <bcf:citekey order="9">zhou2016</bcf:citekey>
+    <bcf:citekey order="10">shen2020</bcf:citekey>
+    <bcf:citekey order="11">shin2016</bcf:citekey>
+    <bcf:citekey order="12">shin2016</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
