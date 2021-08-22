@@ -2,7 +2,6 @@ import numpy as np
 from GridCal.Engine import *
 import random
 from functions_PQ import *
-# from GridCal.Engine.CalculationEngine import *
 
 np.set_printoptions(precision=12)
 
@@ -22,14 +21,14 @@ P5 = np.arange(0, 30, ssz)
 Q5 = np.arange(0, 20, ssz)
 
 
-P2m = translation_stretch_vec(P2)
-Q2m = translation_stretch_vec(Q2)
-P3m = translation_stretch_vec(P3)
-Q3m = translation_stretch_vec(Q3)
-P4m = translation_stretch_vec(P4)
-Q4m = translation_stretch_vec(Q4)
-P5m = translation_stretch_vec(P5)
-Q5m = translation_stretch_vec(Q5)
+# P2m = translation_stretch_vec(P2)
+# Q2m = translation_stretch_vec(Q2)
+# P3m = translation_stretch_vec(P3)
+# Q3m = translation_stretch_vec(Q3)
+# P4m = translation_stretch_vec(P4)
+# Q4m = translation_stretch_vec(Q4)
+# P5m = translation_stretch_vec(P5)
+# Q5m = translation_stretch_vec(Q5)
 
 
 n_param = 8  # the 8 powers
@@ -59,7 +58,7 @@ for ll in range(Mm):  # gathering samples of parameters
 		mat_mp[ll, 6] = random.sample(list(P5), 1)[0]
 		mat_mp[ll, 7] = random.sample(list(Q5), 1)[0]
 
-print(mat_mp)
+# print(mat_mp)
 
 # vv52 = V5(1, 2, 3, 4, 5, 6, 7, 8, indx_Vbus)
 # print(vv52)
@@ -98,13 +97,14 @@ for ll in range(Mm):
 	 [(v5_sol_pp7 - v5_sol) / delta]])
 
 	# print(Ag)
-	print(Ag.T)
+	# print(Ag.T)
 	Ag_store.append(Ag.T)
 
 	Ag_prod = np.dot(Ag, Ag.T)
 	# print(Ag_prod)
 	C += 1 / Mm * Ag_prod
 	# print(C)
+
 
 print(C)
 
@@ -120,8 +120,8 @@ matA = np.zeros((Mm, nterms), dtype=float)
 d1 = 1
 Wy = v[:,d1 - 1]  # only first column
 Wz = v[:,d1:]
-print(Wy)
-print(Wz)
+# print(Wy)
+# print(Wz)
 # zz = np.zeros(n_param - d1, dtype=float)
 
 yy_vec = []
@@ -135,7 +135,7 @@ for ll in range(Mm):
 	zz = np.dot(Wz.T, mat_mp[ll, :])	
 
 zz_mean = 1 / Mm * zz
-print(matA)
+# print(matA)
 
 # compute h(y)
 h_vec = []
@@ -155,7 +155,10 @@ print(c_vec)
 
 
 # everything done, now compute one solution and check
-ppp = [48, 39, 38, 53, 33, 29, 38, 27]
+# ppp = [48, 39, 38, 53, 33, 29, 38, 27]
+ppp = [25, 12, 8, 33, 21, 4, 17, 11]
+
+
 vv5s = V5(ppp[0], ppp[1], ppp[2], ppp[3], ppp[4], ppp[5], ppp[6], ppp[7], indx_Vbus)  # traditional way
 
 
@@ -172,6 +175,8 @@ vv5s = V5(ppp[0], ppp[1], ppp[2], ppp[3], ppp[4], ppp[5], ppp[6], ppp[7], indx_V
 
 
 y_val = np.dot(Wy.T, np.array(ppp))
+print(y_val)
+
 # y_inn = np.dot(Wy, vec_y) + np.dot(Wz, zz_mean)
 vv5p = c_vec[0] * y_val ** 0 + c_vec[1] * y_val ** 1 + c_vec[2] * y_val ** 2 + c_vec[3] * y_val ** 3  # new way
 # vv5p = c_vec[0] * y_val ** 0 + c_vec[1] * y_val ** 1 + c_vec[2] * y_val ** 2 + c_vec[3] * y_val ** 3 + c_vec[4] * y_val ** 4 # new way

@@ -1,0 +1,9 @@
+PWD /home/josep/Work/power-systems-projects/Parametric/Text/Chapters
+INPUT /usr/share/texmf-dist/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+INPUT Case.tex
+OUTPUT Case.log
+INPUT /usr/share/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm

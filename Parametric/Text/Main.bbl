@@ -488,6 +488,37 @@
       \field{pages}{A385\bibrangedash A411}
       \range{pages}{-1}
     \endentry
+    \entry{gridcal}{software}{}
+      \name{author}{1}{}{%
+        {{hash=f3404726b66458a8d8ccf26d0f68a14d}{%
+           family={Peñate-Vera},
+           familyi={P\bibinithyphendelim V\bibinitperiod},
+           given={Santiago},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{f3404726b66458a8d8ccf26d0f68a14d}
+      \strng{fullhash}{f3404726b66458a8d8ccf26d0f68a14d}
+      \strng{bibnamehash}{f3404726b66458a8d8ccf26d0f68a14d}
+      \strng{authorbibnamehash}{f3404726b66458a8d8ccf26d0f68a14d}
+      \strng{authornamehash}{f3404726b66458a8d8ccf26d0f68a14d}
+      \strng{authorfullhash}{f3404726b66458a8d8ccf26d0f68a14d}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{22}
+      \field{month}{8}
+      \field{title}{GridCal. 5-node grid creation script}
+      \field{version}{4.1.0}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/SanPen/GridCal
+      \endverb
+      \verb{url}
+      \verb https://github.com/SanPen/GridCal
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
