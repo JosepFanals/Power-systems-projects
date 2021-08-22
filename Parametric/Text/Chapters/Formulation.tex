@@ -19,20 +19,52 @@ where $g$ is a function pending to be found.
 
 From \eqref{eq:param1} it becomes clear that all parameters will potentially affect a given state. Visually speaking, Fig. \ref{fig:1ax}.a shows a representation of a state as a function of a single parameter, that is, assuming that only one input changes. Fig. \ref{fig:1ax}.b presents a similar visualization with two parameters involved. This justifies why, when viewed as a spatial representation, parameters are also denoted as dimensions. Each one of them stands for a new axis independent axis, and thus, orthogonal to the rest. 
 
+% \begin{figure}[!htb]
+
+%   \begin{subfigure}{0.49\textwidth}
+%     \incfig{p1_1}
+%     \caption{one-axis representation}
+%   \end{subfigure}
+%   \hspace*{\fill}
+%   \begin{subfigure}{0.49\textwidth}
+%     \incfig{p2_1}
+%     \caption{two-axis representation}
+%   \end{subfigure}
+
+%   \caption{Representation of a state with one or two parameters}
+%   \label{fig:1ax}
+% \end{figure}
+
 \begin{figure}[!htb]
-
-  \begin{subfigure}{0.49\textwidth}
-    \incfig{p1_1}
-    \caption{one-axis representation}
-  \end{subfigure}
-  \hspace*{\fill}
-  \begin{subfigure}{0.49\textwidth}
-    \incfig{p2_1}
-    \caption{two-axis representation}
-  \end{subfigure}
-
-  \caption{Representation of a state with one or two parameters}
-  \label{fig:1ax}
+\begin{subfigure}{0.4\textwidth}
+  \vspace{1.13cm}
+\begin{tikzpicture}
+  \begin{axis}[xlabel={$p_1$}, ylabel={$x$}, grid=both, grid style={line width=.1pt, draw=gray!10}, major grid style={line width=.2pt,draw=gray!50}, xtick distance = 1, ytick distance = 0.1, width=5cm, every plot/.append style={very thick}, xmin = 0, xmax = 4]
+\addplot [
+    style=thick,
+    domain=0:4,
+    samples = 200] 
+    {0.03 * (0.5 * x^2 + 0.3 * x) + 0.8};
+\end{axis}
+\end{tikzpicture}
+\caption{one-axis representation}
+\end{subfigure}
+  \hspace{0.2cm}
+\begin{subfigure}{0.6\textwidth}
+\begin{tikzpicture}
+  \begin{axis}[colormap/blackwhite, xlabel={$p_2$}, ylabel={$p_1$}, zlabel={$x$}, grid=both, grid style={line width=.1pt, draw=gray!10}, major grid style={line width=.2pt,draw=gray!50}, xtick distance = 1, ytick distance = 1, ztick distance = 0.1, view={45}{30}, width=7cm]
+\addplot3 [
+    domain=0:4,
+    domain y = 0:4,
+    samples = 15,
+    samples y = 15,
+    surf] {0.03 * (0.5 * y^2 + 0.3 * y + 0.1 * x^2 + 0.05 * x) + 0.8};
+\end{axis}
+\end{tikzpicture}
+\caption{two-axis representation}
+\end{subfigure}
+\caption{Representation of a state with one or two parameters}
+\label{fig:1ax}
 \end{figure}
 
 More than two dimensions are expected to be present in a typical analysis of the parametric power flow. In a mid-size system, assuming all powers are treated as parameters, there could be hundreds of dimensions. If $m \approx 100$, opting for the naive approach with $n^m$ cases would be painful to compute. This is often called the curse of dimensionality. 
