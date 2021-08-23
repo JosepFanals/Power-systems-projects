@@ -1,0 +1,19 @@
+
+\section{Planning}
+The time series power flow is likely the most natural application regarding the parametric analysis of power systems. The topology is preserved, and powers act as parameters. The case study can be treated as a situation where powers vary inside a range of values, with an enormous number of combinations. With just a few samples, obtaining a representative expression for the state of interest is arguably simple. This contrasts with the unconvenient approach where the power flow would have to be called $n^m$ times. 
+
+When integrating renewables, it becomes potentially attractive to have a closed-form expression of the state as a function of the input parameters. The system operator would be able to build a solid estimate about the value of the state in real time, rather than relying on probabilistic studies, which have been norm (see \cite{morales2010, fan2012, boehme2007}). 
+
+On the other hand, the DC load flow has been the state of the art for power system's planning. It computes a fast solution at the expense of a very approximate solution. In addition, it may not be appropriate for distribution grids since the resistive part of the lines is neglected \cite{seifi2011}. The efficient parametryc analysis, in contrast, generates a much more precise result with a function that can be recycled over and over. Could this suppose a paradigm-shift?
+
+\section{Fault analysis}
+Fault analysis conform a sub-field inside the power systems planning field. In its basic form, the powers could be seen as static values and the grid impedances are treated as parameters. Since the methodology is not tied to the form of the power flow equations, the parametric analysis could be performed for varying impedances. 
+
+Three-phase faults would imply that the power flow equations remain unchanged. Unbalanced faults introduce some more complexity because the three phases would have to be analyzed separately. Nonetheless, as the equations would still be continously differentiable, there should be no issues in implementing the parametric analysis. 
+
+\section{Power electronics}
+Power electronics are prone to suffer from saturation. That is, apart from the natural limitation of not being able to provide more power than the generated from the renewable energy source, voltages and currents have to be kept inside the limits. This means that power electronic devices can operate in various states, such as unsaturated, partially saturated or fully saturated, which in turn are defined by different equations \cite{song2021}. 
+
+It may very well be that the parametric analysis becomes uncapable of tracking saturated states. This will mostly depend on the sampling. If all parameters yield an unsaturated converter state, the final explicit function will of course not contemplate a saturated state. Thus, it is recommended to keep the upper and lower bounds close together, and if possible, previously ensure that the converter always operates on the same state. There is much work to be done in order to integrate power electronics devices.  
+
+

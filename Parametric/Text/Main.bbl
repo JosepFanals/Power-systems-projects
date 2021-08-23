@@ -519,6 +519,116 @@
       \verb https://github.com/SanPen/GridCal
       \endverb
     \endentry
+    \entry{boehme2007}{article}{}
+      \name{author}{3}{}{%
+        {{hash=76f7670c5af0a98786cfd11b7b110393}{%
+           family={Boehme},
+           familyi={B\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=fee349bd9e5d68c687c188f403ce5819}{%
+           family={Wallace},
+           familyi={W\bibinitperiod},
+           given={A\bibnamedelima Robin},
+           giveni={A\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=6bd0813ca26a9616a1aa3b78b51f5f4e}{%
+           family={Harrison},
+           familyi={H\bibinitperiod},
+           given={Gareth\bibnamedelima P},
+           giveni={G\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{514f08c5719e56e83e38132e759fbd40}
+      \strng{fullhash}{514f08c5719e56e83e38132e759fbd40}
+      \strng{bibnamehash}{514f08c5719e56e83e38132e759fbd40}
+      \strng{authorbibnamehash}{514f08c5719e56e83e38132e759fbd40}
+      \strng{authornamehash}{514f08c5719e56e83e38132e759fbd40}
+      \strng{authorfullhash}{514f08c5719e56e83e38132e759fbd40}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE transactions on power systems}
+      \field{number}{3}
+      \field{title}{Applying time series to power flow analysis in networks with high wind penetration}
+      \field{volume}{22}
+      \field{year}{2007}
+      \field{pages}{951\bibrangedash 957}
+      \range{pages}{7}
+    \endentry
+    \entry{seifi2011}{book}{}
+      \name{author}{2}{}{%
+        {{hash=c835f5959196cc123e43cd70032af302}{%
+           family={Seifi},
+           familyi={S\bibinitperiod},
+           given={Hossein},
+           giveni={H\bibinitperiod}}}%
+        {{hash=9760d627d47a47b6819d5c6801c7aed0}{%
+           family={Sepasian},
+           familyi={S\bibinitperiod},
+           given={Mohammad\bibnamedelima Sadegh},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Science \& Business Media}%
+      }
+      \strng{namehash}{8af5cd380d416d1124b9341a09ca1043}
+      \strng{fullhash}{8af5cd380d416d1124b9341a09ca1043}
+      \strng{bibnamehash}{8af5cd380d416d1124b9341a09ca1043}
+      \strng{authorbibnamehash}{8af5cd380d416d1124b9341a09ca1043}
+      \strng{authornamehash}{8af5cd380d416d1124b9341a09ca1043}
+      \strng{authorfullhash}{8af5cd380d416d1124b9341a09ca1043}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Electric power system planning: issues, algorithms and solutions}
+      \field{year}{2011}
+    \endentry
+    \entry{song2021}{article}{}
+      \name{author}{4}{}{%
+        {{hash=f47cc1ff1ed8ea8025326fb247ba534f}{%
+           family={Song},
+           familyi={S\bibinitperiod},
+           given={Jie},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3777cc28ad2ddb7c61b6e246d449fe22}{%
+           family={Cheah-Mane},
+           familyi={C\bibinithyphendelim M\bibinitperiod},
+           given={Marc},
+           giveni={M\bibinitperiod}}}%
+        {{hash=dd60251b6213da382edf3daf634a0ce9}{%
+           family={Prieto-Araujo},
+           familyi={P\bibinithyphendelim A\bibinitperiod},
+           given={Eduardo},
+           giveni={E\bibinitperiod}}}%
+        {{hash=3241bb77928a8eddfdc6a7a4265eb6ee}{%
+           family={Gomis-Bellmunt},
+           familyi={G\bibinithyphendelim B\bibinitperiod},
+           given={Oriol},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{65697263fa24c7e386a686c3e55739b6}
+      \strng{fullhash}{52500ba77483a7496401c8f2cc2473ca}
+      \strng{bibnamehash}{52500ba77483a7496401c8f2cc2473ca}
+      \strng{authorbibnamehash}{52500ba77483a7496401c8f2cc2473ca}
+      \strng{authornamehash}{65697263fa24c7e386a686c3e55739b6}
+      \strng{authorfullhash}{52500ba77483a7496401c8f2cc2473ca}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Smart Grid}
+      \field{title}{Short-Circuit Analysis of AC Distribution Systems Dominated by Voltage Source Converters Considering Converter Limitations}
+      \field{year}{2021}
+      \field{pages}{1\bibrangedash 1}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1109/TSG.2021.3102011
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

@@ -17,6 +17,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Case study}{10}{chapter.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Potential adaptation to power electronics}{15}{chapter.4}%
+\contentsline {chapter}{\numberline {4}Future lines of work}{15}{chapter.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusions}{16}{chapter.5}%
+\contentsline {section}{\numberline {4.1}Planning}{15}{section.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}Fault analysis}{15}{section.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.3}Power electronics}{16}{section.4.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Conclusions}{17}{chapter.5}%
