@@ -57,6 +57,7 @@ def grid_solve(p_PQ, indx_Vbus):
 
     return abs(power_flow.results.voltage[indx_Vbus])
 
+
 def samples_calc(M, n_param, indx_Vbus, param_lower_bnd, param_upper_bnd):
 
     """
@@ -170,7 +171,8 @@ def polynomial_coeff(M, N_t, Wy, param_store, hx, perms):
                 res = res * yy[kk] ** perms[nn][kk]
             Q[ll, nn] = res
 
-    c_vec = np.dot(np.dot(np.linalg.inv(np.dot(Q.T, Q)), Q.T), hx)
+    # c_vec = np.dot(np.dot(np.linalg.inv(np.dot(Q.T, Q)), Q.T), hx)
+    c_vec = np.dot(np.linalg.solve(np.dot(Q.T, Q), Q.T), hx)
 
     return c_vec
 
