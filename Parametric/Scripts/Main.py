@@ -123,8 +123,6 @@ def orthogonal_decomposition(C, tr_error, l_exp):
     return Wy, N_t, k
 
 
-
-
 # Input values
 x_bus = 5  # bus of interest
 n_param = 8  # number of parameters
