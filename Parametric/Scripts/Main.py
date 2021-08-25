@@ -1,11 +1,11 @@
 # Parametric analysis of power systems
-# By Santiago Peñate Vera and Josep Fanals Batllori
 
 # Packages
 import numpy as np
 from GridCal.Engine import *
 import random
 import math
+import itertools
 np.set_printoptions(precision=10)
 
 # Created functions
@@ -97,6 +97,7 @@ def samples_calc(M, n_param, indx_Vbus, param_lower_bnd, param_upper_bnd):
 
 
 def orthogonal_decomposition(C, tr_error, l_exp):
+
     """
     Orthogonal decomposition of the covariance matrix to determine the meaningful directions
 
@@ -118,9 +119,60 @@ def orthogonal_decomposition(C, tr_error, l_exp):
         k += 1
 
     N_t = int(math.factorial(l_exp + k) / (math.factorial(k) * math.factorial(l_exp)))  # number of terms
-    Wy = w[:,k - 1]  # and for now, do not define Wz
+    Wy = w[:,:k]  # and for now, do not define Wz
 
     return Wy, N_t, k
+
+
+def permutate(k, l_exp):
+
+    """
+    Generate the permutations for all exponents of y
+
+    :param k: number of meaningful directions
+    :param l: expansion order
+    :return perms: array of permutations
+    """
+
+    Nt = int(math.factorial(l_exp + k) / (math.factorial(l_exp) * math.factorial(k)))
+
+    lst = [ll for ll in range(l_exp + 1)] * k
+    perms_all = set(itertools.permutations(lst, k))
+    perms = []
+    for per in perms_all:
+        if sum(per) <= l_exp:
+            perms.append(per)
+
+    return perms
+
+
+def polynomial_coeff(M, N_t, Wy, param_store, hx, perms):
+
+    """
+    Calculate the coefficients c
+
+    :param M: number of samples
+    :param N_t: number of terms
+    :param Wy: transformation matrix to go from p to y
+    :param param_store: stored values of the parameters for each sample
+    :param hx: solutions of the state for each sample
+    :param perms: permutations of exponents
+    :return: array with c coefficients
+    """
+
+    Q = np.zeros((M, N_t), dtype=float)  # store the values of the basis function
+
+    for ll in range(M):
+        yy = np.dot(Wy.T, param_store[ll, :])  # go from p to y
+        for nn in range(N_t):  # fill a row
+            res = 1
+            for kk in range(k):  # basis function, with all permutations
+                res = res * yy[kk] ** perms[nn][kk]
+            Q[ll, nn] = res
+
+    c_vec = np.dot(np.dot(np.linalg.inv(np.dot(Q.T, Q)), Q.T), hx)
+
+    return c_vec
 
 
 # Input values
@@ -146,19 +198,14 @@ hx, C, param_store = samples_calc(M, n_param, indx_Vbus, param_lower_bnd, param_
 # 3. Perform orthogonal decomposition
 Wy, N_t, k = orthogonal_decomposition(C, tr_error, l_exp)
 
-# 4. Find polynomial coefficients
-Q = np.zeros((M, N_t), dtype=float)  # store the values of the basis function
-for ll in range(M):
-    yy = np.dot(Wy.T, param_store[ll, :])
-    # basis function, I will have to generalize it
-    for nn in range(N_t):
-        Q[ll, nn] = yy ** nn
+# 4. Generate permutations
+perms = permutate(k, l_exp)
 
-c_vec = np.dot(np.dot(np.linalg.inv(np.dot(Q.T, Q)), Q.T), hx)
+# 5. Find polynomial coefficients
+c_vec = polynomial_coeff(M, N_t, Wy, param_store, hx, perms)
+print('Array of coefficients: ', c_vec)
 
-
-# ///////////////////////////
-# Test
+# 6. Test
 pp = [random.uniform(param_lower_bnd[kk], param_upper_bnd[kk]) for kk in range(n_param)]  # random parameters
 
 x_real = grid_solve(pp, indx_Vbus)
@@ -168,8 +215,8 @@ x_est = 0
 for nn in range(N_t):
     x_est += c_vec[nn] * y_red ** nn  # change for the generic polynomial, todo
 
-print('Actual state:    ', x_real)
-print('Estimated state: ', x_est)
-print('Error:           ', abs(x_real - x_est))
+print('Actual state:           ', x_real)
+print('Estimated state:        ', x_est[0])
+print('Error:                  ', abs(x_real - x_est[0]))
 
 
