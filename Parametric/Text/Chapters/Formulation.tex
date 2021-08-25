@@ -5,7 +5,7 @@ Parameters are defined as the input data which are meant to vary. Powers are par
 
 This way, the power flow problem can be written as:
 \begin{equation}
-  \mathbf{f}(\mathbf{x}, \mathbf{p}) = 0,
+  \mathbf{f}(\mathbf{x}, \mathbf{p}) = \mathbf{0},
   \label{eq:power1}
 \end{equation}
 where $\mathbf{f}$ symbolizes all implicit functions involved in the solution of the problem. The formulation that follows is generic, in the sense that the methodology would be equally valid for other problems. Hence, this technique is not limited to the traditional power flow. 
@@ -84,14 +84,14 @@ Calculating the gradient numerically is probably the most benefitial option beca
 \end{equation}
 where $\delta$ is an arbitrary small number, such as $\delta=1\cdot 10^{-10}$ for instance. Computing the gradient with this approach means that the power flow solver has to be called $m+1$~times. 
 
-Let $\mathbf{C}\in \mathbb{R}^{m \times m}$ be the covariance matrix. Its elements identify the influence of the parameters on the states. Large elements represent that the two involved parameters have a significant impact on the state, whereas small elements that these two parameters are potentially irrelevant. Since a parameter $k$ can take any value inside its corresponding range $[a_k,b_k]$, several samples have to be extracted to have a representative $\mathbf{C}$ matrix:
+Let $\mathbf{C}\in \mathbb{R}^{m \times m}$ be the covariance matrix. Its elements identify the influence of the parameters on the states. Large elements represent that the two involved parameters have a significant impact on the state, whereas small elements mean that these two parameters are potentially irrelevant. Since a parameter $p_k$ can take any value inside its corresponding range $[a_k,b_k]$, several samples have to be extracted to have a representative $\mathbf{C}$ matrix:
 \begin{equation}
   \mathbf{C} \approx \frac{1}{M} \sum_{i=1}^M \nabla_{\mathbf{p}}g (\nabla_{\mathbf{p}}g)^T,
   \label{eq:C1}
 \end{equation}
 where $M$ is the total number of samples and takes a relatively arbitrary value. 
 
-The parameters take random values in each sample. The power flow solver would have to be called $M(m+1)$ times in total. Although it largerly depends on the number of initial dimensions, $M$ can take values in the order of a hundred. As a consequence, it can be foreseen that calculating $M(m+1)$ power flows is generally way faster than computing $n^m$ cases. The reason is that there is no dependence on the discretized $n$ values and this methodology provides a continuous solution (in the form of a polynomial). 
+The parameters take random values in each sample. The power flow solver would have to be called $M(m+1)$ times in total. Although it largely depends on the number of initial dimensions, $M$ can take values in the order of a hundred. As a consequence, it can be foreseen that calculating $M(m+1)$ power flows is generally way faster than computing $n^m$ cases. The reason is that there is no dependence on the discretized $n$ values and this methodology provides a continuous solution (in the form of a polynomial). 
 
 Matrix $\mathbf{C}$ is symmetrical by definition, which means it can be diagonalized by orthogonal matrices:
 \begin{equation}
@@ -124,7 +124,7 @@ Consequently, the initial parametric power flow of the form $x=g(\mathbf{p})$ is
 \end{equation}
 where $h$ is a function which has yet to be found. In more detail, it will consist of a polynomial. Working with $\mathbf{y}$, which symbolizes $k$ directions, instead of $\mathbf{p}$ where there are $m$ directions involved, is not mandatory. The state $x$ could still be approximated by a polynomial function $h(\mathbf{p})$. However, if $m$ tends to a large number, the method would suffer from the curse of dimensionality. 
 
-More details are provided in the following section, but for now it will be assumed that the number of terms $N_t$ in the function $h$ is given by \cite{shen2020, zhou2016}:
+More details are provided in the following section, but for now, it will be assumed that the number of terms $N_t$ in the function $h$ is given by \cite{shen2020, zhou2016}:
 \begin{equation}
   N_{t} = \binom{l+m}{m} = \frac{(l + m)!}{m! \ (l + m - m)!} = \frac{(l + m)!}{m! \ l!}  ,
   \label{eq:Nt1}
@@ -179,7 +179,7 @@ Finally, all $f$ are added:
 \end{equation}
 Note that taking into account \eqref{eq:p0}, \eqref{eq:p1} and \eqref{eq:p2}, there are a total of 10 terms, just like \eqref{eq:Nt1} indicates when $l=2$ and $m=3$. 
 
-Recall that a total of $M$ samples, where the parameters take random values, are needed to build the covariance matrix. Now these samples have to be used in order to compute the coefficients $c$. Let $\mathbf{Q} \in \mathbb{R}^{M \times N_t}$ denote the matrix where the terms that multiply the coefficients $c$ are stored, and $\mathbf{h_x}$ the vector that contains the value of the state $x$ at each sample. Then, the goal is to minimize the error $\epsilon$ in the generic expression:
+Recall that a total of $M$ samples, where the parameters take random values, are needed to build the covariance matrix. Now these samples have to be used in order to compute the coefficients $\mathbf{c}$. Let $\mathbf{Q} \in \mathbb{R}^{M \times N_t}$ denote the matrix where the terms that multiply the coefficients $\mathbf{c}$ are stored, and $\mathbf{h_x}$ the vector that contains the value of the state $x$ at each sample. Then, the goal is to minimize the error $\epsilon$ in the generic expression:
 \begin{equation}
   \mathbf{h_x} = \mathbf{Q} \mathbf{c} + \mathbf{\epsilon},
   \label{eq:lss}
@@ -202,5 +202,5 @@ The steps to take in order to obtain the reduced dimension model are summarized 
   \item With the random samples, transform $\mathbf{p}$ into $\mathbf{y}$ with \eqref{eq:y1}. 
   \item Build the $\mathbf{Q}$ matrix, the $\mathbf{h_x}$ vector, and find the coefficients with \eqref{eq:lss2}. 
 \end{enumerate}
-Once the coefficients $\mathbf{c}$ are calculated, the procedure yields an explicit function which relates the state $x$ with any value of the parameters. 
+Once the coefficients $\mathbf{c}$ are calculated, the procedure yields an explicit function that relates the state $x$ with any value of the parameters. 
 

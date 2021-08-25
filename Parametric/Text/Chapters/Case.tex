@@ -1,4 +1,4 @@
-The aim of this section is to show more in detail the calculation procedure. The methodology is applied to a basic power system such as the 5-bus system from the GridCal tutorial \cite{gridcal}, shown in Fig. \ref{fig:5bus}. 
+This section aims to show more in detail the calculation procedure. The methodology is applied to a basic power system such as the 5-bus system from the GridCal tutorial \cite{gridcal}, shown in Fig. \ref{fig:5bus}. 
 
 \begin{figure}[!htb]\centering
   \begin{tikzpicture}
@@ -46,7 +46,7 @@ The aim of this section is to show more in detail the calculation procedure. The
   \caption{High-level representation of the 5-bus system}
   \label{fig:5bus}
 \end{figure}
-The system is formed by four PQ buses and one slack bus, corresponding to node 1. Lines are originally modeled with a $\pi$ equivalent. Nevertheless, the parallel capacitances are removed in order to have voltages below the level imposed by the slack bus, which should help at obtaining a more intuitive result. 
+The system is formed by four PQ buses and one slack bus, corresponding to node 1. Lines are originally modeled with a $\pi$ equivalent. Nevertheless, the parallel capacitances are removed to have voltages below the level imposed by the slack bus, which should help in obtaining a more intuitive result. 
 
 The state of interest will be the voltage magniude at bus 5, thus, $x=V_5$. Chosing the parameters is rather a subjective choice which largely depends on the scope of the study. However, they are chosen to be the four active powers and the four reactive powers in this case:
 \begin{equation}
@@ -55,7 +55,7 @@ The state of interest will be the voltage magniude at bus 5, thus, $x=V_5$. Chos
 \end{equation}
 where $P$ and $Q$ stand for the loads of active and reactive power. 
 
-These powers can take any value inside a predefined range of values. In a realistic scenario, such range could comprise a high confidence interval. Table \ref{tab:lowup} shows the chosen lower and upper bounds for all powers.  
+These powers can take any value inside a predefined range of values. In a realistic scenario, this range could comprise a high confidence interval. Table \ref{tab:lowup} shows the chosen lower and upper bounds for all powers.  
 
 \begin{table}[!htb]
   \centering
@@ -74,7 +74,7 @@ The calculation process obeys the four steps summarized in Section \ref{sec:proc
 
 \hspace{0.32cm} 1. Compute the gradients for the $M$ samples to calculate the covariance matrix $\mathbf{C}$ with \eqref{eq:C1}. 
 
-A total of $M=10$ samples is chosen. This becomes a resonable amount considering that the expansion order is set to $l=3$. Moreover, as it will be shown in the next step, all eight parameters will be encapsulated in a single meaningful direction, so $k=1$. Thus, $N_t = 4$ in accordance with \eqref{eq:Nt1}. The requirements are being met since $M$ should be between 1.5 to 3 times $N_t$.
+A total of $M=10$ samples is chosen. This becomes a reasonable amount considering that the expansion order is set to $l=3$. Moreover, as it will be shown in the next step, all eight parameters will be encapsulated in a single meaningful direction, so $k=1$. Thus, $N_t = 4$ in accordance with \eqref{eq:Nt1}. The requirements are being met since $M$ should be between 1.5 to 3 times $N_t$.
 
 There is no complexity in genereting the samples. All parameters take random values between the limits set in Table \ref{tab:lowup}. The power flow is solved $M(m+1) = 10(8 + 1)=90$ times. With it, a total of 10 gradients are obtained by following \eqref{eq:grad2}. The covariance matrix $\mathbf{C}$ is built by adding the products of gradients, as shown in \eqref{eq:C1}. In this particular case, it becomes:
 \begin{equation}
@@ -124,11 +124,11 @@ As $k=1$, $\mathbf{W}_y$ is a single-column matrix containing the eigenvector $\
   \end{pmatrix}.
   \label{eq:eigenvec}
 \end{equation}
-This matrix weights all parameters. Notice how the sixth parameter, the one corresponding to $P_4$, is the largest by far. This could also had been observed in the $\mathbf{C}$ matrix shown in \eqref{eq:Cres}, where the sixth column/row has significantly greater values than the rest. It makes sense that $P_4$ has a notable impact on $V_5$ because bus 4 is the only one not directly connected to the slack bus. 
+This matrix weights all parameters. Notice how the sixth parameter, the one corresponding to $P_4$, is the largest by far. This could also have been observed in the $\mathbf{C}$ matrix shown in \eqref{eq:Cres}, where the sixth column/row has significantly greater values than the rest. It makes sense that $P_4$ has a notable impact on $V_5$ because bus 4 is the only one not directly connected to the slack bus. 
 
 \hspace{0.32cm} 3. With the random samples, transform $\mathbf{p}$ into $\mathbf{y}$ with \eqref{eq:y1}. 
 
-Then, the $\mathbf{p}$ vector with the random samples and the matrix $\mathbf{W}_y^T$ are multiplied for all samples. This is an straightforward step since the two involved objects are already known. The goal is to transform the 8 dimensions in $\mathbf{p}$ to just one dimension stored in $\mathbf{y}$. In the end, the procedure looks for $h(\mathbf{y})$, so $\mathbf{p}$ always has to be transformed. 
+Then, the $\mathbf{p}$ vector with the random samples and the matrix $\mathbf{W}_y^T$ are multiplied for all samples. This is a straightforward step since the two involved objects are already known. The goal is to transform the 8 dimensions in $\mathbf{p}$ to just one dimension stored in $\mathbf{y}$. In the end, the procedure looks for $h(\mathbf{y})$, so $\mathbf{p}$ always has to be transformed. 
 
 Since there is only one dimension in $\mathbf{y}$, the basis function expansion turns out to be simplified. If $l=3$:
 \begin{equation}
