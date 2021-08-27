@@ -6,6 +6,7 @@ from GridCal.Engine import *
 import random
 import math
 import itertools
+from smt.sampling_methods import LHS
 np.set_printoptions(precision=10)
 
 # Created functions

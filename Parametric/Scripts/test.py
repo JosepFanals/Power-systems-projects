@@ -1,40 +1,21 @@
 # python file for testing small scripts
 
 import numpy as np
-import math
-import itertools
+import matplotlib.pyplot as plt
 
-k = 2
-l = 3
-Nt = int(math.factorial(l + k) / (math.factorial(l) * math.factorial(k)))
-print(Nt)
+from smt.sampling_methods import LHS
 
-lst = [ll for ll in range(l + 1)] * k
-perms = set(itertools.permutations(lst, k))
-print(len(perms))
-perms_good = []
-for per in perms:
-    if sum(per) <= l:
-        perms_good.append(per)
+xlimits = np.array([[0.0, 50]] * 8)
+sampling = LHS(xlimits=xlimits)
 
-print(perms_good)
-print(len(perms_good))
-print(perms_good[1][0])
+print(xlimits)
+num = 50
+x = sampling(num)
 
+print(x.shape)
 
-
-
-# working! now merge with the parametric code
-
-yyy = [2, 2, 3]
-exp = [0, 1, 2]
-# res = [yyy[kk] ** exp[kk] for kk in range(len(yyy))]
-res = 1
-for kk in range(len(yyy)):  # range(k)
-    res = res * yyy[kk] ** exp[kk]
-print(res)
-
-Wy = np.array([[0, 1, 2, 3, 4, 5], [1, 2, 3, 4, 5, 6]])
-paramm = np.array([1, 2, 3, 4, 5, 6])
-yy = np.array(np.dot(Wy, paramm))
-print(yy)
+print(x)
+# plt.plot(x[:, 0], x[:, 1], "o")
+# plt.xlabel("x")
+# plt.ylabel("y")
+# plt.show()
