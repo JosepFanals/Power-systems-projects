@@ -75,20 +75,26 @@ def samples_calc(M, n_param, indx_Vbus, param_lower_bnd, param_upper_bnd):
 
     hx = np.zeros(M)  # h_x vector, with the x solutions at each sample. Maybe better than using zmean?
     C = np.zeros((n_param, n_param), dtype=float)
-    param_store = np.zeros((M, n_param), dtype=float)
+    # param_store = np.zeros((M, n_param), dtype=float)
+
+    # create samples with Latin Hypercube
+    xlimits = np.zeros((n_param, 2), dtype=float)  # 2 columns: [lower_bound, upper_bound]
+    for ll in range(n_param):
+        xlimits[ll, 0] = param_lower_bnd[ll]
+        xlimits[ll, 1] = param_upper_bnd[ll]
+
+    sampling_lh = LHS(xlimits=xlimits)
+    param_store = sampling_lh(M)  # matrix with all samples
+
 
     for ll in range(M):
-        # generate random values for the parameters
-        params = [random.uniform(param_lower_bnd[kk], param_upper_bnd[kk]) for kk in range(n_param)]
-        param_store[ll, :] = params
-
         # x solution for each sample
-        hx[ll] = grid_solve(params, indx_Vbus)
+        hx[ll] = grid_solve(param_store[ll, :], indx_Vbus)
 
         # calculate gradients and form C matrix
         Ag = np.zeros(n_param)
         for kk in range(n_param):
-            params_delta = np.copy(params)
+            params_delta = np.copy(param_store[ll, :])
             params_delta[kk] += delta  # increase a parameter by delta
             Ag[kk] = (grid_solve(params_delta, indx_Vbus) - hx[ll]) / delta  # compute gradient as [x(p + delta) - x(p)] / delta
 
