@@ -22,6 +22,7 @@ def grid_solve(p_PQ, indx_Vbus):
 
     grid = MultiCircuit()
 
+    # Buses
     bus1 = Bus('Bus 1', vnom=20)
     bus1.is_slack = True
     grid.add_bus(bus1)
@@ -44,6 +45,29 @@ def grid_solve(p_PQ, indx_Vbus):
     grid.add_bus(bus5)
     grid.add_load(bus5, Load('load 5', P=p_PQ[6], Q=p_PQ[7]))
 
+    # more buses added
+    bus6 = Bus('Bus 6', vnom=20)
+    grid.add_bus(bus6)
+    grid.add_load(bus6, Load('load 6', P=10, Q=2))
+
+    bus7 = Bus('Bus 7', vnom=20)
+    grid.add_bus(bus7)
+    grid.add_load(bus7, Load('load 7', P=5, Q=2))
+
+    bus8 = Bus('Bus 8', vnom=20)
+    grid.add_bus(bus8)
+    grid.add_load(bus8, Load('load 8', P=10, Q=5))
+
+    bus9 = Bus('Bus 9', vnom=20)
+    grid.add_bus(bus9)
+    grid.add_load(bus9, Load('load 9', P=13, Q=15))
+
+    bus10 = Bus('Bus 10', vnom=20)
+    grid.add_bus(bus10)
+    grid.add_load(bus10, Load('load 10', P=17, Q=5))
+
+
+    # Lines
     grid.add_line(Line(bus1, bus2, 'line 1-2', r=0.05, x=0.11, b=0.0))
     grid.add_line(Line(bus1, bus3, 'line 1-3', r=0.05, x=0.11, b=0.0))
     grid.add_line(Line(bus1, bus5, 'line 1-5', r=0.03, x=0.08, b=0.0))
@@ -52,6 +76,15 @@ def grid_solve(p_PQ, indx_Vbus):
     grid.add_line(Line(bus3, bus4, 'line 3-4', r=0.06, x=0.13, b=0.0))
     grid.add_line(Line(bus4, bus5, 'line 4-5', r=0.04, x=0.09, b=0.0))
 
+    # more lines added
+    grid.add_line(Line(bus1, bus6, 'line 1-6', r=0.03, x=0.10, b=0.0))
+    grid.add_line(Line(bus4, bus6, 'line 4-6', r=0.04, x=0.08, b=0.0))
+    grid.add_line(Line(bus5, bus7, 'line 5-7', r=0.04, x=0.11, b=0.0))
+    grid.add_line(Line(bus3, bus8, 'line 3-8', r=0.03, x=0.09, b=0.0))
+    grid.add_line(Line(bus6, bus9, 'line 6-9', r=0.03, x=0.08, b=0.0))
+    grid.add_line(Line(bus7, bus10, 'line 7-10', r=0.04, x=0.12, b=0.0))
+
+    # run power flow
     options = PowerFlowOptions(SolverType.NR, verbose=False)
     power_flow = PowerFlowDriver(grid, options)
     power_flow.run()
