@@ -48,23 +48,23 @@ def grid_solve(p_PQ, indx_Vbus):
     # more buses added
     bus6 = Bus('Bus 6', vnom=20)
     grid.add_bus(bus6)
-    grid.add_load(bus6, Load('load 6', P=10, Q=2))
+    grid.add_load(bus6, Load('load 6', P=p_PQ[8], Q=p_PQ[9]))
 
     bus7 = Bus('Bus 7', vnom=20)
     grid.add_bus(bus7)
-    grid.add_load(bus7, Load('load 7', P=5, Q=2))
+    grid.add_load(bus7, Load('load 7', P=p_PQ[10], Q=p_PQ[11]))
 
     bus8 = Bus('Bus 8', vnom=20)
     grid.add_bus(bus8)
-    grid.add_load(bus8, Load('load 8', P=10, Q=5))
+    grid.add_load(bus8, Load('load 8', P=p_PQ[12], Q=p_PQ[13]))
 
     bus9 = Bus('Bus 9', vnom=20)
     grid.add_bus(bus9)
-    grid.add_load(bus9, Load('load 9', P=13, Q=15))
+    grid.add_load(bus9, Load('load 9', P=p_PQ[14], Q=p_PQ[15]))
 
     bus10 = Bus('Bus 10', vnom=20)
     grid.add_bus(bus10)
-    grid.add_load(bus10, Load('load 10', P=17, Q=5))
+    grid.add_load(bus10, Load('load 10', P=p_PQ[16], Q=p_PQ[17]))
 
 
     # Lines
@@ -108,7 +108,6 @@ def samples_calc(M, n_param, indx_Vbus, param_lower_bnd, param_upper_bnd):
 
     hx = np.zeros(M)  # h_x vector, with the x solutions at each sample. Maybe better than using zmean?
     C = np.zeros((n_param, n_param), dtype=float)
-    # param_store = np.zeros((M, n_param), dtype=float)
 
     # create samples with Latin Hypercube
     xlimits = np.zeros((n_param, 2), dtype=float)  # 2 columns: [lower_bound, upper_bound]
@@ -219,12 +218,12 @@ def polynomial_coeff(M, N_t, Wy, param_store, hx, perms):
 
 # Input values
 x_bus = 5  # bus of interest
-n_param = 8  # number of parameters
+n_param = 18  # number of parameters, added more buses
 l_exp = 3  # expansion order
 k_est = 0.2  # proportion of expected meaningful directions
 factor_MNt = 2.5  # M = factor_MNt * Nterms, should be around 1.5 and 3
-param_lower_bnd = [0, 0, 0, 0, 0, 0, 0, 0]  # lower limits, in MVA
-param_upper_bnd = [50, 50, 50, 50, 50, 50, 50, 50]  # upper limits, in MVA
+param_lower_bnd = [10] * n_param  # lower limits for all parameters
+param_upper_bnd = [20] * n_param  # upper limits for all parameters
 delta = 1e-5  # small increment to calculate gradients
 tr_error = 0.1  # truncation error allowed
 
@@ -257,8 +256,9 @@ x_est = 0
 for nn in range(N_t):
     x_est += c_vec[nn] * y_red ** nn  # change for the generic polynomial, todo
 
-print('Actual state:           ', x_real)
-print('Estimated state:        ', x_est[0])
-print('Error:                  ', abs(x_real - x_est[0]))
-
+print('Actual state:               ', x_real)
+print('Estimated state:            ', x_est[0])
+print('Error:                      ', abs(x_real - x_est[0]))
+print('Number of power flow calls: ', M * (n_param + 1))
+print('Original calls n^m = M^m:   ', M ** n_param)
 
