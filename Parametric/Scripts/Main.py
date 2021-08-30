@@ -7,7 +7,24 @@ import random
 import math
 import itertools
 from smt.sampling_methods import LHS
+from scipy.sparse import csr_matrix
 np.set_printoptions(precision=10)
+
+
+def dSbus_dV(Ybus, V):
+    """
+    Computes partial derivatives of power injection w.r.t. voltage.
+    """
+
+    Ibus = Ybus * V
+    ib = range(len(V))
+    diagV = csr_matrix((V, (ib, ib)))
+    diagIbus = csr_matrix((Ibus, (ib, ib)))
+    diagVnorm = csr_matrix((V / np.abs(V), (ib, ib)))
+    dS_dVm = diagV * np.conj(Ybus * diagVnorm) + np.conj(diagIbus) * diagVnorm
+    dS_dVa = 1j * diagV * np.conj(diagIbus - Ybus * diagV)
+    return dS_dVm, dS_dVa
+
 
 # Created functions
 def grid_solve(p_PQ, indx_Vbus):
@@ -188,6 +205,13 @@ def samples_calc(M, n_param, indx_Vbus, param_lower_bnd, param_upper_bnd):
 
     """
 
+    nP = int(n_param / 2)
+    nQ = int(n_param / 2)
+
+    grid = test_grid()
+    snapshot = gc.compile_snapshot_circuit(grid)
+    Sg = snapshot.generator_data.get_injections_per_bus()[:, 0]
+
     hx = np.zeros(M)  # h_x vector, with the x solutions at each sample. Maybe better than using zmean?
     C = np.zeros((n_param, n_param), dtype=float)
 
@@ -200,17 +224,35 @@ def samples_calc(M, n_param, indx_Vbus, param_lower_bnd, param_upper_bnd):
     sampling_lh = LHS(xlimits=xlimits)
     param_store = sampling_lh(M)  # matrix with all samples
 
-
     for ll in range(M):
+
+        # compose the power injections from the sample
+        P = param_store[ll, :nP]
+        Q = param_store[ll, nP:nP+nQ]
+        Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q) / snapshot.Sbase)
+        S = Sg - Sl
+
         # x solution for each sample
-        hx[ll] = grid_solve(param_store[ll, :], indx_Vbus)
+        v = power_flow(snapshot=snapshot, S=S)
+        hx[ll] = v[indx_Vbus]
 
         # calculate gradients and form C matrix
         Ag = np.zeros(n_param)
         for kk in range(n_param):
             params_delta = np.copy(param_store[ll, :])
             params_delta[kk] += delta  # increase a parameter by delta
-            Ag[kk] = (grid_solve(params_delta, indx_Vbus) - hx[ll]) / delta  # compute gradient as [x(p + delta) - x(p)] / delta
+
+            # compose the power injections from the sample delta
+            P = params_delta[:nP]
+            Q = params_delta[nP:nP + nQ]
+            Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q) / snapshot.Sbase)
+            S = Sg - Sl
+
+            # run the power flow
+            v = power_flow(snapshot=snapshot, S=S)
+
+            # compute the delta
+            Ag[kk] = (v[indx_Vbus] - hx[ll]) / delta  # compute gradient as [x(p + delta) - x(p)] / delta
 
         Ag_prod = np.outer(Ag, Ag)  # vector by vector to create a matrix
         C += 1 / M * Ag_prod
