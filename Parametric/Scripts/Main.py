@@ -230,7 +230,9 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, indx_Vbus, param_lower_b
         # compose the power injections from the sample
         P = param_store[ll, :nP]
         Q = param_store[ll, nP:nP+nQ]
-        Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q) / snapshot.Sbase)
+        print(P)
+        # Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q) / snapshot.Sbase)
+        Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q))  # already normalized P and Q
         S = Sg - Sl
 
         # print(Sl)
@@ -252,9 +254,9 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, indx_Vbus, param_lower_b
             # compose the power injections from the sample delta
             P = params_delta[:nP]
             Q = params_delta[nP:nP + nQ]
-            Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q) / snapshot.Sbase)
+            # Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q) / snapshot.Sbase)
+            Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q))
             S = Sg - Sl
-            # print(Sl)
 
             # run the power flow
 
@@ -370,8 +372,8 @@ if __name__ == '__main__':
     l_exp = 3  # expansion order
     k_est = 0.2  # proportion of expected meaningful directions
     factor_MNt = 2.5  # M = factor_MNt * Nterms, should be around 1.5 and 3
-    param_lower_bnd = [10] * n_param  # lower limits for all parameters
-    param_upper_bnd = [20] * n_param  # upper limits for all parameters
+    param_lower_bnd = [0.1] * n_param  # lower limits for all parameters
+    param_upper_bnd = [0.2] * n_param  # upper limits for all parameters
     delta = 1e-5  # small increment to calculate gradients
     tr_error = 0.1  # truncation error allowed
     print('Running...')
@@ -398,7 +400,23 @@ if __name__ == '__main__':
     # 6. Test
     pp = [random.uniform(param_lower_bnd[kk], param_upper_bnd[kk]) for kk in range(n_param)]  # random parameters
 
-    x_real = grid_solve(pp, indx_Vbus)
+    # x_real = grid_solve(pp, indx_Vbus)  # compute with the snapshot
+
+    P = np.array(pp[:4])
+    Q = np.array(pp[4:])
+    print(P)
+    # Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q) / snapshot.Sbase)
+    Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q))  # already normalized P and Q
+    Sg = snapshot.generator_data.get_injections_per_bus()[:, 0]
+    S = Sg - Sl
+
+    # print(Sl)
+
+    # x solution for each sample
+    v = power_flow(snapshot=snapshot, S=S, V0=snapshot.Vbus)
+    x_real = v[indx_Vbus]
+
+
 
     y_red = np.dot(Wy.T, np.array(pp))
     x_est = 0
