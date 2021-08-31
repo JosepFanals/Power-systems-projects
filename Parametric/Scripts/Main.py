@@ -251,6 +251,7 @@ pp = [random.uniform(param_lower_bnd[kk], param_upper_bnd[kk]) for kk in range(n
 
 x_real = grid_solve(pp, indx_Vbus)
 
+# adapt for when k>1
 y_red = np.dot(Wy.T, np.array(pp))
 x_est = 0
 for nn in range(N_t):
