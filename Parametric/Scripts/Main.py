@@ -28,87 +28,87 @@ def dSbus_dV(Ybus, V):
     return dS_dVm, dS_dVa
 
 
-# Created functions
-def grid_solve(p_PQ, indx_Vbus):
+# # Created functions
+# def grid_solve(p_PQ, indx_Vbus):
 
-    """
-    Define GridCal grid, with varying parameters. Can there be more than one load per bus?
+#     """
+#     Define GridCal grid, with varying parameters. Can there be more than one load per bus?
 
-    :param p_PQ: list of parameters related to active and reactive power, in MVA
-    :param indx_Vbus: index of the bus of interest
-    :return: the absolute value of the voltages
-    """
+#     :param p_PQ: list of parameters related to active and reactive power, in MVA
+#     :param indx_Vbus: index of the bus of interest
+#     :return: the absolute value of the voltages
+#     """
 
-    grid = gc.MultiCircuit()
+#     grid = gc.MultiCircuit()
 
-    # Buses
-    bus1 = gc.Bus('Bus 1', vnom=20)
-    bus1.is_slack = True
-    grid.add_bus(bus1)
-    gen1 = gc.Generator('Slack Generator', voltage_module=1.0)
-    grid.add_generator(bus1, gen1)
+#     # Buses
+#     bus1 = gc.Bus('Bus 1', vnom=20)
+#     bus1.is_slack = True
+#     grid.add_bus(bus1)
+#     gen1 = gc.Generator('Slack Generator', voltage_module=1.0)
+#     grid.add_generator(bus1, gen1)
 
-    bus2 = gc.Bus('Bus 2', vnom=20)
-    grid.add_bus(bus2)
-    grid.add_load(bus2, gc.Load('load 2', P=p_PQ[0], Q=p_PQ[1]))
+#     bus2 = gc.Bus('Bus 2', vnom=20)
+#     grid.add_bus(bus2)
+#     grid.add_load(bus2, gc.Load('load 2', P=p_PQ[0], Q=p_PQ[1]))
 
-    bus3 = gc.Bus('Bus 3', vnom=20)
-    grid.add_bus(bus3)
-    grid.add_load(bus3, gc.Load('load 3', P=p_PQ[2], Q=p_PQ[3]))
+#     bus3 = gc.Bus('Bus 3', vnom=20)
+#     grid.add_bus(bus3)
+#     grid.add_load(bus3, gc.Load('load 3', P=p_PQ[2], Q=p_PQ[3]))
 
-    bus4 = gc.Bus('Bus 4', vnom=20)
-    grid.add_bus(bus4)
-    grid.add_load(bus4, gc.Load('load 4', P=p_PQ[4], Q=p_PQ[5]))
+#     bus4 = gc.Bus('Bus 4', vnom=20)
+#     grid.add_bus(bus4)
+#     grid.add_load(bus4, gc.Load('load 4', P=p_PQ[4], Q=p_PQ[5]))
 
-    bus5 = gc.Bus('Bus 5', vnom=20)
-    grid.add_bus(bus5)
-    grid.add_load(bus5, gc.Load('load 5', P=p_PQ[6], Q=p_PQ[7]))
+#     bus5 = gc.Bus('Bus 5', vnom=20)
+#     grid.add_bus(bus5)
+#     grid.add_load(bus5, gc.Load('load 5', P=p_PQ[6], Q=p_PQ[7]))
 
-    # more buses added
-    # bus6 = gc.Bus('Bus 6', vnom=20)
-    # grid.add_bus(bus6)
-    # grid.add_load(bus6, gc.Load('load 6', P=p_PQ[8], Q=p_PQ[9]))
+#     # more buses added
+#     # bus6 = gc.Bus('Bus 6', vnom=20)
+#     # grid.add_bus(bus6)
+#     # grid.add_load(bus6, gc.Load('load 6', P=p_PQ[8], Q=p_PQ[9]))
 
-    # bus7 = gc.Bus('Bus 7', vnom=20)
-    # grid.add_bus(bus7)
-    # grid.add_load(bus7, gc.Load('load 7', P=p_PQ[10], Q=p_PQ[11]))
+#     # bus7 = gc.Bus('Bus 7', vnom=20)
+#     # grid.add_bus(bus7)
+#     # grid.add_load(bus7, gc.Load('load 7', P=p_PQ[10], Q=p_PQ[11]))
 
-    # bus8 = gc.Bus('Bus 8', vnom=20)
-    # grid.add_bus(bus8)
-    # grid.add_load(bus8, gc.Load('load 8', P=p_PQ[12], Q=p_PQ[13]))
+#     # bus8 = gc.Bus('Bus 8', vnom=20)
+#     # grid.add_bus(bus8)
+#     # grid.add_load(bus8, gc.Load('load 8', P=p_PQ[12], Q=p_PQ[13]))
 
-    # bus9 = gc.Bus('Bus 9', vnom=20)
-    # grid.add_bus(bus9)
-    # grid.add_load(bus9, gc.Load('load 9', P=p_PQ[14], Q=p_PQ[15]))
+#     # bus9 = gc.Bus('Bus 9', vnom=20)
+#     # grid.add_bus(bus9)
+#     # grid.add_load(bus9, gc.Load('load 9', P=p_PQ[14], Q=p_PQ[15]))
 
-    # bus10 = gc.Bus('Bus 10', vnom=20)
-    # grid.add_bus(bus10)
-    # grid.add_load(bus10, gc.Load('load 10', P=p_PQ[16], Q=p_PQ[17]))
+#     # bus10 = gc.Bus('Bus 10', vnom=20)
+#     # grid.add_bus(bus10)
+#     # grid.add_load(bus10, gc.Load('load 10', P=p_PQ[16], Q=p_PQ[17]))
 
 
-    # Lines
-    grid.add_line(gc.Line(bus1, bus2, 'line 1-2', r=0.05, x=0.11, b=0.0))
-    grid.add_line(gc.Line(bus1, bus3, 'line 1-3', r=0.05, x=0.11, b=0.0))
-    grid.add_line(gc.Line(bus1, bus5, 'line 1-5', r=0.03, x=0.08, b=0.0))
-    grid.add_line(gc.Line(bus2, bus3, 'line 2-3', r=0.04, x=0.09, b=0.0))
-    grid.add_line(gc.Line(bus2, bus5, 'line 2-5', r=0.04, x=0.09, b=0.0))
-    grid.add_line(gc.Line(bus3, bus4, 'line 3-4', r=0.06, x=0.13, b=0.0))
-    grid.add_line(gc.Line(bus4, bus5, 'line 4-5', r=0.04, x=0.09, b=0.0))
+#     # Lines
+#     grid.add_line(gc.Line(bus1, bus2, 'line 1-2', r=0.05, x=0.11, b=0.0))
+#     grid.add_line(gc.Line(bus1, bus3, 'line 1-3', r=0.05, x=0.11, b=0.0))
+#     grid.add_line(gc.Line(bus1, bus5, 'line 1-5', r=0.03, x=0.08, b=0.0))
+#     grid.add_line(gc.Line(bus2, bus3, 'line 2-3', r=0.04, x=0.09, b=0.0))
+#     grid.add_line(gc.Line(bus2, bus5, 'line 2-5', r=0.04, x=0.09, b=0.0))
+#     grid.add_line(gc.Line(bus3, bus4, 'line 3-4', r=0.06, x=0.13, b=0.0))
+#     grid.add_line(gc.Line(bus4, bus5, 'line 4-5', r=0.04, x=0.09, b=0.0))
 
-    # more lines added
-    # grid.add_line(gc.Line(bus1, bus6, 'line 1-6', r=0.03, x=0.10, b=0.0))
-    # grid.add_line(gc.Line(bus4, bus6, 'line 4-6', r=0.04, x=0.08, b=0.0))
-    # grid.add_line(gc.Line(bus5, bus7, 'line 5-7', r=0.04, x=0.11, b=0.0))
-    # grid.add_line(gc.Line(bus3, bus8, 'line 3-8', r=0.03, x=0.09, b=0.0))
-    # grid.add_line(gc.Line(bus6, bus9, 'line 6-9', r=0.03, x=0.08, b=0.0))
-    # grid.add_line(gc.Line(bus7, bus10, 'line 7-10', r=0.04, x=0.12, b=0.0))
+#     # more lines added
+#     # grid.add_line(gc.Line(bus1, bus6, 'line 1-6', r=0.03, x=0.10, b=0.0))
+#     # grid.add_line(gc.Line(bus4, bus6, 'line 4-6', r=0.04, x=0.08, b=0.0))
+#     # grid.add_line(gc.Line(bus5, bus7, 'line 5-7', r=0.04, x=0.11, b=0.0))
+#     # grid.add_line(gc.Line(bus3, bus8, 'line 3-8', r=0.03, x=0.09, b=0.0))
+#     # grid.add_line(gc.Line(bus6, bus9, 'line 6-9', r=0.03, x=0.08, b=0.0))
+#     # grid.add_line(gc.Line(bus7, bus10, 'line 7-10', r=0.04, x=0.12, b=0.0))
 
-    # run power flow
-    options = gc.PowerFlowOptions(gc.SolverType.NR, verbose=False)
-    power_flow = gc.PowerFlowDriver(grid, options)
-    power_flow.run()
+#     # run power flow
+#     options = gc.PowerFlowOptions(gc.SolverType.NR, verbose=False)
+#     power_flow = gc.PowerFlowDriver(grid, options)
+#     power_flow.run()
 
-    return abs(power_flow.results.voltage[indx_Vbus])
+#     return abs(power_flow.results.voltage[indx_Vbus])
 
 
 def test_grid():
@@ -139,25 +139,25 @@ def test_grid():
     grid.add_load(bus5, gc.Load('load 5', P=0, Q=0))
 
     # more buses added
-    # bus6 = gc.Bus('Bus 6', vnom=20)
-    # grid.add_bus(bus6)
-    # grid.add_load(bus6, gc.Load('load 6', P=0, Q=0))
+    bus6 = gc.Bus('Bus 6', vnom=20)
+    grid.add_bus(bus6)
+    grid.add_load(bus6, gc.Load('load 6', P=0, Q=0))
 
-    # bus7 = gc.Bus('Bus 7', vnom=20)
-    # grid.add_bus(bus7)
-    # grid.add_load(bus7, gc.Load('load 7', P=0, Q=0))
+    bus7 = gc.Bus('Bus 7', vnom=20)
+    grid.add_bus(bus7)
+    grid.add_load(bus7, gc.Load('load 7', P=0, Q=0))
 
-    # bus8 = gc.Bus('Bus 8', vnom=20)
-    # grid.add_bus(bus8)
-    # grid.add_load(bus8, gc.Load('load 8', P=0, Q=0))
+    bus8 = gc.Bus('Bus 8', vnom=20)
+    grid.add_bus(bus8)
+    grid.add_load(bus8, gc.Load('load 8', P=0, Q=0))
 
-    # bus9 = gc.Bus('Bus 9', vnom=20)
-    # grid.add_bus(bus9)
-    # grid.add_load(bus9, gc.Load('load 9', P=0, Q=0))
+    bus9 = gc.Bus('Bus 9', vnom=20)
+    grid.add_bus(bus9)
+    grid.add_load(bus9, gc.Load('load 9', P=0, Q=0))
 
-    # bus10 = gc.Bus('Bus 10', vnom=20)
-    # grid.add_bus(bus10)
-    # grid.add_load(bus10, gc.Load('load 10', P=0, Q=0))
+    bus10 = gc.Bus('Bus 10', vnom=20)
+    grid.add_bus(bus10)
+    grid.add_load(bus10, gc.Load('load 10', P=0, Q=0))
 
     # Lines
     grid.add_line(gc.Line(bus1, bus2, 'line 1-2', r=0.05, x=0.11, b=0.0))
@@ -169,12 +169,12 @@ def test_grid():
     grid.add_line(gc.Line(bus4, bus5, 'line 4-5', r=0.04, x=0.09, b=0.0))
 
     # more lines added
-    # grid.add_line(gc.Line(bus1, bus6, 'line 1-6', r=0.03, x=0.10, b=0.0))
-    # grid.add_line(gc.Line(bus4, bus6, 'line 4-6', r=0.04, x=0.08, b=0.0))
-    # grid.add_line(gc.Line(bus5, bus7, 'line 5-7', r=0.04, x=0.11, b=0.0))
-    # grid.add_line(gc.Line(bus3, bus8, 'line 3-8', r=0.03, x=0.09, b=0.0))
-    # grid.add_line(gc.Line(bus6, bus9, 'line 6-9', r=0.03, x=0.08, b=0.0))
-    # grid.add_line(gc.Line(bus7, bus10, 'line 7-10', r=0.04, x=0.12, b=0.0))
+    grid.add_line(gc.Line(bus1, bus6, 'line 1-6', r=0.03, x=0.10, b=0.0))
+    grid.add_line(gc.Line(bus4, bus6, 'line 4-6', r=0.04, x=0.08, b=0.0))
+    grid.add_line(gc.Line(bus5, bus7, 'line 5-7', r=0.04, x=0.11, b=0.0))
+    grid.add_line(gc.Line(bus3, bus8, 'line 3-8', r=0.03, x=0.09, b=0.0))
+    grid.add_line(gc.Line(bus6, bus9, 'line 6-9', r=0.03, x=0.08, b=0.0))
+    grid.add_line(gc.Line(bus7, bus10, 'line 7-10', r=0.04, x=0.12, b=0.0))
 
     return grid
 
@@ -210,7 +210,6 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, indx_Vbus, param_lower_b
     nP = int(n_param / 2)
     nQ = int(n_param / 2)
 
-
     Sg = snapshot.generator_data.get_injections_per_bus()[:, 0]
 
     hx = np.zeros(M)  # h_x vector, with the x solutions at each sample. Maybe better than using zmean?
@@ -230,12 +229,8 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, indx_Vbus, param_lower_b
         # compose the power injections from the sample
         P = param_store[ll, :nP]
         Q = param_store[ll, nP:nP+nQ]
-        print(P)
-        # Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q) / snapshot.Sbase)
         Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q))  # already normalized P and Q
         S = Sg - Sl
-
-        # print(Sl)
 
         # x solution for each sample
         v = power_flow(snapshot=snapshot, S=S, V0=snapshot.Vbus)
@@ -254,7 +249,6 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, indx_Vbus, param_lower_b
             # compose the power injections from the sample delta
             P = params_delta[:nP]
             Q = params_delta[nP:nP + nQ]
-            # Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q) / snapshot.Sbase)
             Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q))
             S = Sg - Sl
 
@@ -264,15 +258,11 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, indx_Vbus, param_lower_b
 
             # compute the delta
             Ag[kk] = (v2[indx_Vbus] - hx[ll]) / delta  # compute gradient as [x(p + delta) - x(p)] / delta
-            print(v2[indx_Vbus] - hx[ll])
 
             # TODO: do not compute dV like this, compute the regular NR jacobian instead
             # dV = np.zeros(snapshot.nbus)
             # dV[snapshot.pqpv] = spsolve(dS_dVm_red, S[snapshot.pqpv])
             # Ag[kk] = ((v - dV)[indx_Vbus] - hx[ll]) / delta
-
-
-        print(',,,,,,,,,,,')
 
         Ag_prod = np.outer(Ag, Ag)  # vector by vector to create a matrix
         C += 1 / M * Ag_prod
@@ -354,7 +344,6 @@ def polynomial_coeff(M, N_t, Wy, param_store, hx, perms):
                 res = res * yy[kk] ** perms[nn][kk]
             Q[ll, nn] = res
 
-    # c_vec = np.dot(np.dot(np.linalg.inv(np.dot(Q.T, Q)), Q.T), hx)
     c_vec = np.dot(np.linalg.solve(np.dot(Q.T, Q), Q.T), hx)
 
     return c_vec
@@ -367,7 +356,7 @@ if __name__ == '__main__':
 
     # Input values
     x_bus = 5  # bus of interest
-    n_param = 8  # number of parameters, with less buses
+    n_param = 18  # number of parameters, with less buses
     # n_param = 18  # number of parameters, added more buses
     l_exp = 3  # expansion order
     k_est = 0.2  # proportion of expected meaningful directions
@@ -400,28 +389,23 @@ if __name__ == '__main__':
     # 6. Test
     pp = [random.uniform(param_lower_bnd[kk], param_upper_bnd[kk]) for kk in range(n_param)]  # random parameters
 
-    # x_real = grid_solve(pp, indx_Vbus)  # compute with the snapshot
+    nP = int(n_param / 2)
+    nQ = int(n_param / 2)
 
-    P = np.array(pp[:4])
-    Q = np.array(pp[4:])
-    print(P)
-    # Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q) / snapshot.Sbase)
+    P = np.array(pp[:nP])
+    Q = np.array(pp[nP:nP+nQ])
     Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q))  # already normalized P and Q
     Sg = snapshot.generator_data.get_injections_per_bus()[:, 0]
     S = Sg - Sl
 
-    # print(Sl)
-
-    # x solution for each sample
     v = power_flow(snapshot=snapshot, S=S, V0=snapshot.Vbus)
     x_real = v[indx_Vbus]
 
-
-
+    # TODO: generalize x_est for k>1, using the permutations as above
     y_red = np.dot(Wy.T, np.array(pp))
     x_est = 0
     for nn in range(N_t):
-        x_est += c_vec[nn] * y_red ** nn  # change for the generic polynomial, todo
+        x_est += c_vec[nn] * y_red ** nn
 
     print('Actual state:               ', x_real)
     print('Estimated state:            ', x_est[0])
