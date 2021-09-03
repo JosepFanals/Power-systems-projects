@@ -235,7 +235,7 @@ def permutate(k, l_exp):
     return perms
 
 
-def polynomial_coeff(M, N_t, Wy, param_store, hx, perms):
+def polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k):
 
     """
     Calculate the coefficients c
@@ -246,6 +246,7 @@ def polynomial_coeff(M, N_t, Wy, param_store, hx, perms):
     :param param_store: stored values of the parameters for each sample
     :param hx: solutions of the state for each sample
     :param perms: permutations of exponents
+    :param k: number of meaningful directions
     :return: array with c coefficients
     """
 
@@ -297,8 +298,8 @@ if __name__ == '__main__':
     perms = permutate(k, l_exp)
 
     # 5. Find polynomial coefficients
-    c_vec = polynomial_coeff(M, N_t, Wy, param_store, hx, perms)
-    print('Array of coefficients: ', c_vec)
+    c_vec = polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k)
+    print('Array of coefficients:     ', c_vec)
 
     # 6. Test
     pp = [random.uniform(param_lower_bnd[kk], param_upper_bnd[kk]) for kk in range(n_param)]  # random parameters
@@ -312,18 +313,25 @@ if __name__ == '__main__':
     Sg = snapshot.generator_data.get_injections_per_bus()[:, 0]
     S = Sg - Sl
 
+    # calculate the real state
     v = power_flow(snapshot=snapshot, S=S, V0=snapshot.Vbus)
     x_real = v[indx_Vbus]
 
-    # TODO: generalize x_est for k>1, using the permutations as above
+    # calculate the estimated state
     y_red = np.dot(Wy.T, np.array(pp))
     x_est = 0
+
     for nn in range(N_t):
-        x_est += c_vec[nn] * y_red ** nn
+        res = 1
+        for kk in range(k):
+            res = res * y_red[kk] ** perms[nn][kk]
+        x_est += c_vec[nn] * res
+
+    # ----------------------------------------------------------------
 
     print('Actual state:               ', x_real)
-    print('Estimated state:            ', x_est[0])
-    print('Error:                      ', abs(x_real - x_est[0]))
+    print('Estimated state:            ', x_est)
+    print('Error:                      ', abs(x_real - x_est))
     print('Number of power flow calls: ', M * (n_param + 1))
     print('Original calls n^m = M^m:   ', M ** n_param)
 

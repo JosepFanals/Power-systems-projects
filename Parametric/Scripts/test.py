@@ -124,9 +124,6 @@ Sl = Pp + 1j * Qq
 S = Sg - Sl[0]
 
 mVbus, aVbus, Vbus = power_flow(snapshot=snapshot, S=S, V0=snapshot.Vbus)
-print(Vbus)
-print(mVbus)
-print(aVbus)
 
 # compute derivatives for later
 # dS_dVm, dS_dVa = dSbus_dV(Ybus=snapshot.Ybus, V=V0)
@@ -135,52 +132,59 @@ print(aVbus)
 # print(dSdVm_array)
 # # print(dS_dVm_red)
 
-# derivatives my way: introduce a Ai in the bus where there is a AS
-indx = 4  # for instance, to look at a voltage
-delta = 1e-5
-Pp[0,indx] += delta  # varying P
-# Qq[0,indx] += delta  # varying Q, one at a time
-Sl_before = Sl
-Sl_after = Pp + 1j * Qq
-ASl = Sl_after - Sl_before
-AS = - ASl[0]
-Ivec = np.array(np.conj(Sl_after / Vbus))
-print(Ivec[0])
-
-# print(AI)
-Zbus = np.linalg.pinv(Ybus.toarray())
-# Vvec = np.linalg.solve(Ybus_ar, Ivec[0])
-Vvec = np.dot(Zbus, Ivec[0])
-AV = (Vvec - Vbus) / delta
-print('Vvec')
-# print(Vvec)
-# print(abs(AV))
-
-
-
-
-
-
-# AI = Y AV
-
-# Ybus = Ybus.toarray()
-# Zbus = np.linalg.inv(Ybus)
-# Ppinc = delta
-# Qqinc = 0  # comment
-# Sinc = Ppinc + 1j * Qqinc
-# Iinc = np.conj(Sinc / Vbus[indx])
-# print(Iinc)
-
-
-
 # test with the manual method (v_new - v_old) / delta
+indx = 4
 delta = 1e-5
-Pp[0,indx] += delta  # varying P
+
+Pp2 = np.copy(Pp)
+Pp2[0,indx] += delta  # varying P
 # Qq[0,indx] += delta  # varying Q, one at a time
-Sl = Pp + 1j * Qq
+Sl = Pp2 + 1j * Qq
 S = Sg - Sl[0]
 
 mVbus_n, aVbus_n, Vbus_n = power_flow(snapshot=snapshot, S=S, V0=snapshot.Vbus)
 print((mVbus_n - mVbus) / delta)
 
 
+
+# following Sereeter, Zimmerman (2018)
+# https://matpower.org/docs/TN4-OPF-Derivatives-Cartesian.pdf
+# page 18: dS/dVre = [I] + [V]Ybus*; dS/dVim = 1j * ([I] - [V]Ybus*)
+
+
+def dV_dS(Ybus, Vbus):
+    """
+    Derivatives of abs(Voltage) with respect to powers
+    Work with sparse matrices
+    """
+    Ibus = Ybus * Vbus
+    nb = range(len(Vbus))
+    diagVbus = csr_matrix((Vbus, (nb, nb)))
+    diagIbus = csr_matrix((Ibus, (nb, nb)))
+
+    print(Ybus)
+
+    dS_dVre = np.conj(diagIbus) + diagVbus * np.conj(Ybus)
+    dS_dVim = 1j * (np.conj(diagIbus) - diagVbus * np.conj(Ybus))
+
+    # invert all items, and transpose
+    dS_dVreT = dS_dVre.T
+    dS_dVimT = dS_dVim.T
+
+    # dVre_dS = np.reciprocal(dS_dVreT, out=dS_dVreT.data)
+    # dVim_dS = np.reciprocal(dS_dVimT, out=dS_dVimT.data)
+
+    # invert all values
+
+    return dS_dVre.T, dS_dVre
+
+
+Pp3 = np.copy(Pp)
+Sl = Pp3 + 1j * Qq
+S = Sg - Sl[0]
+
+
+Ybus = snapshot.Ybus
+mVbus_l, aVbus_l, Vbus_l = power_flow(snapshot=snapshot, S=S, V0=snapshot.Vbus)
+
+ma, mb = dV_dS(Ybus, Vbus_l)
