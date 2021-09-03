@@ -6,6 +6,7 @@ import GridCal.Engine as gc
 import random
 import math
 import itertools
+import time
 from smt.sampling_methods import LHS
 from scipy.sparse import csr_matrix
 from scipy.sparse.linalg import spsolve
@@ -293,6 +294,9 @@ def polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV):
 
 if __name__ == '__main__':
 
+    # start time
+    start_time = time.time()
+
     # load grid
     grid = test_grid()
     snapshot = gc.compile_snapshot_circuit(grid)
@@ -357,6 +361,8 @@ if __name__ == '__main__':
             x_est += c_vec[hh][nn] * res
 
         x_est_vec[hh] = np.real(x_est)  # discard complex 0j
+
+    stop_time = time.time()
     # ----------------------------------------------------------------
 
     print('Actual state:               ', x_real_vec)
@@ -364,4 +370,5 @@ if __name__ == '__main__':
     print('Error:                      ', abs(x_real_vec - x_est_vec))
     print('Number of power flow calls: ', M * (n_param + 1))
     print('Original calls n^m = M^m:   ', M ** n_param)
+    print('Time elapsed:               ', stop_time - start_time, 's')
 

@@ -2,11 +2,15 @@
 
 # Packages
 import numpy as np
+import time
 
-Cc = np.zeros((5, 3, 4), dtype=float)
-print(Cc[1, 2, 1])
+start_time = time.time()
 
-hx = np.zeros((10, 3), dtype=float)
-v = np.ones(3, dtype=float)
-hx[0, :] = v[:]
-print(hx)
+
+x = 100
+res = 1
+for kk in range(x):
+    res = res * kk ** (kk / 3) * np.sqrt(kk)
+
+
+print(time.time() - start_time)
