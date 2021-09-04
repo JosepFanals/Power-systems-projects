@@ -108,7 +108,7 @@ def power_flow(snapshot: gc.SnapshotData, S: np.ndarray, V0: np.ndarray):
                               branch_rates=snapshot.Rates,
                               options=options,
                               logger=gc.Logger())
-    return abs(res.voltage)
+    return np.abs(res.voltage)
 
 
 def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_upper_bnd):
@@ -218,7 +218,7 @@ def orthogonal_decomposition(C, tr_error, l_exp, nV):
             k += 1
 
         N_t = int(math.factorial(l_exp + k) / (math.factorial(k) * math.factorial(l_exp)))  # number of terms
-        Wy = w[:,:k]  # and for now, do not define Wz
+        Wy = w[:, :k]  # and for now, do not define Wz
 
         Wy_mat.append(Wy)
         k_vec.append(k)
@@ -292,6 +292,25 @@ def polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV):
     return c_vec_all
 
 
+def get_estimation(nV, Wy, N_t, c_vec):
+
+    x_est_vec = np.zeros(nV, dtype=float)
+
+    for hh in range(nV):
+        y_red = np.dot(Wy[hh].T, np.array(pp))
+        x_est = 0
+
+        for nn in range(N_t[hh]):
+            res = 1
+            for kk in range(k[hh]):
+                res = res * y_red[kk] ** perms[hh][nn][kk]
+            x_est += c_vec[hh][nn] * res
+
+        x_est_vec[hh] = np.real(x_est)  # discard complex 0j
+
+    return x_est_vec
+
+
 if __name__ == '__main__':
 
     # start time
@@ -308,7 +327,7 @@ if __name__ == '__main__':
     factor_MNt = 2.5  # M = factor_MNt * Nterms, should be around 1.5 and 3
     param_lower_bnd = [0.0] * n_param  # lower limits for all parameters
     param_upper_bnd = [0.2] * n_param  # upper limits for all parameters
-    delta = 1e-4  # small increment to calculate gradients
+    delta = 1e-3  # small increment to calculate gradients
     tr_error = 0.1  # truncation error allowed
     print('Running...')
 
@@ -339,7 +358,7 @@ if __name__ == '__main__':
 
     P = np.array(pp[:nP])
     Q = np.array(pp[nP:nP+nQ])
-    Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q))  # already normalized P and Q
+    Sl = snapshot.load_data.C_bus_load * (P + 1j * Q)  # already normalized P and Q
     Sg = snapshot.generator_data.get_injections_per_bus()[:, 0]
     S = Sg - Sl
 
@@ -348,26 +367,15 @@ if __name__ == '__main__':
     x_real_vec = v[pq_vec]
 
     # calculate the estimated state
-    x_est_vec = np.zeros(nV, dtype=float)
-
-    for hh in range(nV):
-        y_red = np.dot(Wy[hh].T, np.array(pp))
-        x_est = 0
-
-        for nn in range(N_t[hh]):
-            res = 1
-            for kk in range(k[hh]):
-                res = res * y_red[kk] ** perms[hh][nn][kk]
-            x_est += c_vec[hh][nn] * res
-
-        x_est_vec[hh] = np.real(x_est)  # discard complex 0j
+    x_est_vec = get_estimation(nV=nV, Wy=Wy, N_t=N_t, c_vec=c_vec)
 
     stop_time = time.time()
     # ----------------------------------------------------------------
-
+    error = np.abs(x_real_vec - x_est_vec)
     print('Actual state:               ', x_real_vec)
     print('Estimated state:            ', x_est_vec)
-    print('Error:                      ', abs(x_real_vec - x_est_vec))
+    print('Error:                      ', error)
+    print('Max error:                  ', error.max())
     print('Number of power flow calls: ', M * (n_param + 1))
     print('Original calls n^m = M^m:   ', M ** n_param)
     print('Time elapsed:               ', stop_time - start_time, 's')
