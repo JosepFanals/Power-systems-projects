@@ -313,6 +313,35 @@ def normalize(m_norm, n_norm, x, n_param):
     return y
 
 
+def solve_parametric(pp, Wy, nV, N_t, k, perms, c_vec):  # parallelize!
+    """
+    Compute the solution with the polynomial coefficients
+    :param pp: array with the normalized parameters
+    :param Wy: matrix to go from p to y
+    :param nV: number of PQ buses
+    :param k: number of meaningful directions
+    :param perms: exponents to use at each permutation
+    :param c_vec: vector of coefficients
+    :return: array with the voltages
+    """
+
+    x_est_vec = np.zeros(nV, dtype=float)
+
+    for hh in range(nV):
+        y_red = np.dot(Wy[hh].T, np.array(pp))
+        x_est = 0
+
+        for nn in range(N_t[hh]):
+            res = 1
+            for kk in range(k[hh]):
+                res = res * y_red[kk] ** perms[hh][nn][kk]
+            x_est += c_vec[hh][nn] * res
+        x_est_vec[hh] = np.real(x_est)  # discard complex 0j
+
+    return x_est_vec
+
+
+
 if __name__ == '__main__':
 
     # start time
@@ -328,12 +357,13 @@ if __name__ == '__main__':
     k_est = 0.2  # proportion of expected meaningful directions
     factor_MNt = 2.5  # M = factor_MNt * Nterms, should be around 1.5 and 3
     param_lower_bnd = [0.0] * n_param  # lower limits for all parameters
-    param_upper_bnd = [0.1] * n_param  # upper limits for all parameters
+    param_upper_bnd = [0.15] * n_param  # upper limits for all parameters
     delta = 1e-5  # small increment to calculate gradients
     tr_error = 0.1  # truncation error allowed
+    n_tests = 1000  # number of tests to perform, totally arbitrary
     print('Running...')
 
-    # O. Obtain m and n to normalize inputs
+    # 0. Obtain m and n to normalize inputs
     m_norm, n_norm = stretch_translation(param_upper_bnd, param_lower_bnd, n_param)
 
     # 1. Initial calculations
@@ -352,47 +382,57 @@ if __name__ == '__main__':
 
     # 5. Find polynomial coefficients
     c_vec = polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV, m_norm, n_norm, n_param)
-    print('Array of coefficients:     ', c_vec)
+    stop_time1 = time.time()  # time to find the coefficients
 
     # 6. Test
-    pp = np.array([random.uniform(param_lower_bnd[kk], param_upper_bnd[kk]) for kk in range(n_param)])  # random parameters
+    pp_list = []
+    for ntt in range(n_tests):
+        pp = np.array([random.uniform(param_lower_bnd[kk], param_upper_bnd[kk]) for kk in range(n_param)])  # random parameters
+        pp_list.append(pp)
 
-    nP = int(n_param / 2)
-    nQ = int(n_param / 2)
-
-    P = np.array(pp[:nP])
-    Q = np.array(pp[nP:nP+nQ])
-    Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q))  # already normalized P and Q
-    Sg = snapshot.generator_data.get_injections_per_bus()[:, 0]
-    S = Sg - Sl
+    stop_time2 = time.time()  # time up to generate the random parameters
 
     # calculate the real state
-    v = power_flow(snapshot=snapshot, S=S, V0=snapshot.Vbus)
-    x_real_vec = v[pq_vec]
+    x_real_store = []
+    for ntt in range(n_tests):
+        pp = pp_list[ntt]  # select one sample of random parameters
+
+        nP = int(n_param / 2)
+        nQ = int(n_param / 2)
+
+        P = np.array(pp[:nP])
+        Q = np.array(pp[nP:nP+nQ])
+        Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q))  # already normalized P and Q
+        Sg = snapshot.generator_data.get_injections_per_bus()[:, 0]
+        S = Sg - Sl
+
+        v = power_flow(snapshot=snapshot, S=S, V0=snapshot.Vbus)
+        x_real_vec = v[pq_vec]
+        x_real_store.append(x_real_vec)
+
+    stop_time3 = time.time()  # time up to solve the traditional
 
     # calculate the estimated state
-    x_est_vec = np.zeros(nV, dtype=float)
-    pp = normalize(m_norm, n_norm, pp, n_param)
+    x_est_store = []
+    for ntt in range(n_tests):
+        pp = normalize(m_norm, n_norm, pp_list[ntt], n_param)
+        x_est_vec = solve_parametric(pp, Wy, nV, N_t, k, perms, c_vec)
+        x_est_store.append(x_est_vec)
 
-    for hh in range(nV):
-        y_red = np.dot(Wy[hh].T, np.array(pp))
-        x_est = 0
+    stop_time4 = time.time()  # time up to solve the parametric
 
-        for nn in range(N_t[hh]):
-            res = 1
-            for kk in range(k[hh]):
-                res = res * y_red[kk] ** perms[hh][nn][kk]
-            x_est += c_vec[hh][nn] * res
+    # error calculation
+    err_abs = np.zeros(nV)  # calculate the average of all errors, for each bus
+    for ntt in range(n_tests):
+        err_abs += 1 / n_tests * (abs(x_real_store[ntt] - x_est_store[ntt]))
 
-        x_est_vec[hh] = np.real(x_est)  # discard complex 0j
-
-    stop_time = time.time()
     # ----------------------------------------------------------------
-
     print('Actual state:               ', x_real_vec)
     print('Estimated state:            ', x_est_vec)
-    print('Error:                      ', abs(x_real_vec - x_est_vec))
+    print('Error:                      ', err_abs)
     print('Number of power flow calls: ', M * (n_param + 1))
     print('Original calls n^m = M^m:   ', M ** n_param)
-    print('Time elapsed:               ', stop_time - start_time, 's')
+    print('Time to find polynomial:    ', stop_time1 - start_time, 's')
+    print('Time with traditional:      ', stop_time3 - stop_time2, 's')
+    print('Time with parametric:       ', stop_time4 - stop_time3, 's')
 
