@@ -1,5 +1,4 @@
 # Parametric analysis of power systems
-# Addition: normalize parameters [0, 1]
 
 # Packages
 import numpy as np
@@ -11,6 +10,7 @@ import time
 from smt.sampling_methods import LHS
 from scipy.sparse import csr_matrix
 from scipy.sparse.linalg import spsolve
+from numba import jit, njit
 np.set_printoptions(precision=10)
 
 
@@ -199,7 +199,7 @@ def orthogonal_decomposition(C, tr_error, l_exp, nV):
         N_t = int(math.factorial(l_exp + k) / (math.factorial(k) * math.factorial(l_exp)))  # number of terms
         Wy = w[:,:k]  # and for now, do not define Wz
 
-        Wy_mat.append(Wy)
+        Wy_mat.append(np.real(Wy))
         k_vec.append(k)
         N_t_vec.append(N_t)
 
@@ -313,6 +313,7 @@ def normalize(m_norm, n_norm, x, n_param):
     return y
 
 
+# @jit
 def solve_parametric(pp, Wy, nV, N_t, k, perms, c_vec):  # parallelize!
     """
     Compute the solution with the polynomial coefficients
@@ -328,7 +329,8 @@ def solve_parametric(pp, Wy, nV, N_t, k, perms, c_vec):  # parallelize!
     x_est_vec = np.zeros(nV, dtype=float)
 
     for hh in range(nV):
-        y_red = np.dot(Wy[hh].T, np.array(pp))
+        # y_red = np.dot(np.ndarray.transpose(Wy[hh]), pp)
+        y_red = np.ndarray.transpose(Wy[hh]).dot(pp)
         x_est = 0
 
         for nn in range(N_t[hh]):
@@ -336,7 +338,8 @@ def solve_parametric(pp, Wy, nV, N_t, k, perms, c_vec):  # parallelize!
             for kk in range(k[hh]):
                 res = res * y_red[kk] ** perms[hh][nn][kk]
             x_est += c_vec[hh][nn] * res
-        x_est_vec[hh] = np.real(x_est)  # discard complex 0j
+
+        x_est_vec[hh] = x_est  # discard complex 0j
 
     return x_est_vec
 
@@ -356,11 +359,11 @@ if __name__ == '__main__':
     l_exp = 3  # expansion order
     k_est = 0.2  # proportion of expected meaningful directions
     factor_MNt = 2.5  # M = factor_MNt * Nterms, should be around 1.5 and 3
-    param_lower_bnd = [0.0] * n_param  # lower limits for all parameters
-    param_upper_bnd = [0.15] * n_param  # upper limits for all parameters
+    param_lower_bnd = [0.05] * n_param  # lower limits for all parameters
+    param_upper_bnd = [0.10] * n_param  # upper limits for all parameters
     delta = 1e-5  # small increment to calculate gradients
     tr_error = 0.1  # truncation error allowed
-    n_tests = 1000  # number of tests to perform, totally arbitrary
+    n_tests = 2000  # number of tests to perform, totally arbitrary
     print('Running...')
 
     # 0. Obtain m and n to normalize inputs
@@ -429,7 +432,7 @@ if __name__ == '__main__':
     # ----------------------------------------------------------------
     print('Actual state:               ', x_real_vec)
     print('Estimated state:            ', x_est_vec)
-    print('Error:                      ', err_abs)
+    print('Mean error:                 ', err_abs)
     print('Number of power flow calls: ', M * (n_param + 1))
     print('Original calls n^m = M^m:   ', M ** n_param)
     print('Time to find polynomial:    ', stop_time1 - start_time, 's')
