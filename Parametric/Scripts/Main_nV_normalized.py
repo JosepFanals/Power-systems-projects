@@ -3,6 +3,7 @@
 # Packages
 import numpy as np
 import GridCal.Engine as gc
+import numba as nb
 import random
 import math
 import itertools
@@ -10,7 +11,6 @@ import time
 from smt.sampling_methods import LHS
 from scipy.sparse import csr_matrix
 from scipy.sparse.linalg import spsolve
-from numba import jit, njit
 np.set_printoptions(precision=10)
 
 
@@ -313,7 +313,7 @@ def normalize(m_norm, n_norm, x, n_param):
     return y
 
 
-# @jit
+# @nb.jit
 def solve_parametric(pp, Wy, nV, N_t, k, perms, c_vec):  # parallelize!
     """
     Compute the solution with the polynomial coefficients
@@ -329,8 +329,7 @@ def solve_parametric(pp, Wy, nV, N_t, k, perms, c_vec):  # parallelize!
     x_est_vec = np.zeros(nV, dtype=float)
 
     for hh in range(nV):
-        # y_red = np.dot(np.ndarray.transpose(Wy[hh]), pp)
-        y_red = np.ndarray.transpose(Wy[hh]).dot(pp)
+        y_red = np.dot(np.ndarray.transpose(Wy[hh]), pp)
         x_est = 0
 
         for nn in range(N_t[hh]):
@@ -339,7 +338,7 @@ def solve_parametric(pp, Wy, nV, N_t, k, perms, c_vec):  # parallelize!
                 res = res * y_red[kk] ** perms[hh][nn][kk]
             x_est += c_vec[hh][nn] * res
 
-        x_est_vec[hh] = x_est  # discard complex 0j
+        x_est_vec[hh] = x_est
 
     return x_est_vec
 
