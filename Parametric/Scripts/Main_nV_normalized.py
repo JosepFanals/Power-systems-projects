@@ -96,7 +96,7 @@ def power_flow(snapshot: gc.SnapshotData, S: np.ndarray, V0: np.ndarray):
     return abs(res.voltage)
 
 
-def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_upper_bnd):
+def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_upper_bnd, m_norm):
 
     """
     Calculate the gradients, build the hx vector, the covariance C matrix and store the parameters
@@ -105,6 +105,7 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_u
     :param n_param: number of parameters
     :param param_lower_bnd: array of lower bounds for the parameters
     :param param_upper_bnd: array of upper bounds for the parameters
+    :param m_norm: factor by which the delta has to be stretched
     :return: hx, C and the stored parameters
 
     """
@@ -157,7 +158,8 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_u
 
             # compute the delta
             # Ag[kk, :] = (v2[pq_vec] - hx[ll, :]) / delta  # compute gradient as [x(p + delta) - x(p)] / delta
-            Ag[kk, :] = (v2[pq_vec] - hx[ll, :]) / (10 * delta)  # go from [0, 0.2] -> [0, 1] 
+            # Ag[kk, :] = (v2[pq_vec] - hx[ll, :]) / (10 * delta)  # go from [0, 0.2] -> [0, 1] 
+            Ag[kk, :] = (v2[pq_vec] - hx[ll, :]) / (m_norm[kk] * delta)  # go from [0, 0.2] -> [0, 1] 
 
         for ii in range(nV):  # build all nV covariance matrices
             Ag_prod = np.outer(Ag[:, ii], Ag[:, ii])
@@ -233,7 +235,7 @@ def permutate(k, l_exp, nV):
     return perms_vec
 
 
-def polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV):
+def polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV, m_norm, n_norm, n_param):
 
     """
     Calculate the coefficients c
@@ -246,10 +248,15 @@ def polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV):
     :param perms: permutations of exponents
     :param k: number of meaningful directions
     :param nV: number of PQ buses
+    :param m_norm: factor by which the parameters are stretched
+    :param n_norm: factor by which the parameters are translated
+    :param n_param: number of parameters
     :return: array with c coefficients
     """
 
-    param_store = param_store * 10  # from [0, 0.2] -> [0, 1]
+    # param_store = param_store * 10  # from [0, 0.2] -> [0, 1]
+    for ll in range(M):
+        param_store[ll, :] = normalize(m_norm, n_norm, param_store[ll, :], n_param)
 
     c_vec_all = []
 
@@ -335,7 +342,7 @@ if __name__ == '__main__':
     M = int(factor_MNt * N_terms_est)  # estimated number of samples
 
     # 2. Compute gradients and covariance matrix
-    hx, C, param_store, nV, pq_vec = samples_calc(snapshot, M, n_param, param_lower_bnd, param_upper_bnd)
+    hx, C, param_store, nV, pq_vec = samples_calc(snapshot, M, n_param, param_lower_bnd, param_upper_bnd, m_norm)
 
     # 3. Perform orthogonal decomposition
     Wy, N_t, k = orthogonal_decomposition(C, tr_error, l_exp, nV)
@@ -344,7 +351,7 @@ if __name__ == '__main__':
     perms = permutate(k, l_exp, nV)
 
     # 5. Find polynomial coefficients
-    c_vec = polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV)
+    c_vec = polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV, m_norm, n_norm, n_param)
     print('Array of coefficients:     ', c_vec)
 
     # 6. Test
