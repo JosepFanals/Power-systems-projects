@@ -3,6 +3,7 @@
 # Packages
 import numpy as np
 import GridCal.Engine as gc
+import numba as nb
 import random
 import math
 import itertools
@@ -11,22 +12,6 @@ from smt.sampling_methods import LHS
 from scipy.sparse import csr_matrix
 from scipy.sparse.linalg import spsolve
 np.set_printoptions(precision=10)
-
-
-def dSbus_dV(Ybus, V):
-    """
-    Computes partial derivatives of power injection w.r.t. voltage.
-    """
-
-    Ibus = Ybus * V
-    ib = range(len(V))
-    diagV = csr_matrix((V, (ib, ib)))
-    diagIbus = csr_matrix((Ibus, (ib, ib)))
-    diagVnorm = csr_matrix((V / np.abs(V), (ib, ib)))
-    dS_dVm = diagV * np.conj(Ybus * diagVnorm) + np.conj(diagIbus) * diagVnorm
-    dS_dVa = 1j * diagV * np.conj(diagIbus - Ybus * diagV)
-
-    return dS_dVm, dS_dVa
 
 
 def test_grid():
@@ -108,10 +93,38 @@ def power_flow(snapshot: gc.SnapshotData, S: np.ndarray, V0: np.ndarray):
                               branch_rates=snapshot.Rates,
                               options=options,
                               logger=gc.Logger())
-    return np.abs(res.voltage)
+    return res.voltage
 
 
-def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_upper_bnd):
+def params2power(x, snapshot: gc.SnapshotData, fix_generation=True):
+    """
+    Convert the parameters vector into the power injections
+    :param x: array of parameter [Pgen | Pload | Qload]
+    :param snapshot: GridCal snapshot of a circuit
+    :param fix_generation: make the generation match the load active power (this is a condition for power flow convergence)
+    :return: Power injections in complex form ready for the power flow
+    """
+    ng = snapshot.ngen
+    nl = snapshot.nload
+    a = ng
+    b = a + nl
+    c = b + nl
+
+    Pgen = x[0:a]
+    Pload = x[a:b]
+    Qload = x[b:c]
+
+    # make Pgen match Pload
+    if fix_generation:
+        Pgen = (Pgen / Pgen.sum()) * Pload.sum()
+
+    Sl = snapshot.load_data.C_bus_load * (Pload + 1j * Qload)  # already normalized P and Q
+    Sg = snapshot.generator_data.C_bus_gen * Pgen
+    S = Sg - Sl
+    return S
+
+
+def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_upper_bnd, m_norm):
 
     """
     Calculate the gradients, build the hx vector, the covariance C matrix and store the parameters
@@ -120,17 +133,18 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_u
     :param n_param: number of parameters
     :param param_lower_bnd: array of lower bounds for the parameters
     :param param_upper_bnd: array of upper bounds for the parameters
+    :param m_norm: factor by which the delta has to be stretched
     :return: hx, C and the stored parameters
 
     """
 
-    nP = int(n_param / 2)
-    nQ = int(n_param / 2)
-
-    pq_vec = snapshot.pq
-    nV = len(pq_vec)
-    Sg = snapshot.generator_data.get_injections_per_bus()[:, 0]
-
+    # nP = int(n_param / 2)
+    # nQ = int(n_param / 2)
+    #
+    # pq_vec = snapshot.pq
+    # nV = len(pq_vec)
+    # Sg = snapshot.generator_data.get_injections_per_bus()[:, 0]
+    nV = snapshot.nbus  # number of variables
     hx = np.zeros((M, nV), dtype=float)  # x solutions at each sample, for all nV buses
     C = np.zeros((nV, n_param, n_param), dtype=float)  # nV covariance matrices
 
@@ -146,18 +160,11 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_u
     for ll in range(M):
 
         # compose the power injections from the sample
-        P = param_store[ll, :nP]
-        Q = param_store[ll, nP:nP+nQ]
-        Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q))  # already normalized P and Q
-        S = Sg - Sl
+        S = params2power(x=param_store[ll, :], snapshot=snapshot)
 
         # x solution for each sample
         v = power_flow(snapshot=snapshot, S=S, V0=snapshot.Vbus)
-        hx[ll, :] = v[pq_vec]
-
-        # compute derivatives for later. May not be possible
-        # dS_dVm, dS_dVa = dSbus_dV(Ybus=snapshot.Ybus, V=v)
-        # dS_dVm_red = dS_dVm[np.ix_(snapshot.pqpv, snapshot.pqpv)]
+        hx[ll, :] = np.abs(v)
 
         # calculate gradients and form C matrix
         Ag = np.zeros((n_param, nV), dtype=float)
@@ -166,31 +173,24 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_u
             params_delta[kk] += delta  # increase a parameter by delta
 
             # compose the power injections from the sample delta
-            P = params_delta[:nP]
-            Q = params_delta[nP:nP + nQ]
-            Sl = snapshot.load_data.C_bus_load * ((P + 1j * Q))
-            S = Sg - Sl
+            S = params2power(x=params_delta, snapshot=snapshot)
 
             # run the power flow with the increments in power
             v2 = power_flow(snapshot=snapshot, S=S, V0=v)
 
             # compute the delta
-            Ag[kk, :] = (v2[pq_vec] - hx[ll, :]) / delta  # compute gradient as [x(p + delta) - x(p)] / delta
-
-            # TODO: do not compute dV like this, compute the regular NR jacobian instead
-            # dV = np.zeros(snapshot.nbus)
-            # dV[snapshot.pqpv] = spsolve(dS_dVm_red, S[snapshot.pqpv])
-            # Ag[kk] = ((v - dV)[indx_Vbus] - hx[ll]) / delta
+            # Ag[kk, :] = (v2[pq_vec] - hx[ll, :]) / delta  # compute gradient as [x(p + delta) - x(p)] / delta
+            # Ag[kk, :] = (v2[pq_vec] - hx[ll, :]) / (10 * delta)  # go from [0, 0.2] -> [0, 1]
+            Ag[kk, :] = (np.abs(v2) - hx[ll, :]) / (m_norm[kk] * delta)  # go from [0, 0.2] -> [0, 1]
 
         for ii in range(nV):  # build all nV covariance matrices
             Ag_prod = np.outer(Ag[:, ii], Ag[:, ii])
             C[ii] = 1 / M * Ag_prod
 
-    return hx, C, param_store, nV, pq_vec
+    return hx, C, param_store, nV
 
 
 def orthogonal_decomposition(C, tr_error, l_exp, nV):
-
     """
     Orthogonal decomposition of the covariance matrix to determine the meaningful directions
 
@@ -199,53 +199,59 @@ def orthogonal_decomposition(C, tr_error, l_exp, nV):
     :param l_exp: expansion order
     :param nV: number of PQ buses
     :return: transformation matrix Wy, number of terms N_t and meaningful directions k, for each PQ bus
-
     """
 
     Wy_mat = []
-    k_vec = []
-    N_t_vec = []
+    k_vec = np.empty(nV, dtype=int)
+    N_t_vec = np.empty(nV, dtype=int)
 
     for ll in range(nV):
         # eigenvalues and eigenvectors
         v, w = np.linalg.eig(C[ll])
 
         v_sum = np.sum(v)
-        err_v = 1
-        k = 0  # meaningful directions
-        while err_v > tr_error:
-            err_v = 1 - v[k] / v_sum
-            k += 1
+
+        if v_sum > 0:
+            err_v = 1
+            k = 0  # meaningful directions
+            while err_v > tr_error:
+                err_v = 1.0 - v[k] / v_sum
+                k += 1
+        else:
+            k = 1
 
         N_t = int(math.factorial(l_exp + k) / (math.factorial(k) * math.factorial(l_exp)))  # number of terms
+
+        # TODO: Al final, k siempre es 2...no podríamos saber esto con antelación para declarar Wy como una matriz?
         Wy = w[:, :k]  # and for now, do not define Wz
 
-        Wy_mat.append(Wy)
-        k_vec.append(k)
-        N_t_vec.append(N_t)
+        Wy_mat.append(np.real(Wy))
+        k_vec[ll] = k
+        N_t_vec[ll] = N_t
 
     # return Wy, N_t, k
     return Wy_mat, N_t_vec, k_vec
 
 
 def permutate(k, l_exp, nV):
-
     """
     Generate the permutations for all exponents of y
 
     :param k: vector with number of meaningful directions
-    :param l: expansion order
+    :param l_exp: expansion order
     :param nV: number of PQ buses
     :return perms: array of all permutations
     """
 
+    # TODO: Me da la impresión de que debe existir una forma más eficiente de conseguir el resultado final
+
     perms_vec = []
 
     for nn in range(nV):
-        Nt = int(math.factorial(l_exp + k[nn]) / (math.factorial(l_exp) * math.factorial(k[nn])))
+        # Nt = int(math.factorial(l_exp + k[nn]) / (math.factorial(l_exp) * math.factorial(k[nn])))
 
         lst = [ll for ll in range(l_exp + 1)] * k[nn]
-        perms_all = set(itertools.permutations(lst, k[nn]))
+        perms_all = set(itertools.permutations(lst, int(k[nn])))  # TODO: porqué usamos "set", no se descartan abajo con el "if sum(per)..." ?
         perms = []
         for per in perms_all:
             if sum(per) <= l_exp:
@@ -256,7 +262,7 @@ def permutate(k, l_exp, nV):
     return perms_vec
 
 
-def polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV):
+def polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV, m_norm, n_norm, n_param):
 
     """
     Calculate the coefficients c
@@ -269,8 +275,15 @@ def polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV):
     :param perms: permutations of exponents
     :param k: number of meaningful directions
     :param nV: number of PQ buses
+    :param m_norm: factor by which the parameters are stretched
+    :param n_norm: factor by which the parameters are translated
+    :param n_param: number of parameters
     :return: array with c coefficients
     """
+
+    # param_store = param_store * 10  # from [0, 0.2] -> [0, 1]
+    for ll in range(M):
+        param_store[ll, :] = normalize(m_norm, n_norm, param_store[ll, :], n_param)
 
     c_vec_all = []
 
@@ -283,7 +296,6 @@ def polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV):
                 res = 1.0
                 for kk in range(k[hh]):  # basis function, with all permutations
                     res = res * yy[kk] ** perms[hh][nn][kk]
-                # Q[ll, nn] = res
                 Q[ll, nn] = np.real(res)  # to avoid error of casting a complex number
 
         c_vec = np.dot(np.linalg.solve(np.dot(Q.T, Q), Q.T), hx[:, hh])
@@ -292,23 +304,82 @@ def polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV):
     return c_vec_all
 
 
-def get_estimation(nV, Wy, N_t, c_vec, perms):
+@nb.njit()
+def stretch_translation(param_up, param_low, n_param):
+    """
+    Stretches and translates from [a, b] to [0, 1]
+    :param param_up: array with the upper limit of the parameters
+    :param param_low: array with the lower limit of the parameters
+    :param n_param: number of parameters
+    :return: arrays with m and n, y = 1 / (b - a) * x - a / (b - a), of the form y = m * x + n
+    """
 
-    x_est_vec = np.zeros(nV, dtype=float)
+    m_norm = np.empty(n_param, dtype=nb.float64)  # stretch
+    n_norm = np.empty(n_param, dtype=nb.float64)  # translation
+
+    for ll in range(n_param):
+        m_norm[ll] = 1 / (param_up[ll] - param_low[ll])
+        n_norm[ll] = - param_low[ll] / (param_up[ll] - param_low[ll])
+
+    return m_norm, n_norm
+
+
+@nb.njit()
+def normalize(m_norm, n_norm, x, n_param):
+    """
+    Goes from x to y, where y = m * x + n, that is, it normalizes the input
+    :param m_norm: normalized slopes
+    :param n_norm: normalized origin
+    :param x: list with n_param parameters where the normalization has to be applied
+    :param n_param: number of parameters
+    :return: list with normalized parameters
+    """
+
+    y = np.empty(n_param, dtype=nb.float64)  # normalized array
+    for ll in range(n_param):
+        y[ll] = m_norm[ll] * x[ll] + n_norm[ll]
+
+    return y
+
+
+# @nb.njit()
+def solve_parametric(pp, Wy, nV, N_t, k, perms, c_vec):  # parallelize!
+    """
+    Compute the solution with the polynomial coefficients
+    :param pp: array with the normalized parameters
+    :param Wy: matrix to go from p to y
+    :param nV: number of PQ buses
+    :param k: number of meaningful directions
+    :param perms: exponents to use at each permutation
+    :param c_vec: vector of coefficients
+    :return: array with the voltages
+    """
+
+    x_est_vec = np.empty(nV, dtype=float)
 
     for hh in range(nV):
-        y_red = np.dot(Wy[hh].T, np.array(pp))
+        y_red = np.dot(Wy[hh].transpose(), pp)
         x_est = 0
 
         for nn in range(N_t[hh]):
             res = 1.0
             for kk in range(k[hh]):
-                res = res * y_red[kk] ** perms[hh][nn][kk]
+                res *= y_red[kk] ** perms[hh][nn][kk]
             x_est += c_vec[hh][nn] * res
 
-        x_est_vec[hh] = np.real(x_est)  # discard complex 0j
+        x_est_vec[hh] = x_est
 
     return x_est_vec
+
+
+def get_bounds(snapshot: gc.SnapshotData, max_gen, min_gen, max_load, min_load):
+
+    nl = snapshot.nload
+    ng = snapshot.ngen
+    n_param = ng + nl + nl
+    upper = np.r_[max_gen * np.ones(ng), max_load * np.ones(nl), max_load * np.ones(nl)] / snapshot.Sbase
+    lower = np.r_[min_gen * np.ones(ng), min_load * np.ones(nl), min_load * np.ones(nl)] / snapshot.Sbase
+    return lower, upper, n_param
 
 
 if __name__ == '__main__':
@@ -321,24 +392,31 @@ if __name__ == '__main__':
     snapshot = gc.compile_snapshot_circuit(grid)
 
     # Input values
-    n_param = 18  # number of parameters
+
     l_exp = 3  # expansion order
     k_est = 0.2  # proportion of expected meaningful directions
     factor_MNt = 2.5  # M = factor_MNt * Nterms, should be around 1.5 and 3
-    param_lower_bnd = [0.0] * n_param  # lower limits for all parameters
-    param_upper_bnd = [0.2] * n_param  # upper limits for all parameters
-    delta = 1e-3  # small increment to calculate gradients
+    param_lower_bnd, param_upper_bnd, n_param = get_bounds(snapshot=snapshot,
+                                                           max_gen=20,
+                                                           min_gen=1,
+                                                           max_load=20,
+                                                           min_load=1)
+
+    delta = 1e-5  # small increment to calculate gradients
     tr_error = 0.1  # truncation error allowed
+    n_tests = 2000  # number of tests to perform, totally arbitrary
     print('Running...')
+
+    # 0. Obtain m and n to normalize inputs
+    m_norm, n_norm = stretch_translation(param_upper_bnd, param_lower_bnd, n_param)
 
     # 1. Initial calculations
     n_k_est = int(k_est * n_param)  # estimated meaningful directions
     N_terms_est = int(math.factorial(l_exp + n_k_est) / (math.factorial(n_k_est) * math.factorial(l_exp)))  # estimated number of terms
     M = int(factor_MNt * N_terms_est)  # estimated number of samples
-    # indx_Vbus = x_bus - 1  # index to grab the voltage
 
     # 2. Compute gradients and covariance matrix
-    hx, C, param_store, nV, pq_vec = samples_calc(snapshot, M, n_param, param_lower_bnd, param_upper_bnd)
+    hx, C, param_store, nV = samples_calc(snapshot, M, n_param, param_lower_bnd, param_upper_bnd, m_norm)
 
     # 3. Perform orthogonal decomposition
     Wy, N_t, k = orthogonal_decomposition(C, tr_error, l_exp, nV)
@@ -347,36 +425,47 @@ if __name__ == '__main__':
     perms = permutate(k, l_exp, nV)
 
     # 5. Find polynomial coefficients
-    c_vec = polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV)
-    # print('Array of coefficients:     ', c_vec)
+    c_vec = polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV, m_norm, n_norm, n_param)
+    stop_time1 = time.time()  # time to find the coefficients
 
     # 6. Test
-    pp = [random.uniform(param_lower_bnd[kk], param_upper_bnd[kk]) for kk in range(n_param)]  # random parameters
+    pp_list = np.empty((n_tests, n_param))
+    for ntt in range(n_tests):
+        pp_list[ntt, :] = np.random.uniform(param_lower_bnd, param_upper_bnd)
 
-    nP = int(n_param / 2)
-    nQ = int(n_param / 2)
-
-    P = np.array(pp[:nP])
-    Q = np.array(pp[nP:nP+nQ])
-    Sl = snapshot.load_data.C_bus_load * (P + 1j * Q)  # already normalized P and Q
-    Sg = snapshot.generator_data.get_injections_per_bus()[:, 0]
-    S = Sg - Sl
+    stop_time2 = time.time()  # time up to generate the random parameters
 
     # calculate the real state
-    v = power_flow(snapshot=snapshot, S=S, V0=snapshot.Vbus)
-    x_real_vec = v[pq_vec]
+    x_real_store = []
+    for ntt in range(n_tests):
+        S = params2power(x=pp_list[ntt, :], snapshot=snapshot)
+        v = power_flow(snapshot=snapshot, S=S, V0=snapshot.Vbus)
+        x_real_vec = np.abs(v)
+        x_real_store.append(x_real_vec)
+
+    stop_time3 = time.time()  # time up to solve the traditional
 
     # calculate the estimated state
-    x_est_vec = get_estimation(nV=nV, Wy=Wy, N_t=N_t, c_vec=c_vec, perms=perms)
+    x_est_store = []
+    for ntt in range(n_tests):
+        pp = normalize(m_norm, n_norm, pp_list[ntt], n_param)
+        x_est_vec = solve_parametric(pp, Wy, nV, N_t, k, perms, c_vec)
+        x_est_store.append(x_est_vec)
 
-    stop_time = time.time()
+    stop_time4 = time.time()  # time up to solve the parametric
+
+    # error calculation
+    err_abs = np.zeros(nV)  # calculate the average of all errors, for each bus
+    for ntt in range(n_tests):
+        err_abs += 1 / n_tests * (abs(x_real_store[ntt] - x_est_store[ntt]))
+
     # ----------------------------------------------------------------
-    error = np.abs(x_real_vec - x_est_vec)
-    print('Actual state:               ', x_real_vec)
-    print('Estimated state:            ', x_est_vec)
-    print('Error:                      ', error)
-    print('Max error:                  ', error.max())
+    print('Actual state:               ', x_real_store[-1])
+    print('Estimated state:            ', x_est_store[-1])
+    print('Mean error:                 ', err_abs)
     print('Number of power flow calls: ', M * (n_param + 1))
     print('Original calls n^m = M^m:   ', M ** n_param)
-    print('Time elapsed:               ', stop_time - start_time, 's')
+    print('Time to find polynomial:    ', stop_time1 - start_time, 's')
+    print('Time with traditional:      ', stop_time3 - stop_time2, 's')
+    print('Time with parametric:       ', stop_time4 - stop_time3, 's')
 
