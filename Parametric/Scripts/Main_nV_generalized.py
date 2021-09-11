@@ -119,13 +119,22 @@ def params2power(x, snapshot: gc.SnapshotData, fix_generation=True):
     b = a + nl
     c = b + nl
 
-    Pgen = x[0:a]
-    Pload = x[a:b]
-    Qload = x[b:c]
+    if len(x.shape) == 2:
+        Pgen = x[0:a, :]
+        Pload = x[a:b, :]
+        Qload = x[b:c, :]
 
-    # make Pgen match Pload
-    if fix_generation:
-        Pgen = (Pgen / Pgen.sum()) * Pload.sum()
+        # make Pgen match Pload
+        if fix_generation:
+            Pgen = (Pgen / Pgen.sum(axis=0)) * Pload.sum(axis=0)
+    else:
+        Pgen = x[0:a]
+        Pload = x[a:b]
+        Qload = x[b:c]
+
+        # make Pgen match Pload
+        if fix_generation:
+            Pgen = (Pgen / Pgen.sum()) * Pload.sum()
 
     Sl = snapshot.load_data.C_bus_load * (Pload + 1j * Qload)  # already normalized P and Q
     Sg = snapshot.generator_data.C_bus_gen * Pgen
@@ -136,19 +145,29 @@ def params2power(x, snapshot: gc.SnapshotData, fix_generation=True):
 def estimate_voltage_sensitivity(J, Ybus, V, S, pvpq, pq, npvpq, nbus):
     # evaluate F(x0)
     Scalc = V * np.conj(Ybus * V)
-    dS = Scalc - S  # compute the mismatch
-    f = np.r_[dS[pvpq].real, dS[pq].imag]
+    dS = Scalc.reshape(-1, 1) - S  # compute the mismatch
+    f = np.r_[dS[pvpq, :].real, dS[pq, :].imag]
 
     # compute update step
     dx = sp.sparse.linalg.spsolve(J, f)
 
     # reassign the solution vector
-    dVa = np.zeros(nbus)
-    dVm = np.zeros(nbus)
-    dVa[pvpq] = dx[:npvpq]
-    dVm[pq] = dx[npvpq:]
+    dVa = np.zeros(S.shape)
+    dVm = np.zeros(S.shape)
+    dVa[pvpq, :] = dx[:npvpq, :]
+    dVm[pq, :] = dx[npvpq:, :]
 
     return dVa, dVm
+
+
+@nb.njit()
+def build_sensitivities(parameters, delta):
+    n_param = len(parameters)
+    params_delta = np.empty((n_param, n_param))
+    for k in range(n_param):
+        params_delta[:, k] = parameters
+        params_delta[k, k] += delta  # increase a parameter by delta
+    return params_delta
 
 
 def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_upper_bnd, m_norm, delta):
@@ -207,22 +226,31 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_u
         J = gc.AC_jacobian(snapshot.Ybus, v, pvpq, pq, pvpq_lookup, npv, npq)
 
         # calculate gradients and form C matrix
-        Ag = np.zeros((n_param, nV), dtype=float)
-        for kk in range(n_param):
-            params_delta = np.copy(param_store[ll, :])
-            params_delta[kk] += delta  # increase a parameter by delta
+        # Ag = np.zeros((n_param, nV), dtype=float)
+        # for kk in range(n_param):
+        #     params_delta = np.copy(param_store[ll, :])
+        #     params_delta[kk] += delta  # increase a parameter by delta
+        #
+        #     # compose the power injections from the sample delta
+        #     S = params2power(x=params_delta, snapshot=snapshot)
+        #
+        #     # compute the voltage sensitivity with the Jacobian matrix
+        #     dVa, dVm = estimate_voltage_sensitivity(J, snapshot.Ybus, v, S, pvpq, pq, npvpq, nbus)
+        #
+        #     Ag[kk, :] = dVm
+        params_delta = build_sensitivities(parameters=param_store[ll, :], delta=delta)
 
-            # compose the power injections from the sample delta
-            S = params2power(x=params_delta, snapshot=snapshot)
+        # compose the power injections from the sample delta
+        S = params2power(x=params_delta, snapshot=snapshot)
 
-            # compute the voltage sensitivity with the Jacobian matrix
-            dVa, dVm = estimate_voltage_sensitivity(J, snapshot.Ybus, v, S, pvpq, pq, npvpq, nbus)
+        # compute the voltage sensitivity with the Jacobian matrix
+        dVa, dVm = estimate_voltage_sensitivity(J, snapshot.Ybus, v, S, pvpq, pq, npvpq, nbus)
 
-            Ag[kk, :] = dVm
+        Ag = dVm
 
         for ii in range(nV):  # build all nV covariance matrices
-            Ag_prod = np.outer(Ag[:, ii], Ag[:, ii])
-            C[ii] = 1 / M * Ag_prod
+            Ag_prod = np.outer(Ag[ii, :], Ag[ii, :])
+            C[ii] = 1.0 / M * Ag_prod
 
         loadingBar(ll, M, 2)
 
@@ -560,8 +588,9 @@ def main_comparison(grid: gc.MultiCircuit, min_p=0, max_p=20, n_tests = 2000):
 if __name__ == '__main__':
     # load grid
     # grid = test_grid()
-    fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/IEEE39.gridcal'
+    # fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/IEEE39.gridcal'
     # fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/Illinois 200 Bus.gridcal'
+    fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/IEEE 118 Bus - ntc_areas.gridcal'
     grid = gc.FileOpen(fname).open()
     main_comparison(grid=grid, min_p=1, max_p=20, n_tests=100)
 
