@@ -9,6 +9,8 @@ import pandas as pd
 import math
 import itertools
 import time
+
+import scipy as sp
 from smt.sampling_methods import LHS
 from scipy.sparse import csr_matrix
 from scipy.sparse.linalg import spsolve
@@ -131,6 +133,24 @@ def params2power(x, snapshot: gc.SnapshotData, fix_generation=True):
     return S
 
 
+def estimate_voltage_sensitivity(J, Ybus, V, S, pvpq, pq, npvpq, nbus):
+    # evaluate F(x0)
+    Scalc = V * np.conj(Ybus * V)
+    dS = Scalc - S  # compute the mismatch
+    f = np.r_[dS[pvpq].real, dS[pq].imag]
+
+    # compute update step
+    dx = sp.sparse.linalg.spsolve(J, f)
+
+    # reassign the solution vector
+    dVa = np.zeros(nbus)
+    dVm = np.zeros(nbus)
+    dVa[pvpq] = dx[:npvpq]
+    dVm[pq] = dx[npvpq:]
+
+    return dVa, dVm
+
+
 def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_upper_bnd, m_norm, delta):
 
     """
@@ -164,6 +184,17 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_u
     sampling_lh = LHS(xlimits=xlimits)
     param_store = sampling_lh(M)  # matrix with all samples
 
+    pq = snapshot.pq
+    pv = snapshot.pv
+    pvpq = np.r_[pv, pq]
+    npvpq = len(pvpq)
+    npv = len(pv)
+    npq = len(pq)
+    nbus = snapshot.nbus
+    # generate lookup pvpq -> index pvpq (used in createJ)
+    pvpq_lookup = np.zeros(np.max(snapshot.Ybus.indices) + 1, dtype=int)
+    pvpq_lookup[pvpq] = np.arange(npvpq)
+
     for ll in range(M):
 
         # compose the power injections from the sample
@@ -172,6 +203,8 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_u
         # x solution for each sample
         v = power_flow(snapshot=snapshot, S=S, V0=snapshot.Vbus)
         hx[ll, :] = np.abs(v)
+
+        J = gc.AC_jacobian(snapshot.Ybus, v, pvpq, pq, pvpq_lookup, npv, npq)
 
         # calculate gradients and form C matrix
         Ag = np.zeros((n_param, nV), dtype=float)
@@ -182,13 +215,10 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_u
             # compose the power injections from the sample delta
             S = params2power(x=params_delta, snapshot=snapshot)
 
-            # run the power flow with the increments in power
-            v2 = power_flow(snapshot=snapshot, S=S, V0=v)
+            # compute the voltage sensitivity with the Jacobian matrix
+            dVa, dVm = estimate_voltage_sensitivity(J, snapshot.Ybus, v, S, pvpq, pq, npvpq, nbus)
 
-            # compute the delta
-            # Ag[kk, :] = (v2[pq_vec] - hx[ll, :]) / delta  # compute gradient as [x(p + delta) - x(p)] / delta
-            # Ag[kk, :] = (v2[pq_vec] - hx[ll, :]) / (10 * delta)  # go from [0, 0.2] -> [0, 1]
-            Ag[kk, :] = (np.abs(v2) - hx[ll, :]) / (m_norm[kk] * delta)  # go from [0, 0.2] -> [0, 1]
+            Ag[kk, :] = dVm
 
         for ii in range(nV):  # build all nV covariance matrices
             Ag_prod = np.outer(Ag[:, ii], Ag[:, ii])
@@ -529,11 +559,11 @@ def main_comparison(grid: gc.MultiCircuit, min_p=0, max_p=20, n_tests = 2000):
 
 if __name__ == '__main__':
     # load grid
-    grid = test_grid()
-    # fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/IEEE39.gridcal'
+    # grid = test_grid()
+    fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/IEEE39.gridcal'
     # fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/Illinois 200 Bus.gridcal'
-    # grid = gc.FileOpen(fname).open()
-    main_comparison(grid=grid, min_p=1, max_p=20, n_tests=20)
+    grid = gc.FileOpen(fname).open()
+    main_comparison(grid=grid, min_p=1, max_p=20, n_tests=100)
 
 
 
