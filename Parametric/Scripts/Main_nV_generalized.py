@@ -1,10 +1,11 @@
 # Parametric analysis of power systems
 
 # Packages
+import sys
 import numpy as np
 import GridCal.Engine as gc
 import numba as nb
-import random
+import pandas as pd
 import math
 import itertools
 import time
@@ -12,6 +13,12 @@ from smt.sampling_methods import LHS
 from scipy.sparse import csr_matrix
 from scipy.sparse.linalg import spsolve
 np.set_printoptions(precision=10)
+
+
+def loadingBar(count, total, size):
+    percent = float(count)/float(total)*100
+    sys.stdout.write("\r" + str(int(count)).rjust(3, '0') + "/" + str(int(total)).rjust(3, '0') +
+                     ' [' + '=' * int(percent / 10) * size + ' ' * (10 - int(percent / 10)) * size + ']')
 
 
 def test_grid():
@@ -84,7 +91,7 @@ def test_grid():
 
 def power_flow(snapshot: gc.SnapshotData, S: np.ndarray, V0: np.ndarray):
 
-    options = gc.PowerFlowOptions()
+    options = gc.PowerFlowOptions(tolerance=1e-3)
 
     res = gc.single_island_pf(circuit=snapshot,
                               Vbus=V0,
@@ -124,7 +131,7 @@ def params2power(x, snapshot: gc.SnapshotData, fix_generation=True):
     return S
 
 
-def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_upper_bnd, m_norm):
+def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_upper_bnd, m_norm, delta):
 
     """
     Calculate the gradients, build the hx vector, the covariance C matrix and store the parameters
@@ -186,6 +193,8 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_u
         for ii in range(nV):  # build all nV covariance matrices
             Ag_prod = np.outer(Ag[:, ii], Ag[:, ii])
             C[ii] = 1 / M * Ag_prod
+
+        loadingBar(ll, M, 2)
 
     return hx, C, param_store, nV
 
@@ -382,29 +391,8 @@ def get_bounds(snapshot: gc.SnapshotData, max_gen, min_gen, max_load, min_load):
     return lower, upper, n_param
 
 
-if __name__ == '__main__':
+def PCA_training(snapshot, k_est, l_exp, factor_MNt, tr_error, param_lower_bnd, param_upper_bnd, n_param, delta):
 
-    # start time
-    start_time = time.time()
-
-    # load grid
-    grid = test_grid()
-    snapshot = gc.compile_snapshot_circuit(grid)
-
-    # Input values
-
-    l_exp = 3  # expansion order
-    k_est = 0.2  # proportion of expected meaningful directions
-    factor_MNt = 2.5  # M = factor_MNt * Nterms, should be around 1.5 and 3
-    param_lower_bnd, param_upper_bnd, n_param = get_bounds(snapshot=snapshot,
-                                                           max_gen=20,
-                                                           min_gen=1,
-                                                           max_load=20,
-                                                           min_load=1)
-
-    delta = 1e-5  # small increment to calculate gradients
-    tr_error = 0.1  # truncation error allowed
-    n_tests = 2000  # number of tests to perform, totally arbitrary
     print('Running...')
 
     # 0. Obtain m and n to normalize inputs
@@ -412,11 +400,12 @@ if __name__ == '__main__':
 
     # 1. Initial calculations
     n_k_est = int(k_est * n_param)  # estimated meaningful directions
-    N_terms_est = int(math.factorial(l_exp + n_k_est) / (math.factorial(n_k_est) * math.factorial(l_exp)))  # estimated number of terms
+    N_terms_est = int(math.factorial(l_exp + n_k_est) / (
+                math.factorial(n_k_est) * math.factorial(l_exp)))  # estimated number of terms
     M = int(factor_MNt * N_terms_est)  # estimated number of samples
 
     # 2. Compute gradients and covariance matrix
-    hx, C, param_store, nV = samples_calc(snapshot, M, n_param, param_lower_bnd, param_upper_bnd, m_norm)
+    hx, C, param_store, nV = samples_calc(snapshot, M, n_param, param_lower_bnd, param_upper_bnd, m_norm, delta)
 
     # 3. Perform orthogonal decomposition
     Wy, N_t, k = orthogonal_decomposition(C, tr_error, l_exp, nV)
@@ -426,14 +415,21 @@ if __name__ == '__main__':
 
     # 5. Find polynomial coefficients
     c_vec = polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV, m_norm, n_norm, n_param)
-    stop_time1 = time.time()  # time to find the coefficients
+
+    return m_norm, n_norm, c_vec, Wy, nV, N_t, k, perms, M
+
+def find_sampling_points(n_tests, n_param, param_lower_bnd, param_upper_bnd):
 
     # 6. Test
     pp_list = np.empty((n_tests, n_param))
     for ntt in range(n_tests):
         pp_list[ntt, :] = np.random.uniform(param_lower_bnd, param_upper_bnd)
 
-    stop_time2 = time.time()  # time up to generate the random parameters
+
+    return pp_list
+
+def sample_test_values(snapshot: gc.SnapshotData, n_tests, pp_list):
+
 
     # calculate the real state
     x_real_store = []
@@ -443,15 +439,72 @@ if __name__ == '__main__':
         x_real_vec = np.abs(v)
         x_real_store.append(x_real_vec)
 
-    stop_time3 = time.time()  # time up to solve the traditional
+    return x_real_store
 
+
+def calculate_estimation_at_the_sampling_points(n_tests, m_norm, n_norm, pp_list, n_param, Wy, nV, N_t, k, perms, c_vec):
     # calculate the estimated state
     x_est_store = []
     for ntt in range(n_tests):
         pp = normalize(m_norm, n_norm, pp_list[ntt], n_param)
         x_est_vec = solve_parametric(pp, Wy, nV, N_t, k, perms, c_vec)
         x_est_store.append(x_est_vec)
+    return x_est_store
 
+
+def main_comparison(grid: gc.MultiCircuit, min_p=0, max_p=20, n_tests = 2000):
+
+    snapshot = gc.compile_snapshot_circuit(grid)
+    l_exp = 3  # expansion order
+    k_est = 0.2  # proportion of expected meaningful directions
+    factor_MNt = 2.5  # M = factor_MNt * Nterms, should be around 1.5 and 3
+    delta = 1e-5  # small increment to calculate gradients
+    tr_error = 0.1  # truncation error allowed
+     # number of tests to perform, totally arbitrary
+
+    # generate bounds
+    param_lower_bnd, param_upper_bnd, n_param = get_bounds(snapshot=snapshot,
+                                                           max_gen=max_p,
+                                                           min_gen=min_p,
+                                                           max_load=max_p,
+                                                           min_load=min_p)
+
+    # start time
+    start_time = time.time()
+    m_norm, n_norm, c_vec, Wy, nV, N_t, k, perms, M = PCA_training(snapshot=snapshot,
+                                                                   k_est=k_est,
+                                                                   l_exp=l_exp,
+                                                                   factor_MNt=factor_MNt,
+                                                                   tr_error=tr_error,
+                                                                   param_lower_bnd=param_lower_bnd,
+                                                                   param_upper_bnd=param_upper_bnd,
+                                                                   n_param=n_param,
+                                                                   delta=delta)
+    stop_time1 = time.time()  # time to find the coefficients
+
+    # Input values
+    pp_list = find_sampling_points(n_tests=n_tests,
+                                   n_param=n_param,
+                                   param_lower_bnd=param_lower_bnd,
+                                   param_upper_bnd=param_upper_bnd)
+    stop_time2 = time.time()  # time up to generate the random parameters
+
+    x_real_store = sample_test_values(snapshot=snapshot,
+                                      n_tests=n_tests,
+                                      pp_list=pp_list)
+    stop_time3 = time.time()  # time up to solve the traditional
+
+    x_est_store = calculate_estimation_at_the_sampling_points(n_tests=n_tests,
+                                                              m_norm=m_norm,
+                                                              n_norm=n_norm,
+                                                              pp_list=pp_list,
+                                                              n_param=n_param,
+                                                              Wy=Wy,
+                                                              nV=nV,
+                                                              N_t=N_t,
+                                                              k=k,
+                                                              perms=perms,
+                                                              c_vec=c_vec)
     stop_time4 = time.time()  # time up to solve the parametric
 
     # error calculation
@@ -460,12 +513,28 @@ if __name__ == '__main__':
         err_abs += 1 / n_tests * (abs(x_real_store[ntt] - x_est_store[ntt]))
 
     # ----------------------------------------------------------------
-    print('Actual state:               ', x_real_store[-1])
-    print('Estimated state:            ', x_est_store[-1])
-    print('Mean error:                 ', err_abs)
+    print()
+    data = {'Names': snapshot.bus_data.bus_names,
+            'Actual state': x_real_store[-1],
+            'Estimated state': x_est_store[-1],
+            'Mean error': err_abs}
+    df = pd.DataFrame(data=data)
+    print(df)
     print('Number of power flow calls: ', M * (n_param + 1))
     print('Original calls n^m = M^m:   ', M ** n_param)
     print('Time to find polynomial:    ', stop_time1 - start_time, 's')
     print('Time with traditional:      ', stop_time3 - stop_time2, 's')
     print('Time with parametric:       ', stop_time4 - stop_time3, 's')
+
+
+if __name__ == '__main__':
+    # load grid
+    grid = test_grid()
+    # fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/IEEE39.gridcal'
+    # fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/Illinois 200 Bus.gridcal'
+    # grid = gc.FileOpen(fname).open()
+    main_comparison(grid=grid, min_p=1, max_p=20, n_tests=20)
+
+
+
 
