@@ -93,13 +93,19 @@ def test_grid():
 
 def power_flow(snapshot: gc.SnapshotData, S: np.ndarray, V0: np.ndarray):
 
-    options = gc.PowerFlowOptions(tolerance=1e-3)
+    options = gc.PowerFlowOptions(tolerance=1e-12)
+    # obviously it will run slower with 1e-12 than with 1e-3, but this way
+    # we get a better idea of the errors. Mean errors of 1e-6, good news!!
 
     res = gc.single_island_pf(circuit=snapshot,
                               Vbus=V0,
                               Sbus=S,
                               Ibus=snapshot.Ibus,
                               branch_rates=snapshot.Rates,
+                              pq=snapshot.pq,
+                              pv=snapshot.pv,
+                              vd=snapshot.vd,
+                              pqpv=snapshot.pqpv,
                               options=options,
                               logger=gc.Logger())
     return res.voltage
@@ -250,7 +256,7 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_u
 
         for ii in range(nV):  # build all nV covariance matrices
             Ag_prod = np.outer(Ag[ii, :], Ag[ii, :])
-            C[ii] = 1.0 / M * Ag_prod
+            C[ii] += 1.0 / M * Ag_prod
 
         loadingBar(ll, M, 2)
 
@@ -421,6 +427,7 @@ def solve_parametric(pp, Wy, nV, N_t, k, perms, c_vec):  # parallelize!
     :param c_vec: vector of coefficients
     :return: array with the voltages
     """
+    tt1 = time.time()
 
     x_est_vec = np.empty(nV, dtype=float)
 
@@ -435,6 +442,9 @@ def solve_parametric(pp, Wy, nV, N_t, k, perms, c_vec):  # parallelize!
             x_est += c_vec[hh][nn] * res
 
         x_est_vec[hh] = x_est
+
+    tt2 = time.time()
+    print(tt2 - tt1)
 
     return x_est_vec
 
@@ -590,9 +600,11 @@ if __name__ == '__main__':
     # grid = test_grid()
     # fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/IEEE39.gridcal'
     # fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/Illinois 200 Bus.gridcal'
-    fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/IEEE 118 Bus - ntc_areas.gridcal'
+    # fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/IEEE 118 Bus - ntc_areas.gridcal'
+    fname = '/home/josep/Work/power-systems-projects/Parametric/Scripts/Grids/IEEE39.gridcal'
+    # fname = '/home/josep/Work/power-systems-projects/Parametric/Scripts/Grids/IEEE118.xlsx'
     grid = gc.FileOpen(fname).open()
-    main_comparison(grid=grid, min_p=1, max_p=20, n_tests=100)
+    main_comparison(grid=grid, min_p=10, max_p=20, n_tests=1000)
 
 
 
