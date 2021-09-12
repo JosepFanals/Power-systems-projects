@@ -74,6 +74,7 @@ def permut(k, l_exp, nV):
             xs_all.append(xs)
         permm_all.append(xs_all)
 
+    # return np.array(permm_all)
     return permm_all
 
 

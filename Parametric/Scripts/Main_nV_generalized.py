@@ -265,8 +265,6 @@ def permut(k, l_exp, nV):
     return permm_all
 
 
-
-
 def permutate(k, l_exp, nV):
     """
     Generate the permutations for all exponents of y
