@@ -23,74 +23,6 @@ def loadingBar(count, total, size):
                      ' [' + '=' * int(percent / 10) * size + ' ' * (10 - int(percent / 10)) * size + ']')
 
 
-def test_grid():
-
-    grid = gc.MultiCircuit()
-
-    # Buses
-    bus1 = gc.Bus('Bus 1', vnom=20)
-    bus1.is_slack = True
-    grid.add_bus(bus1)
-    gen1 = gc.Generator('Slack Generator', voltage_module=1.0)
-    grid.add_generator(bus1, gen1)
-
-    bus2 = gc.Bus('Bus 2', vnom=20)
-    grid.add_bus(bus2)
-    grid.add_load(bus2, gc.Load('load 2', P=0, Q=0))
-
-    bus3 = gc.Bus('Bus 3', vnom=20)
-    grid.add_bus(bus3)
-    grid.add_load(bus3, gc.Load('load 3', P=0, Q=0))
-
-    bus4 = gc.Bus('Bus 4', vnom=20)
-    grid.add_bus(bus4)
-    grid.add_load(bus4, gc.Load('load 4', P=0, Q=0))
-
-    bus5 = gc.Bus('Bus 5', vnom=20)
-    grid.add_bus(bus5)
-    grid.add_load(bus5, gc.Load('load 5', P=0, Q=0))
-
-    # more buses added
-    bus6 = gc.Bus('Bus 6', vnom=20)
-    grid.add_bus(bus6)
-    grid.add_load(bus6, gc.Load('load 6', P=0, Q=0))
-
-    bus7 = gc.Bus('Bus 7', vnom=20)
-    grid.add_bus(bus7)
-    grid.add_load(bus7, gc.Load('load 7', P=0, Q=0))
-
-    bus8 = gc.Bus('Bus 8', vnom=20)
-    grid.add_bus(bus8)
-    grid.add_load(bus8, gc.Load('load 8', P=0, Q=0))
-
-    bus9 = gc.Bus('Bus 9', vnom=20)
-    grid.add_bus(bus9)
-    grid.add_load(bus9, gc.Load('load 9', P=0, Q=0))
-
-    bus10 = gc.Bus('Bus 10', vnom=20)
-    grid.add_bus(bus10)
-    grid.add_load(bus10, gc.Load('load 10', P=0, Q=0))
-
-    # Lines
-    grid.add_line(gc.Line(bus1, bus2, 'line 1-2', r=0.05, x=0.11, b=0.0))
-    grid.add_line(gc.Line(bus1, bus3, 'line 1-3', r=0.05, x=0.11, b=0.0))
-    grid.add_line(gc.Line(bus1, bus5, 'line 1-5', r=0.03, x=0.08, b=0.0))
-    grid.add_line(gc.Line(bus2, bus3, 'line 2-3', r=0.04, x=0.09, b=0.0))
-    grid.add_line(gc.Line(bus2, bus5, 'line 2-5', r=0.04, x=0.09, b=0.0))
-    grid.add_line(gc.Line(bus3, bus4, 'line 3-4', r=0.06, x=0.13, b=0.0))
-    grid.add_line(gc.Line(bus4, bus5, 'line 4-5', r=0.04, x=0.09, b=0.0))
-
-    # more lines added
-    grid.add_line(gc.Line(bus1, bus6, 'line 1-6', r=0.03, x=0.10, b=0.0))
-    grid.add_line(gc.Line(bus4, bus6, 'line 4-6', r=0.04, x=0.08, b=0.0))
-    grid.add_line(gc.Line(bus5, bus7, 'line 5-7', r=0.04, x=0.11, b=0.0))
-    grid.add_line(gc.Line(bus3, bus8, 'line 3-8', r=0.03, x=0.09, b=0.0))
-    grid.add_line(gc.Line(bus6, bus9, 'line 6-9', r=0.03, x=0.08, b=0.0))
-    grid.add_line(gc.Line(bus7, bus10, 'line 7-10', r=0.04, x=0.12, b=0.0))
-
-    return grid
-
-
 def power_flow(snapshot: gc.SnapshotData, S: np.ndarray, V0: np.ndarray):
 
     options = gc.PowerFlowOptions(tolerance=1e-12)
@@ -189,7 +121,6 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_u
     :return: hx, C and the stored parameters
 
     """
-
     # nP = int(n_param / 2)
     # nQ = int(n_param / 2)
     #
@@ -294,8 +225,7 @@ def orthogonal_decomposition(C, tr_error, l_exp, nV):
             k = 1
 
         N_t = int(math.factorial(l_exp + k) / (math.factorial(k) * math.factorial(l_exp)))  # number of terms
-
-        # TODO: Al final, k siempre es 2...no podríamos saber esto con antelación para declarar Wy como una matriz?
+        # tenemos que guardar todas las Wy matrices, no cambia mucho saber si siempre k=2, por ejemplo
         Wy = w[:, :k]  # and for now, do not define Wz
 
         Wy_mat.append(np.real(Wy))
@@ -304,6 +234,37 @@ def orthogonal_decomposition(C, tr_error, l_exp, nV):
 
     # return Wy, N_t, k
     return Wy_mat, N_t_vec, k_vec
+
+
+def f(r, n, t, acc=[]):
+    """
+    Generate permutations faster, from: https://stackoverflow.com/questions/27586404/how-to-efficiently-get-all-combinations-where-the-sum-is-10-or-below-in-python
+    """
+    if t == 0:
+        if n >= 0:
+            yield acc
+        return
+    for x in r:
+        if x > n:  # <---- do not recurse if sum is larger than `n`
+            break
+        for lst in f(r, n-x, t-1, acc + [x]):
+            yield lst
+
+
+def permut(k, l_exp, nV):
+    """
+    Faster permutations with f()
+    """
+    permm_all = []
+    for nn in range(nV):
+        xs_all = []
+        for xs in f(range(l_exp+1), l_exp, k[nn]):
+            xs_all.append(xs)
+        permm_all.append(xs_all)
+
+    return permm_all
+
+
 
 
 def permutate(k, l_exp, nV):
@@ -315,7 +276,6 @@ def permutate(k, l_exp, nV):
     :param nV: number of PQ buses
     :return perms: array of all permutations
     """
-
     # TODO: Me da la impresión de que debe existir una forma más eficiente de conseguir el resultado final
 
     perms_vec = []
@@ -354,7 +314,6 @@ def polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV, m_norm, n_norm, 
     :return: array with c coefficients
     """
 
-    # param_store = param_store * 10  # from [0, 0.2] -> [0, 1]
     for ll in range(M):
         param_store[ll, :] = normalize(m_norm, n_norm, param_store[ll, :], n_param)
 
@@ -427,7 +386,6 @@ def solve_parametric(pp, Wy, nV, N_t, k, perms, c_vec):  # parallelize!
     :param c_vec: vector of coefficients
     :return: array with the voltages
     """
-    tt1 = time.time()
 
     x_est_vec = np.empty(nV, dtype=float)
 
@@ -442,9 +400,6 @@ def solve_parametric(pp, Wy, nV, N_t, k, perms, c_vec):  # parallelize!
             x_est += c_vec[hh][nn] * res
 
         x_est_vec[hh] = x_est
-
-    tt2 = time.time()
-    print(tt2 - tt1)
 
     return x_est_vec
 
@@ -479,7 +434,8 @@ def PCA_training(snapshot, k_est, l_exp, factor_MNt, tr_error, param_lower_bnd, 
     Wy, N_t, k = orthogonal_decomposition(C, tr_error, l_exp, nV)
 
     # 4. Generate permutations
-    perms = permutate(k, l_exp, nV)
+    # perms = permutate(k, l_exp, nV)
+    perms = permut(k, l_exp, nV)
 
     # 5. Find polynomial coefficients
     c_vec = polynomial_coeff(M, N_t, Wy, param_store, hx, perms, k, nV, m_norm, n_norm, n_param)
