@@ -1,0 +1,226 @@
+\section{Introduction}
+The power flow problem is focused on solving a given state under certain conditions. However, in reality, many parameters are prone to change. The powers can evolve along the course of the day, for instance. Hence, the power flow has to be solved repeatedly. This is an arduous task especially considering that the toplogy remains the same. Ideally, the system should be solved once for all cases. The parametric power flow revolves around this core idea.
+
+The first work following the aforementioned direction is the so-called probabilistic power flow \cite{allan1974probabilistic}. Given some uncertainty in the input parameters, it estimates the probability of output variables such as the power through the lines. Such an approach is limited to working with probabilities. In this sense, there is no deterministic output value to be derived from the inputs. A simple yet arguably unaccurate option is to rely on Taylor expansion method. The first derivative could estimate the evolution of an output (denoted as state from now on) depending on the inputs (also called parameters) \cite{choi2016propagating}. Unfortunately, this sensitivity analysis is limited to the usage of linear terms whereas the power flow exhibits a rather quadratic profile. For more depth in this regard, see the two-bus example system in \cite{trias2018helm}. A more fundamentally sound possibility is to look for an explicit closed-form expression that links parameters with states. A set of parameters can be sampled inside a closed predefinite range, extract the dependency between parameters and inputs, and fit a polynomial to these points \cite{shen2020principal}. Eventually, the paremeters can be grouped with the principal component analysis so that the states depend only on a few final parameters \cite{constantine2014active}. Some advantages of this method are its simplicity and freedom to choose polynomial basis. On the downside, it is heavily dependent on the sampling stage. Even opting for the Latin Hypercube sampling, which produces a realistic representation of the space \cite{mckay2000comparison}, does not minimize much the error. Fortunately, the Galerkin method avoids the sampling process, and achieves smaller errors in the whole domain \cite{zhou2019global}. If orthogonal basis are selected, the residual will be perpendicular to them, which is said to be optimal \cite{wu2020parametric}. The work that follows employs the decoupled Galerkin. In short, it exchanges a bit of accuracy for faster computational times as small linear systems are solved progressively \cite{zhou2016novel}.
+
+This document covers the mathematical formulation of the Galerkin method and applies it in a simple two-bus system. The goal is to introduce the notation, show explicitly what the equations look like, and get an idea of its practicality. 
+
+\section{Formulation}
+In essence, the power flow looks for a solution to a non-linear system of equations of the form:
+\begin{equation}
+   \bm{0} = \bm{f}(\bm{x}),
+   \label{eq:0f}
+\end{equation}
+where $\bm{x}$ is the vector of unknowns (usually the voltages), and $\bm{f}$ is a set of non-linear equations.
+
+Nonetheless, parameters can also be explicitly considered in the parametric power flow. This way, Equation \ref{eq:0f} becomes:
+\begin{equation}
+   \bm{0} = \bm{f}(\bm{x}, \bm{p}),
+\end{equation}
+where $\bm{p}$ is a vector of parameters. Magnitudes such as powers in PQ buses or the voltage magnitude in PV buses can be treated as parameters. Under particular scenarios, impedances could be parameters as well.
+
+In any case, the power flow equations are implicit. This justifies why a tiny change in a parameter theoretically involves having to solve the whole system of equations. Instead, the parametric power flow looks for the following:
+\begin{equation}
+   \bm{x} = \bm{g}(\bm{p}),
+\end{equation}
+where $\bm{g}$ is a set of equations to be found. 
+
+The parametric power flow adopts the treatment of states with polynomial representations involving coefficients and the parameters. This is desireable because as the Weierstrass approximation theorem states, a polynomial functoin can identify as closely as desired a continuous function inside a closed interval \cite{trefethen2019approximation, wu2020parametric}. The concept of approximating the solution with polynomials is not new. For example, the Holomorphic Embedding Load Flow method is based on it \cite{trias2012holomorphic}. 
+
+With the Galerkin method, a set of basis $\{\Phi\}$ is chosen. The states are approximated by:
+\begin{equation}
+   \bm{\hat{x}} = \sum_i^N \bm{c}_i \bm{\Phi}_i,
+   \label{eq:apr}
+\end{equation}
+that is, they are a linear function of the basis, where $\bm{\hat{x}}$ denotes the estimated states, and $\bm{c}_i$ are coefficients to be found. The value of $N$ depends on the chosen order of the polynomials $N_p$ and the amount of parameters $N_d$. Concretely:
+\begin{equation}
+   N = \frac{(N_p + N_d)!}{N_p! N_d!}.
+\end{equation}
+The curse of dimensionality has to be avoided in order to reduce the computational cost. If it is decided that polynomials should reach high orders to better approximate the states, or numerous magnitudes are meant to change, then $N$ will inevitably take a very large value. One of the motivations of the decoupled Galerkin is to alleviate somewhat this burden. 
+
+A key idea behind the Galerkin method for the parametric power flow is the orthogonality between basis. Let the inner product between two objects $x$ and $y$ be $\langle x,y \rangle$. It is defined as \cite{zhou2019global}:
+\begin{equation}
+   \langle x,y \rangle = \int_\Omega x(\bm{p}) y(\bm{p}) dW(\bm{p}),
+\end{equation}
+where $\Omega$ is the full domain, and $W(\bm{p})$ is a weighting function that can be set to 1 without loss of generality.
+
+If orthogonal basis are picked, the inner product between two basis $\Phi_i$ and $\Phi_j$ is:
+\begin{equation}
+   \langle \Phi_i, \Phi_j \rangle = \delta_{ij},
+   \label{eq:cross}
+\end{equation}
+where $\delta_{ij}$ is Kronecker's delta, which becomes 1 if $i=j$ and 0 if $i\neq j$. While it is not mandatory for basis to be orthogonal, it is of great practicality. Recall the expressions of the power flow contain the product between voltages. With orthogonal basis, the equations are greatly simplified because most products become null following Equation \ref{eq:cross}.
+
+The choice of polynomials (in other words, the form that the basis take) is to be decided to the user. In the work that follows, Legendre polynomials are selected due to being bounded in the range $[-1,1]$. Working in per unit values, most likely the parameters evolve inside this range. If needed, they can be denormalized as well. Supposing a single parameter $p$ is involved, using Rodrigues' formula, the first polynomials are \cite{mccarthy1993generalized}:
+\begin{equation}
+   \begin{cases}
+      \Phi_0 = 1,\\
+      \Phi_1 = p,\\
+      \Phi_2 = (3p^2-1)/2,\\
+      \Phi_3 = (5p^3-3p)/2.\\
+   \end{cases}
+\end{equation}
+In the example contained in this document, a second parameter is introduced. Let $p$ be the first parameter representing the active power, and $q$ the second parameter that stands for the reactive power. If a maximum order $N_p=3$ is chosen, then the full set of basis turns out to be:
+\begin{equation}
+   \bm{\Phi} = \biggl[1, p, q, pq, \frac{3p^2-1}{2}, \frac{3q^2-1}{2}, p\frac{3q^2-1}{2}, q\frac{3p^2-1}{2}, \frac{5p^3-1}{2}, \frac{5q^3-1}{2}\biggr].
+   \label{eq:exp}
+\end{equation}
+To find the coefficients in Equation \ref{eq:apr}, after being defined the set of basis $\bm{\Phi}$, the next step is to formulate the residuals $\bm{R}$. Just as in the traditional power flow, the residuals represent the mismatch between the actual power and the specified power in a given bus. The goal is to minimize these residuals by taking the projection to each basis:
+\begin{equation}
+   \langle \bm{R}, \bm{\Phi} \rangle = \bm{0}.
+\end{equation}
+This will form a system of equations to be solved, for example, by the Newton-Raphson method. Suppose the system under study has $n$ unknowns (coinciding with the total number of equations). Since $\bm{\Phi}$ is formed by $N$ terms, there is a system of size $N \times n$ to be solved all at once. 
+
+To avoid solving this potentially huge system at one go, a solution is to decompose it following the decoupled Galerkin method \cite{zhou2016novel}. In it, first the inner product of the residuals $\bm{R}_{0}$ only containing 0 order terms and $\Phi_0$ is performed:
+\begin{equation}
+   \langle \bm{R}_0, \Phi_0 \rangle = \bm{0}.
+\end{equation}
+As a result of it, the first coefficients $\bm{c}_0$ are obtained. 
+
+Then, the first order terms are considered through:
+\begin{equation}
+   \langle \bm{R}_1, \Phi_1 \rangle = \bm{0},
+\end{equation}
+which involves the already known coefficients $\bm{c}_0$ and the new coefficients to find $\bm{c}_1$. This approach continues until all basis have been exhausted. Thus, all required coefficients to represent the states are found, and the problem is finished. It has to be mentioned that going for this technique has the advantage of having to solve a linear system for orders greater than 0. The associated matrix can be inverted only once, resulting in a saving of time. The decoupled Galerkin cannot compete with the classical Galerkin in terms of precision, but yields a high speed advantage (see \cite{zhou2016novel}).
+
+\section{Example}
+The example that follows consists of a two-bus system. One bus is a slack one, while the second acts as a PQ bus. Its powers $p+jq$ are parameters. Figure \ref{fig:2bus} shows very schematically this system.
+
+
+\begin{figure}[!htb]\centering
+   \begin{tikzpicture}[european]
+    \draw (-1.3,0) to [sinusoidal voltage source] (-0.5,0.0);
+    \draw (-0.5,0) to [short] (0,0);
+    \draw (0,-0.0) to [/tikz/circuitikz/bipoles/length=25pt, R, l=$r+jx$] (3,-0.0);
+    \draw[line width=0.1cm] (0,0.-0.4) to [short] (0,0.4);
+    \draw[line width=0.1cm] (3,0.-0.4) to [short] (3,0.4);
+    \draw (3,0.0) to [short] (3.5,0.0);
+    \draw[-{Latex[scale=1.5]}] (3.5,-0.0) -- (3.5,-1.0);
+
+    \node(bus1) at (-0.0,0.6) {$\underline{V}_1$};
+    \node(bus2) at (3.0,0.6) {$\underline{V}_2$};
+    \node(load) at (3.5,-1.3) {$-p-jq$};
+  \end{tikzpicture}
+  \caption{Scheme of the 2-bus system.}
+  \label{fig:2bus}
+\end{figure}
+With the Galerkin method, it is preferable to solve the power flow in rectangular coordinates, as it makes the integrals easier to operate. Assume bus 1 has a set voltage of $e_1+jf_1=1+0j$. Then, the power equations are:
+\begin{equation}
+   \begin{cases}
+   p = g e^2 - g e + g f^2 - b f, \\
+   -q = g f + b e^2 - b e + b f^2, \\
+\end{cases}
+\label{eq:syst1}
+\end{equation}
+where $g+jb=\frac{1}{r+jx}$, and $e$ and $f$ represent respectively the real and imaginary part of the voltage at bus 2.
+
+Considering the polynomial representation of the voltages, Equation \ref{eq:syst1} becomes:
+\begin{equation}
+   \begin{cases}
+      R_p = & - \sum_i^N c_i^{(p)} \Phi_i + g \sum_i^N c_i^{(e)} \Phi_i \sum_i^N c_i^{(e)} \Phi_i - g \sum_i^N c_i^{(e)} \Phi_i \\
+                                  & + g \sum_i^N c_i^{(f)} \Phi_i \sum_i^N c_i^{(f)} \Phi_i - b \sum_i^N c_i^{(f)} \Phi_i, \\ 
+      R_q = & \sum_i^N c_i^{(q)} \Phi_i + g \sum_i^N c_i^{(f)} \Phi_i + b \sum_i^N c_i^{(e)} \Phi_i \sum_i^N c_i^{(e)} \Phi_i \\
+          &- b \sum_i^N c_i^{(e)} \Phi_i + b \sum_i^N c_i^{(f)} \Phi_i \sum_i^N c_i^{(f)} \Phi_i, \\
+   \end{cases}
+   \label{eq:syst2}
+\end{equation}
+where the powers are parametrized as well with coefficients $c_i^{(p)}$ and $c_i^{(q)}$ respectively. They are found directly assuming that Equation \ref{eq:syst2} has to be equivalent to Equation \ref{eq:syst1}. Hence:
+\begin{equation}
+   \begin{cases}
+   p = \sum_i^N c_i^{(p)}\Phi_i = \sum_i^N 0 \cdot 1 + 1 \cdot p + 0 \cdot q + ... \\
+   q = \sum_i^N c_i^{(q)}\Phi_i = \sum_i^N 0 \cdot 1 + 0 \cdot p + 1 \cdot q + ... \\
+\end{cases}
+\end{equation}
+So all their coefficients are zero except for the one that multiplies itself, of course.
+
+To proceed in order to solve for the coefficients of the voltages, first the inner product $\langle R_{0}, \Phi_0 \rangle = 0$ is calculated:
+\begin{equation}
+   \begin{cases}
+      0 = g c_0^{(e)} c_0^{(e)} - g c_0^{(e)} + g c_0^{(f)} c_0^{(f)} - b c_0^{(f)}, \\
+      0 = g c_0^{(f)} + b c_0^{(e)} c_0^{(e)} - b c_0^{(e)} + b c_0^{(f)}c_0^{(f)}.
+   \end{cases}
+\end{equation}
+This system of equations is solved with the Newton-Raphson method (note it is non-linear), and coefficients $c_0^{(e)}$ and $c_0^{(f)}$ are obtained.
+
+The next step involves calculating $\langle R_{1}, \Phi_1 \rangle = 0$, which only contains coefficients of zero and first order. As a result, the first order coefficients are meant to be obtained:
+\begin{equation}
+   \begin{cases}
+   0 = -1 + g (c_0^{(e)} c_1^{(e)} + c_1^{(e)}c_0^{(e)}) - g c_1^{(e)} + g(c_0^{(f)} c_1^{(f)} + c_1^{(f)} c_0^{(f)}) - b c_1^{(f)}, \\
+   0 = gc_1^{(f)} + b (c_0^{(e)} c_1^{(e)} + c_1^{(e)} c_0^{(e)}) - b c_1^{(e)} + b (c_0^{(f)} c_1^{(f)} + c_1^{(f)} c_0^{(f)}). \\
+\end{cases}
+\end{equation}
+Fortunately in this case the system is linear, and it will remain linear for the rest of inner products $\langle R_k, \Phi_k \rangle$ for $k\geq 1$. This way, there is a constant Jacobian:
+\begin{equation}
+   J = \begin{pmatrix}
+      2gc_0^{(e)} - g & 2gc_0^{(f)} - b \\
+      2bc_0^{(e)} - b & 2bc_0^{(f)} + g \\
+   \end{pmatrix},
+\end{equation}
+which only has to be inverted once. 
+
+Explicitly, the inner product $\langle R_2, \Phi_2 \rangle$ becomes:
+\begin{equation}
+   \begin{cases}
+      0 = g(2c_0^{(e)}c_2^{(e)} + c_1^{(e)}c_1^{(e)}) - g c_2^{(e)} + g(2c_0^{(f)}c_2^{(f)} + c_1^{(f)}c_1^{(f)}) - bc_2^{(f)}, \\
+      0 = 1 + gc_2^{(f)} + b(2c_0^{(e)}c_2^{(e)} + c_1^{(e)}c_1^{(e)}) - bc_2^{(e)} + b(2c_0^{(f)}c_2^{(f)} + c_1^{(f)}c_1^{(f)}).
+   \end{cases}
+\end{equation}
+It is solved for the coefficients $c_2^{(e)}$ and $c_2^{(f)}$ as they are the only unknowns at this stage. The advantage of the decoupled Galerkin becomes clear as it is way simpler to solve step by step these systems of equations than attempting to solve a large non-linear system once.
+
+The rest of coefficients are solved by taking the remaining inner products $\langle R_k, \Phi_k \rangle$ until $k=N$. For this system of example, the non-varying parameters take the values shown in Table \ref{tab:params}.
+
+\begin{table}[!htb]\centering
+   \begin{tabular}{cc}
+      \hline
+      \textbf{Magnitude} & \textbf{Value} \\
+      \hline
+      \hline
+      $r$ & 0.01 \\
+      $x$ & 0.05 \\
+      $e_1$ & 1.0 \\
+      $f_1$ & 0.0 \\
+      \hline
+   \end{tabular}
+   \caption{Static paramters of the system.}
+   \label{tab:params}
+\end{table}
+The dynamic parameters, so to speak, are the powers $p$ and $q$. They are assumed to take values between 0 and 1. If the procedure described above is followed, taking $N_d=3$, the coefficients of the voltages at bus 2 are the ones gathered in Table \ref{tab:params}.
+
+\begin{table}[!htb]\centering
+   \begin{tabular}{ccc}
+      \hline
+      \textbf{Order} & $\bm{c}^{(e)}$ & $\bm{c}^{(f)}$ \\
+      \hline
+      \hline
+      0 & 1.00000E+00 &	0.00000E+00 \\
+      1 & 1.00000E-02 &	5.00000E-02 \\
+      2 & 4.74000E-02 & -1.00000E-02 \\
+      3 & 5.20000E-05 &	0.00000E+00 \\
+      4 & -2.34780E-03 & 0.00000E+00 \\
+      5 & 4.20264E-05 &	0.00000E+00 \\
+      6 & 2.21728E-04 &	0.00000E+00 \\
+      7 & -8.17450E-06 & 0.00000E+00 \\
+      8 & -2.63729E-05 & 0.00000E+00 \\
+      9 & 1.47668E-06 &	0.00000E+00 \\
+      \hline
+   \end{tabular}
+   \caption{Obtained coefficients for the voltages.}
+   \label{tab:params}
+\end{table}
+Graphically, the percentual current error presents a shape as the one in Figure \ref{fig:3d1}. 
+
+\begin{figure}[!htb]\centering
+\begin{tikzpicture}
+   \begin{axis}[view={45}{60}, colorbar, colorbar style={height=5cm, at={(1.1,0.8)}, title=Percentual error}, colormap={bluered}{
+rgb255(0.0cm)=(255,255,255); rgb255(0.05cm)=(0,0,180); rgb255(1cm)=(0,255,255); rgb255(2cm)=(100,255,0);
+rgb255(3cm)=(255,255,0); rgb255(4cm)=(255,0,0); rgb255(5cm)=(128,0,0)}, xlabel={$p$}, ylabel={$q$}, zlabel={Error}, ytick={0,0.2,...,1.0}]
+    \addplot3[scatter, only marks, opacity=0.9, domain=0:1, y domain=0:1, each nth point={3}]
+    table[x=p, y=q, z=err, col sep=comma] {Data/resI.csv};
+    \end{axis}
+\end{tikzpicture}
+\caption{3D representation of the percentual current error as a function of the parametrized powers.}
+\label{fig:3d1}
+\end{figure}
+The average error is around 1\%, which concludes that the Galerkin method is capable of approximating well enough the voltages in this simple two-bus case. Opting for the full Galerkin, and not the decoupled, would produce smaller errors on paper. This is something to be tested in the future.
+
+

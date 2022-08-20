@@ -39,6 +39,9 @@ def power_flow(snapshot: gc.SnapshotData, S: np.ndarray, V0: np.ndarray):
                               vd=snapshot.vd,
                               pqpv=snapshot.pqpv,
                               options=options,
+                              ma=None,
+                              theta=None,
+                              Beq=None,
                               logger=gc.Logger())
     return res.voltage
 
@@ -160,7 +163,8 @@ def samples_calc(snapshot: gc.SnapshotData, M, n_param, param_lower_bnd, param_u
         v = power_flow(snapshot=snapshot, S=S, V0=snapshot.Vbus)
         hx[ll, :] = np.abs(v)
 
-        J = gc.AC_jacobian(snapshot.Ybus, v, pvpq, pq, pvpq_lookup, npv, npq)
+        # J = gc.AC_jacobian(snapshot.Ybus, v, pvpq, pq, pvpq_lookup, npv, npq)
+        J = gc.AC_jacobian(snapshot.Ybus, v, pvpq, pq, npv, npq)
 
         # calculate gradients and form C matrix
         # Ag = np.zeros((n_param, nV), dtype=float)
@@ -555,10 +559,13 @@ if __name__ == '__main__':
     # fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/IEEE39.gridcal'
     # fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/Illinois 200 Bus.gridcal'
     # fname = '/home/santi/Documentos/Git/GitHub/GridCal/Grids_and_profiles/grids/IEEE 118 Bus - ntc_areas.gridcal'
-    fname = '/home/josep/Work/power-systems-projects/Parametric/Scripts/Grids/IEEE39.gridcal'
+    # fname = '/home/josep/Work/power-systems-projects/Parametric/Scripts/Grids/IEEE39.gridcal'
     # fname = '/home/josep/Work/power-systems-projects/Parametric/Scripts/Grids/IEEE118.xlsx'
+    # fname = '/home/josep/Work/power-systems-projects/Parametric/Scripts/Grids/IEEE5.xlsx'
+    # fname = '/home/josep/Work/power-systems-projects/Parametric/Scripts/Grids/IEEE9.xlsx'
+    fname = '/home/josep/Work/power-systems-projects/Parametric/Scripts/Grids/IEEE14.xlsx'
     grid = gc.FileOpen(fname).open()
-    main_comparison(grid=grid, min_p=10, max_p=20, n_tests=1000)
+    main_comparison(grid=grid, min_p=-0, max_p=60, n_tests=100)
 
 
 
